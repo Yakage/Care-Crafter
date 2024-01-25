@@ -25,7 +25,7 @@ class Intro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Thread.sleep(3000)
         installSplashScreen()
-        setContentView(R.layout.activity_intro)
+        setContentView(R.layout.introduction_intro)
 
         // on below line we are initializing all
         // our variables with their ids.
@@ -38,8 +38,8 @@ class Intro : AppCompatActivity() {
         // on below line we are adding click listener for our skip button
         skipBtn.setOnClickListener {
             // on below line we are opening a new activity
-            val i = Intent(this@Intro, SignIn::class.java)
-            startActivity(i)
+            val intent = Intent(this@Intro, SignIn::class.java)
+            startActivity(intent)
         }
 
         // on below line we are initializing our slider list.

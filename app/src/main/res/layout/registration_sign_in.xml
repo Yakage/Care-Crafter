@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registration.Login">
+    tools:context=".registration.SignIn">
 
     <TextView
         android:id="@+id/tv_app_name"
@@ -88,7 +88,6 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="@id/et_password"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="@id/et_password"
         app:layout_constraintTop_toBottomOf="@id/et_password" />
 
