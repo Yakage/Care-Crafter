@@ -39,5 +39,5 @@ class Features : AppCompatActivity() {
         // Set the default selected item
         binding.bottomNavigation.selectedItemId = R.id.action_home
     }
-    }
+
 }
