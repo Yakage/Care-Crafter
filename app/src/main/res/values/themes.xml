@@ -7,6 +7,7 @@
         <item name="colorPrimaryVariant">@color/blue</item>
         <item name="android:statusBarColor">@color/blue</item>
     </style>
+
     <style name="Theme.CareCrafter" parent="Base.Theme.CareCrafter" />
 
 

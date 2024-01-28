@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".body.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".body.features.water_intake.SettingFragment">
 
-    <TextView
-        android:id="@+id/tv_profile"
-        android:layout_width="match_parent"
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="37sp"
-        android:gravity="center"
+        android:foregroundGravity="center"
+        android:src="@drawable/icon_back"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="37sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/iv_back"
+        app:layout_constraintStart_toEndOf="@id/iv_back"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_units"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -141,12 +152,93 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_daily_goal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_gender"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/iv_daily_goal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_daily_goal"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_daily_goal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Daily Goal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_daily_goal"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Set goal manually"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_daily_goal"
+            app:layout_constraintStart_toEndOf="@id/iv_daily_goal"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_cups"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_daily_goal"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/iv_cups"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_cups"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_cups"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Cups"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_cups"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Add or remove cups"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_cups"
+            app:layout_constraintStart_toEndOf="@id/iv_cups"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_widgets"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_gender"
+        app:layout_constraintTop_toBottomOf="@id/layout_cups"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -262,47 +354,6 @@
             android:layout_marginStart="20dp"
             app:layout_constraintTop_toBottomOf="@id/tv_theme"
             app:layout_constraintStart_toEndOf="@id/iv_theme"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_log_out"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_theme"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/iv_log_out"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icon_log_out"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_log_out"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_log_out"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Log out of your account"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_log_out"
-            app:layout_constraintStart_toEndOf="@id/iv_log_out"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

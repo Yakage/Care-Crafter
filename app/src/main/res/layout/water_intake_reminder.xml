@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".body.features.water_intake.ReminderFragment">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        android:src="@drawable/icon_back"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reminder"
+        android:textSize="37sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/iv_back"
+        app:layout_constraintStart_toEndOf="@id/iv_back"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_wake_sleep"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_borders"
+        app:layout_constraintTop_toBottomOf="@id/tv_reminder"
+        app:layout_constraintStart_toStartOf="@id/iv_back"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/tv_wake_sleep"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Wake Up and Sleep Time"
+            android:textSize="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="8:00 Am - 10:00 Pm"
+            android:textColor="@color/blue"
+            android:textSize="30sp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tv_wake_sleep"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_reminder_interval"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_borders"
+        app:layout_constraintTop_toBottomOf="@id/layout_wake_sleep"
+        app:layout_constraintStart_toStartOf="@id/iv_back"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/tv_reminder_interval"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Reminder Interval"
+            android:textSize="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="Every 90 Minutes"
+            android:textColor="@color/blue"
+            android:textSize="30sp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tv_reminder_interval"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_further_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_borders"
+        app:layout_constraintTop_toBottomOf="@id/layout_reminder_interval"
+        app:layout_constraintStart_toStartOf="@id/iv_back"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/tv_further_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Further Reminder"
+            android:textSize="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggleButtonCompat"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Still remind when your goal is achieved"
+            android:checked="false"
+            android:layout_centerInParent="true"
+            app:layout_constraintTop_toBottomOf="@id/tv_further_reminder"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_manage_notification"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/background_borders"
+        app:layout_constraintTop_toBottomOf="@id/layout_further_reminder"
+        app:layout_constraintStart_toStartOf="@id/iv_back"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/tv_manage_notification"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="Manage Notification"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggleButtonCompat2"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Permanent Notification"
+            android:checked="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_manage_notification"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggleButtonCompat3"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Sound"
+            android:checked="false"
+            app:layout_constraintTop_toBottomOf="@id/toggleButtonCompat2"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggleButtonCompat4"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Sound Type"
+            android:checked="false"
+            app:layout_constraintTop_toBottomOf="@id/toggleButtonCompat3"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggleButtonCompat5"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:text="Vibration"
+            android:checked="false"
+            app:layout_constraintTop_toBottomOf="@id/toggleButtonCompat4"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_care_crafter_web"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Go to CareCrafter Wev ->"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

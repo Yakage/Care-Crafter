@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment3"
+            android:title="Home"
+            android:icon="@drawable/icon_home" />
+        <item
+            android:id="@+id/statisticFragment"
+            android:title="Statistics"
+            android:icon="@drawable/icon_dashboard" />
+        <item
+            android:id="@+id/reminderFragment"
+            android:title="Reminder"
+            android:icon="@drawable/icon_feature" />
+        <item
+            android:id="@+id/settingFragment"
+            android:title="Settings"
+            android:icon="@drawable/icon_profile" />
+    </group>
+
+
+</menu>

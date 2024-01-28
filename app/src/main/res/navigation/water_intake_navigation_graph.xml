@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/water_intake_navigation_graph"
+    app:startDestination="@id/homeFragment3">
+
+    <fragment
+        android:id="@+id/reminderFragment"
+        android:name="com.carecrafter.body.features.water_intake.ReminderFragment"
+        android:label="water_intake_reminder"
+        tools:layout="@layout/water_intake_reminder" >
+        <action
+            android:id="@+id/action_reminderFragment_to_homeFragment3"
+            app:destination="@id/homeFragment3" />
+        <action
+            android:id="@+id/action_reminderFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_reminderFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment3"
+        android:name="com.carecrafter.body.features.water_intake.HomeFragment"
+        android:label="water_intake_home"
+        tools:layout="@layout/water_intake_home" >
+        <action
+            android:id="@+id/action_homeFragment3_to_statisticFragment3"
+            app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_homeFragment3_to_reminderFragment3"
+            app:destination="@id/reminderFragment" />
+        <action
+            android:id="@+id/action_homeFragment3_to_settingFragment2"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.carecrafter.body.features.water_intake.SettingFragment"
+        android:label="water_intake_setting"
+        tools:layout="@layout/water_intake_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_homeFragment3"
+            app:destination="@id/homeFragment3" />
+        <action
+            android:id="@+id/action_settingFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="com.carecrafter.body.features.water_intake.StatisticFragment"
+        android:label="water_intake_statistic"
+        tools:layout="@layout/water_intake_statistic" >
+        <action
+            android:id="@+id/action_statisticFragment_to_homeFragment3"
+            app:destination="@id/homeFragment3" />
+        <action
+            android:id="@+id/action_statisticFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+        <action
+            android:id="@+id/action_statisticFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/waterIntakeActivity"
+        android:name="com.carecrafter.body.features.WaterIntakeActivity"
+        android:label="activity_water_intake"
+        tools:layout="@layout/activity_water_intake" />
+</navigation>

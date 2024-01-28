@@ -13,6 +13,27 @@
         android:theme="@style/Theme.CareCrafter"
         tools:targetApi="31">
         <activity
+            android:name=".body.features.ExerciseSuggestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.DietSuggestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.StepTrackerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.SleepTrackerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.water_intake.SleepRimenderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.WaterIntakeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".body.features.FeaturesActivity"
+            android:exported="false" />
+        <activity
             android:name=".body.DashboardActivity"
             android:exported="false" />
         <activity
