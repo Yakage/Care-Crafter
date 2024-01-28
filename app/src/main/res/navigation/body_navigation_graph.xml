@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/body_navigation_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.carecrafter.body.DashboardFragment"
+        android:label="body_dashboard"
+        tools:layout="@layout/body_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_featuresFragment"
+            app:destination="@id/featuresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.carecrafter.body.HomeFragment"
+        android:label="body_home"
+        tools:layout="@layout/body_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_featuresFragment"
+            app:destination="@id/featuresFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/bodyActivity"
+        android:name="com.carecrafter.body.BodyActivity"
+        android:label="activity_body"
+        tools:layout="@layout/activity_body" />
+    <fragment
+        android:id="@+id/featuresFragment"
+        android:name="com.carecrafter.body.FeaturesFragment"
+        android:label="body_features"
+        tools:layout="@layout/body_features" >
+        <action
+            android:id="@+id/action_featuresFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_featuresFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_featuresFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.carecrafter.body.ProfileFragment"
+        android:label="body_profile"
+        tools:layout="@layout/body_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_featuresFragment"
+            app:destination="@id/featuresFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+</navigation>

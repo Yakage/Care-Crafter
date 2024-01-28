@@ -3,7 +3,7 @@ package com.carecrafter.registration
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.carecrafter.body.Home
+import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.RegistrationSignInBinding
 
 class SignIn : AppCompatActivity() {
@@ -14,7 +14,7 @@ class SignIn : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btLogin.setOnClickListener {
-            val intent = Intent(this@SignIn, Home::class.java)
+            val intent = Intent(this@SignIn, BodyActivity::class.java)
             startActivity(intent)
         }
 
