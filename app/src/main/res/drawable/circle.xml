@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <!-- creates an oval shape -->
-        <shape android:shape="oval">
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:toDegrees="360">
 
-            <!-- giving the color and width to the stroke -->
-            <stroke android:color="@color/blue" android:width="2dp"/>
+    <shape
+        android:innerRadiusRatio="2.5"
+        android:shape="ring"
+        android:thicknessRatio="10.0"
+        android:useLevel="false">
 
-            <!-- giving the width and the height to the shape -->
-            <size android:width="120dp" android:height="120dp"/>
-        </shape>
-    </item>
-</selector>
+        <solid android:color="@color/blue" />
+    </shape>
+</rotate>

@@ -36,15 +36,10 @@
         app:layout_constraintStart_toStartOf="@id/iv_back"
         android:elevation="5dp">
 
-        <TextView
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:text="bar chart dito "
-            android:textStyle="bold"
-            android:textSize="50dp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_height="300dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
