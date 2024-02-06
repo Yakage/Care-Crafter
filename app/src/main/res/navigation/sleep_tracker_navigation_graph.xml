@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sleep_tracker_navigation_graph"
+    app:startDestination="@id/homeSleepTrackerFragment">
+
+    <fragment
+        android:id="@+id/homeSleepTrackerFragment"
+        android:name="com.carecrafter.body.features.sleep_tracker.HomeSleepTrackerFragment"
+        android:label="sleep_tracker_home"
+        tools:layout="@layout/sleep_tracker_home" >
+        <action
+            android:id="@+id/action_homeSleepTrackerFragment_to_statisticSleepTrackerFragment"
+            app:destination="@id/statisticSleepTrackerFragment" />
+        <action
+            android:id="@+id/action_homeSleepTrackerFragment_to_settingsSleepTrackerFragment"
+            app:destination="@id/settingsSleepTrackerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsSleepTrackerFragment"
+        android:name="com.carecrafter.body.features.sleep_tracker.SettingsSleepTrackerFragment"
+        android:label="sleep_tracker_setting"
+        tools:layout="@layout/sleep_tracker_setting" >
+        <action
+            android:id="@+id/action_settingsSleepTrackerFragment_to_homeSleepTrackerFragment"
+            app:destination="@id/homeSleepTrackerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticSleepTrackerFragment"
+        android:name="com.carecrafter.body.features.sleep_tracker.StatisticSleepTrackerFragment"
+        android:label="sleep_tracker_statistics"
+        tools:layout="@layout/sleep_tracker_statistics" >
+        <action
+            android:id="@+id/action_statisticSleepTrackerFragment_to_homeSleepTrackerFragment"
+            app:destination="@id/homeSleepTrackerFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/sleepTrackerActivity"
+        android:name="com.carecrafter.body.features.SleepTrackerActivity"
+        android:label="activity_sleep_reminder"
+        tools:layout="@layout/activity_sleep_reminder" />
+</navigation>
