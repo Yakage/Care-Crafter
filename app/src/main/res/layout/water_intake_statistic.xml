@@ -132,7 +132,7 @@
             android:id="@+id/tv_drink_frequency"
             android:layout_width="190sp"
             android:layout_height="match_parent"
-            android:text="Drink Ferquency"
+            android:text="Drink Frequency"
             android:textSize="20sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
