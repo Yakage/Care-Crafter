@@ -4,50 +4,47 @@
     android:id="@+id/idRLSlider"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200">
+    android:background="@color/white">
 
-    <!--text view for displaying
-        our heading-->
-    <TextView
-        android:id="@+id/idTVSliderTitle"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linear_layout_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="Slide 1"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <!--Image view for displaying
-        our slider image-->
-    <ImageView
-        android:id="@+id/idIVSlider"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_below="@id/idTVSliderTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
-        android:src="@mipmap/ic_launcher" />
+        <ImageView
+            android:id="@+id/idIVSlider"
+            android:layout_width="274dp"
+            android:layout_height="301dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginBottom="20dp" />
 
-    <!--text view for displaying our
-        slider description-->
-    <TextView
-        android:id="@+id/idTVSliderDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/idIVSlider"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="C++ data structure and ALgorithm Course"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/idTVSliderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Slide 1"
+            android:textAlignment="center"
+            android:textColor="@color/introButtonColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/idTVSliderDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="C++ data structure and Algorithm Course"
+            android:textAlignment="center"
+            android:textColor="@color/introButtonColor"
+            android:textSize="15sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

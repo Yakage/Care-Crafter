@@ -20,6 +20,18 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/idBtnSkip"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="Skip"
+            android:textAllCaps="false"
+            android:textColor="@color/introButtonColor"
+            android:textStyle="bold" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -27,16 +39,17 @@
 
         <LinearLayout
             android:id="@+id/idLLDots"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="3">
 
             <TextView
                 android:id="@+id/idTVSlideOne"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="1dp"
@@ -50,7 +63,7 @@
 
             <TextView
                 android:id="@+id/idTVSlideTwo"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="1dp"
@@ -64,7 +77,21 @@
 
             <TextView
                 android:id="@+id/idTVSlideThree"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+                android:text="•"
+                android:textAlignment="center"
+                android:textColor="@color/grey"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/idTVSlideFour"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="1dp"
@@ -78,17 +105,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/idBtnSkip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/introButtonColor"
-            android:padding="4dp"
-            android:text="Skip"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
 
     </LinearLayout>
 
