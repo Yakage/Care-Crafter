@@ -54,7 +54,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Dream better, live better.",
                 "Trust CareCrafter to track your sleep.",
-                R.drawable.sleep
+                R.drawable.blacksleep
             )
         )
 

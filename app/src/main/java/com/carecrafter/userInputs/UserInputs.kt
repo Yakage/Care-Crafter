@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
@@ -20,6 +21,7 @@ class UserInputs : AppCompatActivity() {
         // id's
         val timeSpinner = findViewById<Spinner>(R.id.timeSpinnerOne)
         val finishButton = findViewById<Button>(R.id.finishButton)
+        val backButton = findViewById<ImageView>(R.id.backButton)
 
         // array nako
         val timeOptions = arrayOf("4:00 AM", "5:00 AM", "6:00 AM", "7:00 AM", "8:00 AM",
@@ -51,6 +53,10 @@ class UserInputs : AppCompatActivity() {
         finishButton.setOnClickListener {
             val intent = Intent(this, BodyActivity::class.java)
             startActivity(intent)
+        }
+
+        backButton.setOnClickListener {
+            onBackPressed()
         }
     }
 }
