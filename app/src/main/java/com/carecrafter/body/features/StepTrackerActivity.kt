@@ -1,125 +1,74 @@
 package com.carecrafter.body.features
 
-import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupWithNavController
 import com.carecrafter.R
+import com.carecrafter.databinding.ActivityStepTrackerBinding
+import com.carecrafter.databinding.ActivityWaterIntakeBinding
+import com.google.android.material.navigation.NavigationView
 
-class StepTrackerActivity : AppCompatActivity(), SensorEventListener {
-    private var sensorManager: SensorManager? = null
-
-    // Creating a variable which will give the running status
-    // and initially given the boolean value as false
-    private var running = false
-
-    // Creating a variable which will counts total steps
-    // and it has been given the value of 0 float
-    private var totalSteps = 0f
-
-    // Creating a variable  which counts previous total
-    // steps and it has also been given the value of 0 float
-    private var previousTotalSteps = 0f
+class StepTrackerActivity : AppCompatActivity(){
+    private lateinit var binding: ActivityStepTrackerBinding
+    private lateinit var navController: NavController
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navigationView: NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_step_tracker)
-        loadData()
-        resetSteps()
+        binding = ActivityStepTrackerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Adding a context of SENSOR_SERVICE as Sensor Manager
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        navigationView = findViewById(R.id.navigationViewForStepTracker)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewForStepTracker) as NavHostFragment
+        navController = navHostFragment.navController
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView.setupWithNavController(navController)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbarForStepTracker)
+        setSupportActionBar(toolbar)
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
+        drawerLayout.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toggle.syncState()
+
+        navController.addOnDestinationChangedListener {_, destination, _ ->
+            if(destination.id == R.id.homeStepTrackerFragment){
+                toolbar.visibility = View.VISIBLE
+                navigationView.visibility = View.VISIBLE
+                toolbar.title = ""
+            }
+            else if (destination.id == R.id.statisticStepTrackerFragment){
+                toolbar.visibility = View.GONE
+                navigationView.visibility = View.GONE
+            }
+        }
     }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragmentContainerView)
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
 
-    override fun onResume() {
-        super.onResume()
-        running = true
-
-        // Returns the number of steps taken by the user since the last reboot while activated
-        // This sensor requires permission android.permission.ACTIVITY_RECOGNITION.
-        // So don't forget to add the following permission in AndroidManifest.xml present in manifest folder of the app.
-        val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-
-
-        if (stepSensor == null) {
-            // This will give a toast message to the user if there is no sensor in the device
-            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
-        } else {
-            // Rate suitable for the user interface
-            sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }else{
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-
-        // Calling the TextView that we made in activity_main.xml
-        // by the id given to that TextView
-        var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
-
-        if (running) {
-            totalSteps = event!!.values[0]
-
-            // Current steps are calculated by taking the difference of total steps
-            // and previous steps
-            val currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
-
-            // It will show the current steps to the user
-            tv_stepsTaken.text = ("$currentSteps")
-        }
-    }
-
-    fun resetSteps() {
-        var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
-        tv_stepsTaken.setOnClickListener {
-            // This will give a toast message if the user want to reset the steps
-            Toast.makeText(this, "Long tap to reset steps", Toast.LENGTH_SHORT).show()
-        }
-
-        tv_stepsTaken.setOnLongClickListener {
-
-            previousTotalSteps = totalSteps
-
-            // When the user will click long tap on the screen,
-            // the steps will be reset to 0
-            tv_stepsTaken.text = 0.toString()
-
-            // This will save the data
-            saveData()
-
-            true
-        }
-    }
-
-    private fun saveData() {
-
-        // Shared Preferences will allow us to save
-        // and retrieve data in the form of key,value pair.
-        // In this function we will save data
-        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-
-        val editor = sharedPreferences.edit()
-        editor.putFloat("key1", previousTotalSteps)
-        editor.apply()
-    }
-
-    private fun loadData() {
-
-        // In this function we will retrieve data
-        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val savedNumber = sharedPreferences.getFloat("key1", 0f)
-
-        // Log.d is used for debugging purposes
-        Log.d("MainActivity", "$savedNumber")
-
-        previousTotalSteps = savedNumber
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // We do not have to write anything in this function for this app
-    }
 }
