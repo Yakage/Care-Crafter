@@ -3,6 +3,7 @@ package com.carecrafter.sqlitedatabase
 import android.content.ContentValues
 import android.content.Context
 import androidx.core.database.getStringOrNull
+import com.carecrafter.models.User
 
 class UserDAO(context: Context) {
     private val dbHelper = CareCrafterDatabaseHelper(context)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/step_tracker_navigation_graph"
-    app:startDestination="@id/stepTrackerActivity">
+    app:startDestination="@id/homeStepTrackerFragment">
     <activity
         android:id="@+id/stepTrackerActivity"
         android:name="com.carecrafter.body.features.StepTrackerActivity"
@@ -13,5 +13,18 @@
         android:id="@+id/homeStepTrackerFragment"
         android:name="com.carecrafter.body.features.step_tracker.HomeStepTrackerFragment"
         android:label="step_tracker_home"
-        tools:layout="@layout/step_tracker_home" />
+        tools:layout="@layout/step_tracker_home" >
+        <action
+            android:id="@+id/action_homeStepTrackerFragment_to_statisticStepTrackerFragment"
+            app:destination="@id/statisticStepTrackerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticStepTrackerFragment"
+        android:name="com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragment"
+        android:label="step_tracker_statistics"
+        tools:layout="@layout/step_tracker_statistics" >
+        <action
+            android:id="@+id/action_statisticStepTrackerFragment_to_homeStepTrackerFragment"
+            app:destination="@id/homeStepTrackerFragment" />
+    </fragment>
 </navigation>
