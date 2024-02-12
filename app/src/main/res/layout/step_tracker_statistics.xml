@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".body.features.water_intake.StatisticFragment">
+    tools:context=".body.features.step_tracker.StatisticStepTrackerFragment">
 
     <ImageView
         android:id="@+id/iv_back"
@@ -26,7 +26,6 @@
         android:gravity="center"
         app:layout_constraintTop_toTopOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_graph"
         android:layout_width="match_parent"
@@ -37,20 +36,14 @@
         app:layout_constraintStart_toStartOf="@id/iv_back"
         android:elevation="5dp">
 
-        <TextView
-            android:id="@+id/tv_chart"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Chart chart "
-            android:textSize="50sp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            android:layout_height="300dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_average_volume"
+        android:id="@+id/layout_average_step"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="20dp"
@@ -60,10 +53,10 @@
         android:elevation="5dp">
 
         <TextView
-            android:id="@+id/tv_average_volume"
+            android:id="@+id/tv_average_step"
             android:layout_width="190sp"
             android:layout_height="match_parent"
-            android:text="Average Volume"
+            android:text="Average Steps"
             android:textSize="20sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -73,33 +66,33 @@
             android:id="@+id/tv_volume"
             android:layout_width="180sp"
             android:layout_height="match_parent"
-            android:text="100 oz"
+            android:text="100 steps"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:paddingStart="10dp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_average_volume" />
+            app:layout_constraintStart_toEndOf="@id/tv_average_step" />
 
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_average_completion"
+        android:id="@+id/layout_total_steps"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="20dp"
         android:background="@drawable/background_borders"
-        app:layout_constraintTop_toBottomOf="@id/layout_average_volume"
+        app:layout_constraintTop_toBottomOf="@id/layout_average_step"
         app:layout_constraintStart_toStartOf="@id/iv_back"
         android:elevation="5dp">
 
         <TextView
-            android:id="@+id/tv_average_completion"
+            android:id="@+id/tv_total_steps"
             android:layout_width="190sp"
             android:layout_height="match_parent"
-            android:text="Average Completion"
+            android:text="Total Steps"
             android:textSize="20sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -109,47 +102,16 @@
             android:id="@+id/tv_percentage"
             android:layout_width="180sp"
             android:layout_height="match_parent"
-            android:text="70 %"
+            android:text="10000 steps"
             android:textSize="18sp"
             android:textColor="@color/blue"
             android:paddingStart="10dp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_average_completion" />
+            app:layout_constraintStart_toEndOf="@id/tv_total_steps" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_drink_frequency"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/background_borders"
-        app:layout_constraintTop_toBottomOf="@id/layout_average_completion"
-        app:layout_constraintStart_toStartOf="@id/iv_back"
-        android:elevation="5dp">
 
-        <TextView
-            android:id="@+id/tv_drink_frequency"
-            android:layout_width="190sp"
-            android:layout_height="match_parent"
-            android:text="Drink Frequency"
-            android:textSize="20sp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_times"
-            android:layout_width="180sp"
-            android:layout_height="match_parent"
-            android:text="6 times / day"
-            android:textSize="18sp"
-            android:textColor="@color/blue"
-            android:paddingStart="10dp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_drink_frequency" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_care_crafter_web"
@@ -165,6 +127,4 @@
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
