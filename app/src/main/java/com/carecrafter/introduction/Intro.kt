@@ -14,12 +14,11 @@ class Intro : AppCompatActivity() {
     lateinit var sliderAdapter: SliderAdapter
     lateinit var sliderList: ArrayList<SliderData>
 
-    // on below line we are creating a variable for our
-    // skip button, slider indicator text view for 3 dots
-    lateinit var skipBtn: Button
+    lateinit var skipBtn: TextView
     lateinit var indicatorSlideOneTV: TextView
     lateinit var indicatorSlideTwoTV: TextView
     lateinit var indicatorSlideThreeTV: TextView
+    lateinit var indicatorSlideFourTV: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,64 +26,61 @@ class Intro : AppCompatActivity() {
         installSplashScreen()
         setContentView(R.layout.introduction_intro)
 
-        // on below line we are initializing all
-        // our variables with their ids.
         viewPager = findViewById(R.id.idViewPager)
         skipBtn = findViewById(R.id.idBtnSkip)
         indicatorSlideOneTV = findViewById(R.id.idTVSlideOne)
         indicatorSlideTwoTV = findViewById(R.id.idTVSlideTwo)
         indicatorSlideThreeTV = findViewById(R.id.idTVSlideThree)
+        indicatorSlideFourTV = findViewById(R.id.idTVSlideFour)
 
-        // on below line we are adding click listener for our skip button
         skipBtn.setOnClickListener {
-            // on below line we are opening a new activity
             val intent = Intent(this@Intro, SignIn::class.java)
             startActivity(intent)
         }
 
-        // on below line we are initializing our slider list.
         sliderList = ArrayList()
 
-        // on below line we are adding data to our list
         sliderList.add(
             SliderData(
-                "Python",
-                "Python Development Course",
+                "Every step counts.",
+                "Let CareCrafter track your\n" +
+                        "journey to wellness.",
                 R.drawable.python
             )
         )
 
         sliderList.add(
             SliderData(
-                "Java",
-                "Java Development Course",
+                "Dream better, live better.",
+                "Trust CareCrafter to track your sleep.",
                 R.drawable.java
             )
         )
 
         sliderList.add(
             SliderData(
-                "C++",
-                "C++ Development Course",
+                "Quench your thirst for wellness.",
+                "Trust CareCrafter to remind you to hydrate.",
                 R.drawable.c
             )
         )
 
-        // on below line we are adding slider list
-        // to our adapter class.
+        sliderList.add(
+            SliderData(
+                "Eating right made easy.",
+                "Explore tailored diet suggestions with CareCrafter.",
+                R.drawable.c
+            )
+        )
+
         sliderAdapter = SliderAdapter(this, sliderList)
 
-        // on below line we are setting adapter
-        // for our view pager on below line.
         viewPager.adapter = sliderAdapter
 
-        // on below line we are adding page change
-        // listener for our view pager.
         viewPager.addOnPageChangeListener(viewListener)
 
     }
 
-    // creating a method for view pager for on page change listener.
     var viewListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
         override fun onPageScrolled(
             position: Int,
@@ -94,30 +90,35 @@ class Intro : AppCompatActivity() {
         }
 
         override fun onPageSelected(position: Int) {
-            // we are calling our dots method to
-            // change the position of selected dots.
 
-            // on below line we are checking position and updating text view text color.
             if (position == 0) {
+                indicatorSlideOneTV.setTextColor(resources.getColor(R.color.introButtonColor))
                 indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
-                indicatorSlideOneTV.setTextColor(resources.getColor(R.color.white))
+                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 skipBtn.setText("Skip")
 
             } else if (position == 1) {
-                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.white))
+                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.introButtonColor))
                 indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
+                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
                 skipBtn.setText("Skip")
-            } else {
-                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
-                indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.white))
+            } else if (position == 2){
+                indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
-                skipBtn.setText("Let Get Started")
+                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
+                skipBtn.setText("Skip")
+            } else {
+                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
+                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
+                indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
+                skipBtn.setText("Get Started")
             }
         }
 
-        // below method is use to check scroll state.
         override fun onPageScrollStateChanged(state: Int) {}
     }
 }
