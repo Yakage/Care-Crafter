@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.RegistrationSignInBinding
+import com.carecrafter.userInputs.UserInputs
 
 class SignIn : AppCompatActivity() {
     private lateinit var binding: RegistrationSignInBinding
@@ -14,7 +15,7 @@ class SignIn : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btLogin.setOnClickListener {
-            val intent = Intent(this@SignIn, BodyActivity::class.java)
+            val intent = Intent(this@SignIn, UserInputs::class.java)
             startActivity(intent)
         }
 
