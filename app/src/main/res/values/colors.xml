@@ -11,6 +11,7 @@
     <color name="button_color">#1E573B</color>
     <color name="blue">#00B0FF</color>
 
-    <color name="introButtonColor">#c594fe</color>
+    <color name="introButtonColor">#1b66fa</color>
+    <color name="introButtonColorTwo">#40d3b9</color>
     <color name="stepColor">#FCC419</color>
 </resources>

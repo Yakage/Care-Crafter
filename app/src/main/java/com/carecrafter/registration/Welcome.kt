@@ -4,19 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import com.carecrafter.R
 
 class Welcome : AppCompatActivity() {
 
     private lateinit var welcomeLogin: Button
     private lateinit var welcomeSignup: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-
         welcomeLogin = findViewById(R.id.welcomeLogin)
         welcomeSignup = findViewById(R.id.welcomeSignup)
+        val backButton = findViewById<ImageView>(R.id.backButton)
 
         welcomeLogin.setOnClickListener {
             val intent = Intent(this, SignIn::class.java)
@@ -26,6 +28,10 @@ class Welcome : AppCompatActivity() {
         welcomeSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
+        }
+
+        backButton.setOnClickListener {
+            onBackPressed()
         }
     }
 }

@@ -21,5 +21,8 @@ class SignUp : AppCompatActivity() {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
         }
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

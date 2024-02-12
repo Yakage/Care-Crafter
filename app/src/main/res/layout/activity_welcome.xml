@@ -6,44 +6,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/white"
     tools:context=".registration.Welcome">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to CareCrafter"
-        android:textColor="@color/introButtonColor"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="50dp"/>
-
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/border_black"
-        android:gravity="center_vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/welcomeLogin"
-            android:layout_width="190dp"
-            android:layout_height="60dp"
-            android:text="Login"
-            android:textSize="20sp"
-            android:backgroundTint="@color/introButtonColor"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp">
 
-        <Button
-            android:id="@+id/welcomeSignup"
-            android:layout_width="190dp"
-            android:layout_height="60dp"
-            android:text="Signup"
-            android:textSize="20sp"
-            android:backgroundTint="@color/introButtonColor"
-            android:layout_gravity="center_horizontal"/>
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CareCrafter"
+                android:textColor="@color/introButtonColor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="your personal health companion"
+                android:layout_marginBottom="50dp"/>
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/border_black"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/welcomeLogin"
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:text="Login"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/introButtonColor"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/welcomeSignup"
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:text="Signup"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/introButtonColor"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
