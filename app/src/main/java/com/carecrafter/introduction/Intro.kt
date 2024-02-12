@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager.widget.ViewPager
 import com.carecrafter.R
 import com.carecrafter.registration.SignIn
+import com.carecrafter.registration.Welcome
 
 class Intro : AppCompatActivity() {
     lateinit var viewPager: ViewPager
@@ -34,7 +35,7 @@ class Intro : AppCompatActivity() {
         indicatorSlideFourTV = findViewById(R.id.idTVSlideFour)
 
         skipBtn.setOnClickListener {
-            val intent = Intent(this@Intro, SignIn::class.java)
+            val intent = Intent(this@Intro, Welcome::class.java)
             startActivity(intent)
         }
 
@@ -45,7 +46,7 @@ class Intro : AppCompatActivity() {
                 "Every step counts.",
                 "Let CareCrafter track your\n" +
                         "journey to wellness.",
-                R.drawable.python
+                R.drawable.run
             )
         )
 
@@ -53,7 +54,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Dream better, live better.",
                 "Trust CareCrafter to track your sleep.",
-                R.drawable.java
+                R.drawable.sleep
             )
         )
 
@@ -61,7 +62,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Quench your thirst for wellness.",
                 "Trust CareCrafter to remind you to hydrate.",
-                R.drawable.c
+                R.drawable.drink
             )
         )
 
@@ -69,7 +70,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Eating right made easy.",
                 "Explore tailored diet suggestions with CareCrafter.",
-                R.drawable.c
+                R.drawable.eat
             )
         )
 
