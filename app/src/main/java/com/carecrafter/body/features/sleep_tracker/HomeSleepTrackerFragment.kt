@@ -9,11 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
-import com.carecrafter.body.features.step_tracker.HomeStepTrackerFragment
 import com.carecrafter.databinding.SleepTrackerHomeBinding
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class HomeSleepTrackerFragment : Fragment() {
 

@@ -5,17 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
-import com.carecrafter.databinding.SleepTrackerHomeBinding
 import com.carecrafter.databinding.SleepTrackerSettingBinding
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class SettingsSleepTrackerFragment : Fragment() {
     private lateinit var binding: SleepTrackerSettingBinding
