@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="@color/white"
+    android:background="#ffffff"
     tools:context=".body.HomeFragment">
 
     <LinearLayout
@@ -119,7 +118,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="10dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#7dd9d7"
                         android:orientation="vertical"
                         android:gravity="center">
 
@@ -141,7 +140,7 @@
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#e6b6ff"
                         android:layout_margin="10dp"
                         android:orientation="vertical"
                         android:gravity="center">
@@ -164,7 +163,7 @@
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#f5e179"
                         android:layout_margin="10dp"
                         android:orientation="vertical"
                         android:gravity="center">
@@ -187,7 +186,7 @@
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#97e982"
                         android:layout_margin="10dp"
                         android:orientation="vertical"
                         android:gravity="center">
@@ -243,14 +242,14 @@
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:layout_margin="10dp"
-                        android:background="@color/introButtonColor">
+                        android:background="#e6b6ff">
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#97e982"
                         android:layout_margin="10dp">
 
                     </LinearLayout>
@@ -258,7 +257,7 @@
                     <LinearLayout
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#7dd9d7"
                         android:layout_margin="10dp">
 
                     </LinearLayout>
@@ -266,7 +265,7 @@
                     <LinearLayout
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:background="@color/introButtonColor"
+                        android:background="#f5e179"
                         android:layout_margin="10dp">
 
                     </LinearLayout>

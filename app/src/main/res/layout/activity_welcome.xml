@@ -77,7 +77,7 @@
                     android:layout_height="60dp"
                     android:text="Signup"
                     android:textSize="20sp"
-                    android:backgroundTint="@color/introButtonColor"
+                    android:backgroundTint="@color/introButtonColorTwo"
                     android:layout_gravity="center_horizontal"/>
 
             </LinearLayout>

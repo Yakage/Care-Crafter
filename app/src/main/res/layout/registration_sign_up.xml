@@ -13,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/backButton"
@@ -22,6 +23,15 @@
             android:src="@drawable/back"
             />
 
+        <TextView
+            android:id="@+id/tv_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textSize="25sp"
+            android:textColor="@color/introButtonColor"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -29,15 +39,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
-
-        <TextView
-            android:id="@+id/tv_create_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Sign Up"
-            android:textSize="30sp"
-            android:textColor="@color/introButtonColor"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_full_name"
@@ -123,7 +124,7 @@
             android:id="@+id/et_confirm_password"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ConfirmPasswordET"
@@ -144,7 +145,7 @@
             android:textColor="@color/white"
             android:background="@color/introButtonColor"
             android:textSize="20sp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="25dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
