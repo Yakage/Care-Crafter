@@ -39,5 +39,5 @@
         android:id="@+id/sleepTrackerActivity"
         android:name="com.carecrafter.body.features.SleepTrackerActivity"
         android:label="activity_sleep_reminder"
-        tools:layout="@layout/activity_sleep_reminder" />
+        tools:layout="@layout/activity_sleep_tracker" />
 </navigation>

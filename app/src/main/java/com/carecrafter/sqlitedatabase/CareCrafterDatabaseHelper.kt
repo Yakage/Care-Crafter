@@ -1,17 +1,14 @@
 package com.carecrafter.sqlitedatabase
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.carecrafter.models.User
 
 class CareCrafterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "CareCrafter.db"
-
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -29,7 +26,7 @@ class CareCrafterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DA
                 "Status TEXT)")
 
         val CREATE_SLEEP_TRACKER_TABLE = ("CREATE TABLE SleepTracker (" +
-                "ID INTEGER INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "UserID INTEGER," +
                 "Time TEXT," +
                 "WakeUpTime TEXT," +
                 "SleepTime TEXT," +
@@ -39,7 +36,7 @@ class CareCrafterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DA
                 "FOREIGN KEY(UserID) REFERENCES User(UserID))")
 
         val CREATE_WATER_INTAKE_TABLE = ("CREATE TABLE WaterIntake (" +
-                "ID INTEGER INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "UserID INTEGER," +
                 "DailyGoal INTEGER," +
                 "TotalWaterIntakeForTheDay REAL," +
                 "CurrentWaterIntakeForTheDay REAL," +
@@ -52,12 +49,12 @@ class CareCrafterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DA
                 "FOREIGN KEY(UserID) REFERENCES User(UserID))")
 
         val CREATE_STEP_TRACKER_TABLE = ("CREATE TABLE StepTracker (" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "UserID INTEGER," +
                 "CurrentStepsPerDay INTEGER," +
                 "TotalStepsTaken INTEGER," +
                 "AverageStepTaken INTEGER," +
-                "DailyGoalStepPerMonthOrYear INTEGER,") //+
-                //"FOREIGN KEY(UserID) REFERENCES User(UserID))")
+                "DailyGoalStepPerMonthOrYear INTEGER," +
+                "FOREIGN KEY(UserID) REFERENCES User(UserID))")
 
         db.execSQL(CREATE_USER_TABLE)
         db.execSQL(CREATE_SLEEP_TRACKER_TABLE)
@@ -72,27 +69,4 @@ class CareCrafterDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DA
         db.execSQL("DROP TABLE IF EXISTS StepTracker")
         onCreate(db)
     }
-
-
-    //functions for User
-    fun insertUser(user: User){
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put("Name", user.name)
-            put("Email", user.email)
-            put("Age", user.age)
-            put("Height", user.height)
-            put("Gender", user.gender)
-            put("Weight", user.weight)
-            put("Password", user.password)
-            put("ConfirmPassword", user.confirmPassword)
-            put("Role", user.role)
-            put("Status", user.status)
-        }
-
-        db.insert("User", null, values)
-        db.close()
-    }
-
-    //functions for WaterIntake
 }

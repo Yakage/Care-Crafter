@@ -7,7 +7,7 @@
     tools:context=".body.features.sleep_tracker.StatisticSleepTrackerFragment">
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -25,8 +25,8 @@
         android:gravity="center"
         android:text="Statistics"
         android:textSize="37sp"
-        app:layout_constraintStart_toEndOf="@id/iv_back"
-        app:layout_constraintTop_toTopOf="@id/iv_back" />
+        app:layout_constraintStart_toEndOf="@id/ivBack"
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/time_bar"

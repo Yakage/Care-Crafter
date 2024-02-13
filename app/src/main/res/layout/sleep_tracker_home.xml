@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btStop"
         android:layout_width="185dp"
         android:layout_height="73dp"
         android:layout_marginTop="36dp"
@@ -66,10 +66,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btStop" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivAlarm"
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginTop="32dp"
@@ -80,7 +80,7 @@
         android:contentDescription="TODO" />
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
