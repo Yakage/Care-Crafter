@@ -43,7 +43,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -70,10 +70,9 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="357dp"
         android:layout_height="343dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_borders"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_reminder">
 
@@ -196,6 +195,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="357dp"
         android:layout_height="86dp"
         android:layout_marginTop="128dp"
@@ -210,8 +210,8 @@
             android:layout_height="52dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="Wake up Time"
             android:gravity="center"
+            android:text="Wake up Time"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -230,5 +230,18 @@
                 android:hint="Input Wake Up Time" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        android:layout_width="330dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Confirm and Return"
+        android:textColor="@color/blue"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context=".body.features.sleep_tracker.StatisticSleepTrackerFragment">
 
     <ImageView
-        android:id="@+id/iv_back"
+        android:id="@+id/ivBack"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
