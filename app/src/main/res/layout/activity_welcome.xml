@@ -54,7 +54,7 @@
                 android:layout_marginBottom="50dp"/>
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="270dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:orientation="vertical"
@@ -63,7 +63,7 @@
 
                 <Button
                     android:id="@+id/welcomeLogin"
-                    android:layout_width="190dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:text="Login"
                     android:textSize="20sp"
@@ -73,7 +73,7 @@
 
                 <Button
                     android:id="@+id/welcomeSignup"
-                    android:layout_width="190dp"
+                    android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:text="Signup"
                     android:textSize="20sp"
