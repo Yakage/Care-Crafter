@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CareCrafter"
         tools:targetApi="31">
         <activity
+            android:name=".body.features.step_tracker.StepTrackerV2"
+            android:exported="false" />
+        <activity
             android:name=".userInputs.UserInputs"
             android:exported="false" />
         <activity
