@@ -34,27 +34,18 @@ class SignUp : AppCompatActivity() {
         }
 
         binding.btSubmit.setOnClickListener {
-            val name = binding.FullNameET.text.toString()
-            val email = binding.EmailET.text.toString()
-            val age = binding.AgeET.text.toString()
-            val height = binding.HeightET.text.toString()
-            val weight = binding.WeightET.text.toString()
-            val gender = binding.GenderET.text.toString()
-            val password = binding.PasswordET.text.toString()
-            val confirmPassword = binding.ConfirmPasswordET.text.toString()
-            val nameData = name.trim()
-            val emailData = email.trim()
-            val ageData = age.trim()
-            val heightData = height.trim()
-            val weightData = weight.trim()
-            val genderData = gender.trim()
-            val passwordData = password.trim()
-            val confirmPasswordData = confirmPassword.trim()
-
+            val name = binding.FullNameET.text.toString().trim()
+            val email = binding.EmailET.text.toString().trim()
+            val age = binding.AgeET.text.toString().trim()
+            val height = binding.HeightET.text.toString().trim()
+            val weight = binding.WeightET.text.toString().trim()
+            val gender = binding.GenderET.text.toString().trim()
+            val password = binding.PasswordET.text.toString().trim()
+            val confirmPassword = binding.ConfirmPasswordET.text.toString().trim()
 
             //json data
             val signupDataJson =
-                "{\"name\":\"$nameData\",\"email\":\"$emailData\",\"age\":\"$ageData\",\"height\":\"$heightData\",\"weight\":\"$weightData\",\"gender\":\"$genderData\",\"password\":\"$passwordData\",\"confirm_password\":\"$confirmPasswordData\"}"
+                "{\"name\":\"$name\",\"email\":\"$email\",\"age\":\"$age\",\"height\":\"$height\",\"weight\":\"$weight\",\"gender\":\"$gender\",\"password\":\"$password\",\"confirm_password\":\"$confirmPassword\"}"
 
             //validation
             if (name.isEmpty()) {

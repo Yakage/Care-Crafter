@@ -12,13 +12,13 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @POST("register")
     fun createUser(
-        @Field("name") nameData:String,
-        @Field("email") emailData:String,
-        @Field("age") ageData:String,
-        @Field("height") heightData:String,
-        @Field("weight") weightData:String,
-        @Field("gender") genderData:String,
-        @Field("password") passwordData:String,
+        @Field("name") name:String,
+        @Field("email") email:String,
+        @Field("age") age:String,
+        @Field("height") height:String,
+        @Field("weight") weight:String,
+        @Field("gender") gender:String,
+        @Field("password") password:String,
         @Field("confirm_password") confirmPasswordData:String,
     ):retrofit2.Call<DefaultResponse>
 
