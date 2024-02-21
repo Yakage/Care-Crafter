@@ -90,7 +90,11 @@ class SignIn : AppCompatActivity() {
             val intent = Intent(this@SignIn, SignUp::class.java)
             startActivity(intent)
         }
-
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(
+                Intent(this@SignIn, BodyActivity::class.java)
+            )
+        }
         binding.backButton.setOnClickListener {
             onBackPressed()
         }

@@ -1,9 +1,15 @@
 package com.carecrafter.models
 
+import java.sql.Time
+
 data class WaterIntake(
-    val id: Int,
-    val currentStepsPerDay: Int,
-    val totalStepsTaken: Int,
-    val averageStepTaken: Int,
-    val dailyGoalStepPerMonthOrYear: Int,
-)
+    var userID: Int,
+    var dailyGoal: Int,
+    var totalWaterIntakeForTheDay: Int,
+    var currentWaterIntakeForTheDay: Int,
+    var reminder: Time,
+    var todayLog: String?,
+    var reminderInterval: Int,
+    var averageVolume: Int,
+    var averageCompletion: Int,
+    var drinkFrequency: Int)

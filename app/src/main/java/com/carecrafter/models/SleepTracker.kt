@@ -1,4 +1,4 @@
-package com.carecrafter.sqlitedatabase
+package com.carecrafter.models
 
 import java.sql.Time
 
