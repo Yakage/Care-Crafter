@@ -14,8 +14,8 @@
             android:id="@+id/action_dashboardFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_dashboardFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_dashboardFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
         <action
             android:id="@+id/action_dashboardFragment_to_featuresFragment"
             app:destination="@id/featuresFragment" />
@@ -32,8 +32,8 @@
             android:id="@+id/action_homeFragment_to_featuresFragment"
             app:destination="@id/featuresFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <activity
         android:id="@+id/bodyActivity"
@@ -52,22 +52,34 @@
             android:id="@+id/action_featuresFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
         <action
-            android:id="@+id/action_featuresFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_featuresFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.carecrafter.body.ProfileFragment"
-        android:label="body_profile"
-        tools:layout="@layout/body_profile" >
+        android:id="@+id/accountFragment"
+        android:name="com.carecrafter.body.AccountFragment"
+        android:label="body_account"
+        tools:layout="@layout/body_account" >
         <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
+            android:id="@+id/action_accountFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_featuresFragment"
+            android:id="@+id/action_accountFragment_to_featuresFragment"
             app:destination="@id/featuresFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_dashboardFragment"
+            android:id="@+id/action_accountFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_updateAccount"
+            app:destination="@id/updateAccount" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateAccount"
+        android:name="com.carecrafter.body.profile.UpdateAccount"
+        android:label="account_update_account"
+        tools:layout="@layout/account_update_account" >
+        <action
+            android:id="@+id/action_updateAccount_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
 </navigation>

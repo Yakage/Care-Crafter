@@ -6,15 +6,23 @@ import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
 import android.widget.Toast
+import androidx.room.Room
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.RegistrationSignInBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
-import com.carecrafter.userInputs.UserInputs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.carecrafter.MainActivity
+import com.carecrafter.roomdatabase.AppDatabase
+import com.carecrafter.roomdatabase.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignIn : AppCompatActivity() {
     private lateinit var binding: RegistrationSignInBinding
@@ -22,7 +30,6 @@ class SignIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = RegistrationSignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.btLogin.setOnClickListener {
             val email = binding.EmailET.text.toString().trim()
             val password = binding.PasswordET.text.toString().trim()
@@ -58,6 +65,7 @@ class SignIn : AppCompatActivity() {
                             response: Response<DefaultResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
+                                val userId = response.body()!!.userId
                                 Toast.makeText(
                                     applicationContext,
                                     response.body()!!.message,
@@ -98,5 +106,7 @@ class SignIn : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+
     }
+
 }

@@ -5,24 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.carecrafter.R
-import com.carecrafter.databinding.BodyHomeBinding
-import com.carecrafter.databinding.BodyProfileBinding
+import androidx.navigation.fragment.findNavController
+import com.carecrafter.databinding.BodyAccountBinding
 
-class ProfileFragment : Fragment() {
-    private lateinit var binding: BodyProfileBinding
+class AccountFragment : Fragment() {
+    private lateinit var binding: BodyAccountBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
-        binding = BodyProfileBinding.inflate(inflater, container, false)
+        binding = BodyAccountBinding.inflate(inflater, container, false)
 
-
+        binding.layoutAccount.setOnClickListener {
+            findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToUpdateAccount())
+        }
         return binding.root
     }
-
-
 
 }

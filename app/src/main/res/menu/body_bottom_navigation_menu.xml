@@ -13,7 +13,7 @@
         android:title="Features"
         android:icon="@drawable/icon_feature" />
     <item
-        android:id="@+id/profileFragment"
-        android:title="Profile"
+        android:id="@+id/accountFragment"
+        android:title="Account"
         android:icon="@drawable/icon_profile" />
 </menu>
