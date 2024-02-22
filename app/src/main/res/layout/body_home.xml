@@ -1,279 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff"
-    tools:context=".body.HomeFragment">
+    android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/layout_header"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/iv_profile_pic"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/carecrafter"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        tools:context=".body.HomeFragment">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_hello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="16dp"
-                android:text="Hello User"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="How are you feeling today?"
-                android:textSize="15sp"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_body"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_features"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Features"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
-
-        <LinearLayout
+            android:id="@+id/layout_header"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:padding="10dp"
-            android:gravity="center">
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/carecrafter"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/layout_features"
+                <TextView
+                    android:id="@+id/tv_hello"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Hello User"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/feature_one"-->
-<!--                        android:layout_width="140dp"-->
-<!--                        android:layout_height="110dp"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        app:cardCornerRadius="20dp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="How are you feeling today?"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/feature_two"-->
-<!--                        android:layout_width="140dp"-->
-<!--                        android:layout_height="110dp"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        app:cardCornerRadius="20dp" />-->
-
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/feature_three"-->
-<!--                        android:layout_width="140dp"-->
-<!--                        android:layout_height="110dp"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        app:cardCornerRadius="20dp" />-->
-
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:id="@+id/feature_four"-->
-<!--                        android:layout_width="140dp"-->
-<!--                        android:layout_height="110dp"-->
-<!--                        app:cardCornerRadius="20dp" />-->
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_margin="10dp"
-                        android:background="#7dd9d7"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/whiterun"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Step tracker"
-                            android:textSize="15sp"
-                            android:textColor="@color/white"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="#e6b6ff"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/whitesleep"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sleep tracker"
-                            android:textSize="15sp"
-                            android:textColor="@color/white"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="#f5e179"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/whitedrink"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Water Reminder"
-                            android:textSize="15sp"
-                            android:textColor="@color/white"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="#97e982"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/whiteeat"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Coming Soon"
-                            android:textSize="15sp"
-                            android:textColor="@color/white"
-                            android:layout_marginTop="5dp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Your Progress"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
 
         <LinearLayout
-            android:id="@+id/progressLayout"
+            android:id="@+id/layout_body"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical">
 
-            <HorizontalScrollView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Features"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none">
+                android:layout_height="140dp"
+                android:padding="10dp"
+                android:gravity="center">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/layout_features"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:background="#7dd9d7"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/whiterun"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Step tracker"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="#e6b6ff"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/whitesleep"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sleep tracker"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="#f5e179"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/whitedrink"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Water Reminder"
+                                android:padding="3dp"
+                                android:textSize="13sp"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="#97e982"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/whiteeat"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Coming Soon"
+                                android:textSize="15sp"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Your Progress"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/progressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_margin="10dp"
+                            android:background="#e6b6ff"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Goal: 1000"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Steps: 500"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:layout_marginBottom="40dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Check Progress->"
+                                android:textSize="17sp"
+                                android:textColor="@color/blue"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:background="#97e982"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Goal: 1000"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Steps: 500"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:layout_marginBottom="40dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Check Progress->"
+                                android:textSize="17sp"
+                                android:textColor="@color/blue"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:background="#7dd9d7"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Goal: 1000"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Steps: 500"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:layout_marginBottom="40dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Check Progress->"
+                                android:textSize="17sp"
+                                android:textColor="@color/blue"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:background="#f5e179"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Goal: 1000"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Steps: 500"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:layout_marginBottom="40dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Check Progress->"
+                                android:textSize="17sp"
+                                android:textColor="@color/blue"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="CareCrafter Web"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/blue"
+                    android:layout_marginBottom="30dp"/>
 
-                    <LinearLayout
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="10dp"
-                        android:background="#e6b6ff">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:background="#97e982"
-                        android:layout_margin="10dp">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:background="#7dd9d7"
-                        android:layout_margin="10dp">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:background="#f5e179"
-                        android:layout_margin="10dp">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+            </LinearLayout>
 
         </LinearLayout>
 
+
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
