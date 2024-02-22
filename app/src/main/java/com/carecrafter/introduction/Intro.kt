@@ -49,7 +49,7 @@ class Intro : AppCompatActivity() {
                 "Every step counts.",
                 "Let CareCrafter track your\n" +
                         "journey to wellness.",
-                R.drawable.run
+                R.drawable.sprint
             )
         )
 
@@ -57,7 +57,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Dream better, live better.",
                 "Trust CareCrafter to track your sleep.",
-                R.drawable.blacksleep
+                R.drawable.nap
             )
         )
 
@@ -65,7 +65,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Quench your thirst for wellness.",
                 "Trust CareCrafter to remind you to hydrate.",
-                R.drawable.drink
+                R.drawable.shot
             )
         )
 
@@ -73,7 +73,7 @@ class Intro : AppCompatActivity() {
             SliderData(
                 "Eating right made easy.",
                 "Explore tailored diet suggestions with CareCrafter.",
-                R.drawable.eat
+                R.drawable.ate
             )
         )
 
