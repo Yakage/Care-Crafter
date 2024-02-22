@@ -86,5 +86,4 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.startBtn.text = "Start"
         binding.resetBtn.isEnabled = false
     }
-
 }
