@@ -22,6 +22,7 @@ import com.carecrafter.retrofit_database.ApiClient
 import com.carecrafter.roomdatabase.AppDatabase
 import com.carecrafter.roomdatabase.User
 import com.carecrafter.roomdatabase.UserDao
+import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ import java.io.StringReader
 class UpdateAccount : Fragment() {
     private lateinit var binding: AccountUpdateAccountBinding
     private lateinit var userDao: UserDao
+    private lateinit var dbHelper: CareCrafterDatabaseHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +46,7 @@ class UpdateAccount : Fragment() {
             findNavController().navigate(UpdateAccountDirections.actionUpdateAccountToAccountFragment())
         }
 
-
+        dbHelper = CareCrafterDatabaseHelper(requireContext())
         binding.btUpdate.setOnClickListener {
             val name = binding.FullNameET.text.toString().trim()
             val email = binding.EmailET.text.toString().trim()
@@ -52,106 +54,98 @@ class UpdateAccount : Fragment() {
             val height = binding.HeightET.text.toString().trim()
             val weight = binding.WeightET.text.toString().trim()
             val gender = binding.GenderET.text.toString().toLowerCase().trim()
+            val userId = dbHelper.getUserID().toString().toInt()
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                val user: User? = userDao.getUser()
+            val updateUserDataJson =
+                "{\"userId\":\"$userId\",\"name\":\"$name\",\"email\":\"$email\",\"age\":\"$age\",\"height\":\"$height\",\"weight\":\"$weight\",\"gender\":\"$gender\"}"
 
-                user?.let { loggedInUser ->
-                    // userId retrieved successfully
-                    val userId = loggedInUser.userId.toInt()
+            //validation
+            if (name.isEmpty()) {
+                binding.FullNameET.error = "Full Name required"
+                binding.FullNameET.requestFocus()
+            }
 
-                    //json data
-                    val updateUserDataJson =
-                        "{\"userId\":\"$userId\",\"name\":\"$name\",\"email\":\"$email\",\"age\":\"$age\",\"height\":\"$height\",\"weight\":\"$weight\",\"gender\":\"$gender\"}"
+            if (email.isEmpty()) {
+                binding.EmailET.error = "Email required"
+                binding.EmailET.requestFocus()
+            }
 
-                    //validation
-                    if (name.isEmpty()) {
-                        binding.FullNameET.error = "Full Name required"
-                        binding.FullNameET.requestFocus()
-                    }
+            if (age.toString().isEmpty()) {
+                binding.AgeET.error = "Age required"
+                binding.AgeET.requestFocus()
+            }
 
-                    if (email.isEmpty()) {
-                        binding.EmailET.error = "Email required"
-                        binding.EmailET.requestFocus()
-                    }
+            if (height.isEmpty()) {
+                binding.HeightET.error = "Height required"
+                binding.HeightET.requestFocus()
+            }
 
-                    if (age.toString().isEmpty()) {
-                        binding.AgeET.error = "Age required"
-                        binding.AgeET.requestFocus()
-                    }
+            if (weight.isEmpty()) {
+                binding.WeightET.error = "Weight required"
+                binding.WeightET.requestFocus()
+            }
 
-                    if (height.isEmpty()) {
-                        binding.HeightET.error = "Height required"
-                        binding.HeightET.requestFocus()
-                    }
+            if (gender.isEmpty()) {
+                binding.GenderET.error = "Gender required"
+                binding.GenderET.requestFocus()
+            }
 
-                    if (weight.isEmpty()) {
-                        binding.WeightET.error = "Weight required"
-                        binding.WeightET.requestFocus()
-                    }
+            //correct malformed data
+            try {
+                val reader = JsonReader(StringReader(updateUserDataJson))
+                reader.isLenient = true
+                reader.beginObject()
+                reader.close()
+                ApiClient.instance.updateUser(
+                    userId,
+                    name,
+                    email,
+                    age,
+                    height,
+                    weight,
+                    gender,
+                )
+                    .enqueue(object : Callback<DefaultResponse> {
+                        override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                            Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
+                                .show()
+                        }
 
-                    if (gender.isEmpty()) {
-                        binding.GenderET.error = "Gender required"
-                        binding.GenderET.requestFocus()
-                    }
-
-                    //correct malformed data
-                    try {
-                        val reader = JsonReader(StringReader(updateUserDataJson))
-                        reader.isLenient = true
-                        reader.beginObject()
-                        reader.close()
-                        ApiClient.instance.updateUser(
-                            userId,
-                            name,
-                            email,
-                            age,
-                            height,
-                            weight,
-                            gender,
-                        )
-                            .enqueue(object : Callback<DefaultResponse> {
-                                override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                                        .show()
+                        override fun onResponse(
+                            call: Call<DefaultResponse>,
+                            response: Response<DefaultResponse>
+                        ) {
+                            if (response.isSuccessful && response.body() != null) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    response.body()!!.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                findNavController().navigate(UpdateAccountDirections.actionUpdateAccountToAccountFragment())
+                            } else {
+                                val errorMessage: String = try {
+                                    response.errorBody()?.string()
+                                        ?: "Failed to get a valid response. Response code: ${response.code()}"
+                                } catch (e: Exception) {
+                                    "Failed to get a valid response. Response code: ${response.code()}"
                                 }
-
-                                override fun onResponse(
-                                    call: Call<DefaultResponse>,
-                                    response: Response<DefaultResponse>
-                                ) {
-                                    if (response.isSuccessful && response.body() != null) {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            response.body()!!.message,
-                                            Toast.LENGTH_LONG
-                                        ).show()
-
-                                    } else {
-                                        val errorMessage: String = try {
-                                            response.errorBody()?.string()
-                                                ?: "Failed to get a valid response. Response code: ${response.code()}"
-                                        } catch (e: Exception) {
-                                            "Failed to get a valid response. Response code: ${response.code()}"
-                                        }
-                                        Toast.makeText(
-                                            requireContext(),
-                                            errorMessage,
-                                            Toast.LENGTH_LONG
-                                        )
-                                            .show()
-                                        Log.e("API_RESPONSE", errorMessage)
-                                    }
-                                }
-                            })
-                    } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                            .show()
-                        e.printStackTrace()
-                    }
-                }
+                                Toast.makeText(
+                                    requireContext(),
+                                    errorMessage,
+                                    Toast.LENGTH_LONG
+                                )
+                                    .show()
+                                Log.e("API_RESPONSE", errorMessage)
+                            }
+                        }
+                    })
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
+                    .show()
+                e.printStackTrace()
             }
         }
+
         return binding.root
     }
 }

@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.carecrafter.R
 import com.carecrafter.registration.SignIn
 import com.carecrafter.registration.Welcome
+import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 
 class Intro : AppCompatActivity() {
     lateinit var viewPager: ViewPager
@@ -21,12 +22,14 @@ class Intro : AppCompatActivity() {
     lateinit var indicatorSlideThreeTV: TextView
     lateinit var indicatorSlideFourTV: TextView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Thread.sleep(3000)
         installSplashScreen()
         setContentView(R.layout.introduction_intro)
-
+        val dbHelper = CareCrafterDatabaseHelper(this)
+        val db = dbHelper.writableDatabase
         viewPager = findViewById(R.id.idViewPager)
         skipBtn = findViewById(R.id.idBtnSkip)
         indicatorSlideOneTV = findViewById(R.id.idTVSlideOne)

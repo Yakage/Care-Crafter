@@ -20,6 +20,7 @@ import androidx.room.RoomDatabase
 import com.carecrafter.MainActivity
 import com.carecrafter.roomdatabase.AppDatabase
 import com.carecrafter.roomdatabase.User
+import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,7 +66,9 @@ class SignIn : AppCompatActivity() {
                             response: Response<DefaultResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
-                                val userId = response.body()!!.userId
+//                                val userId = response.body()!!.userId
+//                                val helper = CareCrafterDatabaseHelper(applicationContext)
+//                                helper.addOrUpdateToken(userId)
                                 Toast.makeText(
                                     applicationContext,
                                     response.body()!!.message,
