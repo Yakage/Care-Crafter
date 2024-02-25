@@ -61,7 +61,7 @@
                 android:background="@drawable/border_black"
                 android:gravity="center_vertical">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/welcomeLogin"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
@@ -71,7 +71,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="5dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/welcomeSignup"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
