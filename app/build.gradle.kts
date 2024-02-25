@@ -76,4 +76,8 @@ dependencies {
 
     // Splite
     implementation ("androidx.sqlite:sqlite-ktx:2.4.0")
+
+    //Temporary Dashboard
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 }
