@@ -9,4 +9,5 @@ data class SleepTracker(
     var sleepTime: Time,
     var timeSlept: Time,
     var totalSleepTime: Time,
-    var sleepScore: Int)
+    var sleepScore: Int
+)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/temp_bmi"
+    app:startDestination="@id/bmiCalcuHome">
+
+    <fragment
+        android:id="@+id/bmiCalcuHome"
+        android:name="com.carecrafter.body.features.Calcu.BmiCalcuHome"
+        android:label="fragment_bmi_calcu_home"
+        tools:layout="@layout/fragment_bmi_calcu_home" />
+    <activity
+        android:id="@+id/bmiCalcuActivity"
+        android:name="com.carecrafter.body.features.BmiCalcuActivity"
+        android:label="activity_bmi_calcu"
+        tools:layout="@layout/activity_bmi_calcu" />
+</navigation>

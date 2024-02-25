@@ -90,8 +90,9 @@
         app:layout_constraintTop_toBottomOf="@+id/timeTV" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="412dp"
-        android:layout_height="102dp"
+        android:id="@+id/constraintLayout4"
+        android:layout_width="411dp"
+        android:layout_height="95dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="1dp"
@@ -139,5 +140,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/resetBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="206dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Rate"
+
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

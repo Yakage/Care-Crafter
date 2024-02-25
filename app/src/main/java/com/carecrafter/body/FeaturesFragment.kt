@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.carecrafter.body.features.BmiCalcuActivity
 import com.carecrafter.body.features.DietSuggestionsActivity
 import com.carecrafter.body.features.ExerciseSuggestionsActivity
 import com.carecrafter.body.features.SleepTrackerActivity
@@ -52,18 +53,23 @@ class FeaturesFragment : Fragment() {
             val intent = Intent(activity, SleepTrackerActivity::class.java)
             startActivity(intent)
         }
-//
-//        binding.cvExerciseSuggestion.setOnClickListener {
-//            // Open the FeatureActivity
-//            val intent = Intent(activity, ExerciseSuggestionsActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        binding.cvDietSuggestion.setOnClickListener {
-//            // Open the FeatureActivity
-//            val intent = Intent(activity, DietSuggestionsActivity::class.java)
-//            startActivity(intent)
-//        }
+
+        binding.cvExerciseSuggestion.setOnClickListener {
+            // Open the FeatureActivity
+            val intent = Intent(activity, ExerciseSuggestionsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.cvDietSuggestion.setOnClickListener {
+            // Open the FeatureActivity
+            val intent = Intent(activity, DietSuggestionsActivity::class.java)
+            startActivity(intent)
+        }
+        binding.cvBmiCalculator.setOnClickListener{
+            // Open the FeatureActivity
+            val intent = Intent(activity, BmiCalcuActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
