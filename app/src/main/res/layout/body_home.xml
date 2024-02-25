@@ -70,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="Features"
-                android:textColor="@color/black"
+                android:textColor="@color/main"
                 android:textSize="25sp"
                 android:textStyle="bold"/>
 
@@ -92,6 +92,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/stepFT"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
@@ -115,6 +116,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/sleepFT"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="#e6b6ff"
@@ -138,6 +140,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/waterFT"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="#f5e179"
@@ -162,6 +165,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/bmiFT"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="#97e982"
@@ -195,7 +199,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="Your Progress"
-                android:textColor="@color/black"
+                android:textColor="@color/main"
                 android:textSize="25sp"
                 android:textStyle="bold"/>
 
@@ -320,7 +324,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -329,7 +334,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="25dp"
                 android:text="CareCrafter Web"
-                android:textColor="@color/black"
+                android:textColor="@color/main"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 

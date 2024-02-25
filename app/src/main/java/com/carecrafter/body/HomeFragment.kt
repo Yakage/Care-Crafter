@@ -21,24 +21,19 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
-        binding.llSleepTracker.setOnClickListener {
+        binding.sleepFT.setOnClickListener {
             val intent = Intent(activity, SleepTrackerActivity::class.java)
             startActivity(intent)
         }
-        binding.llStepTracker.setOnClickListener {
+        binding.stepFT.setOnClickListener {
             val intent = Intent(activity, StepTrackerActivity::class.java)
             startActivity(intent)
         }
-        binding.llWaterIntake.setOnClickListener {
+        binding.waterFT.setOnClickListener {
             val intent = Intent(activity, WaterIntakeActivity::class.java)
             startActivity(intent)
         }
-//        binding.ivProfilePic.setOnClickListener {
-//            val intent = Intent(activity, )
-//        }
 
         return binding.root
     }
-
-
 }
