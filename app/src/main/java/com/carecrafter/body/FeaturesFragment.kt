@@ -52,18 +52,18 @@ class FeaturesFragment : Fragment() {
             val intent = Intent(activity, SleepTrackerActivity::class.java)
             startActivity(intent)
         }
-
-        binding.cvExerciseSuggestion.setOnClickListener {
-            // Open the FeatureActivity
-            val intent = Intent(activity, ExerciseSuggestionsActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.cvDietSuggestion.setOnClickListener {
-            // Open the FeatureActivity
-            val intent = Intent(activity, DietSuggestionsActivity::class.java)
-            startActivity(intent)
-        }
+//
+//        binding.cvExerciseSuggestion.setOnClickListener {
+//            // Open the FeatureActivity
+//            val intent = Intent(activity, ExerciseSuggestionsActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        binding.cvDietSuggestion.setOnClickListener {
+//            // Open the FeatureActivity
+//            val intent = Intent(activity, DietSuggestionsActivity::class.java)
+//            startActivity(intent)
+//        }
 
     }
 }

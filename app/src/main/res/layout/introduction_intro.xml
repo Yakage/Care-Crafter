@@ -29,7 +29,7 @@
             android:textSize="18sp"
             android:text="Skip"
             android:textAllCaps="false"
-            android:textColor="@color/introButtonColor"
+            android:textColor="@color/main"
             android:textStyle="bold" />
 
         <View
@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 android:text="•"
                 android:textAlignment="center"
-                android:textColor="@color/introButtonColor"
+                android:textColor="@color/main"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

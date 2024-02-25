@@ -96,26 +96,26 @@ class Intro : AppCompatActivity() {
         override fun onPageSelected(position: Int) {
 
             if (position == 0) {
-                indicatorSlideOneTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideOneTV.setTextColor(resources.getColor(R.color.main))
                 indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 skipBtn.setText("Skip")
 
             } else if (position == 1) {
-                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.main))
                 indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
                 skipBtn.setText("Skip")
             } else if (position == 2){
-                indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.main))
                 indicatorSlideFourTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
                 skipBtn.setText("Skip")
             } else {
-                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.introButtonColor))
+                indicatorSlideFourTV.setTextColor(resources.getColor(R.color.main))
                 indicatorSlideOneTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideTwoTV.setTextColor(resources.getColor(R.color.grey))
                 indicatorSlideThreeTV.setTextColor(resources.getColor(R.color.grey))
