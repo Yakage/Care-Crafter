@@ -17,4 +17,6 @@
     <color name="introButtonColor">#84d2de</color>
     <color name="introButtonColorTwo">#e4b5ff</color>
     <color name="stepColor">#FCC419</color>
+
+    <color name="main">#458ff6</color>
 </resources>

@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CareCrafter"
-                android:textColor="@color/introButtonColor"
+                android:textColor="@color/main"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -67,7 +67,7 @@
                     android:layout_height="60dp"
                     android:text="Login"
                     android:textSize="20sp"
-                    android:backgroundTint="@color/introButtonColor"
+                    android:backgroundTint="@color/main"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="5dp"/>
 

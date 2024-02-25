@@ -31,7 +31,7 @@
             android:padding="10dp"
             android:text="Slide 1"
             android:textAlignment="center"
-            android:textColor="@color/introButtonColor"
+            android:textColor="@color/main"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
             android:padding="10dp"
             android:text="C++ data structure and Algorithm Course"
             android:textAlignment="center"
-            android:textColor="@color/introButtonColor"
+            android:textColor="@color/main"
             android:textSize="15sp" />
 
     </LinearLayout>
