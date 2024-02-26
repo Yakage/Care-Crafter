@@ -10,6 +10,7 @@ import com.carecrafter.R
 import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.body.features.StepTrackerActivity
 import com.carecrafter.body.features.WaterIntakeActivity
+import com.carecrafter.body.features.WaterIntakeAltActivity
 import com.carecrafter.databinding.BodyHomeBinding
 
 class HomeFragment : Fragment() {
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.waterFT.setOnClickListener {
-            val intent = Intent(activity, WaterIntakeActivity::class.java)
+            val intent = Intent(activity, WaterIntakeAltActivity::class.java)
             startActivity(intent)
         }
 

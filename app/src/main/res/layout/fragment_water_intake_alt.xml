@@ -1,0 +1,104 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Goal setup -->
+    <TextView
+        android:id="@+id/text_goal_setup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set up your goal"
+        android:textSize="18sp"
+        android:padding="16dp"/>
+
+    <!-- Edit goal -->
+    <EditText
+        android:id="@+id/edit_text_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your goal"
+        android:padding="16dp"/>
+
+    <!-- Edit cup size -->
+    <EditText
+        android:id="@+id/edit_text_cup_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Change cup size"
+        android:padding="16dp"/>
+
+    <!-- Specific time setup -->
+    <TextView
+        android:id="@+id/text_time_setup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set up specific time"
+        android:textSize="18sp"
+        android:padding="16dp"/>
+
+    <!-- Edit time -->
+    <EditText
+        android:id="@+id/edit_text_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter specific time"
+        android:padding="16dp"/>
+
+    <!-- Progress display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Circular progress bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/circular_progress_drawable"/>
+
+        <!-- Total amount of water drank -->
+        <TextView
+            android:id="@+id/text_total_water_drank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Water Drank: 500ml"
+            android:textSize="16sp"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <!-- History display -->
+    <TextView
+        android:id="@+id/text_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Drink History"
+        android:textSize="18sp"
+        android:padding="16dp"/>
+
+    <!-- Button to indicate drinking -->
+    <Button
+        android:id="@+id/button_drink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I drank!"
+        android:textSize="16sp"
+        android:padding="16dp"/>
+
+    <!-- Middle drink button -->
+    <Button
+        android:id="@+id/button_middle_drink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drink"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:padding="16dp"/>
+</LinearLayout>
