@@ -19,10 +19,10 @@ class SettingsSleepTrackerFragment : Fragment() {
     ): View {
         binding = SleepTrackerSettingBinding.inflate(inflater, container, false)
 
-        binding.tvConfirm.setOnClickListener{
-            findNavController().navigate(R.id.action_settingsSleepTrackerFragment_to_homeSleepTrackerFragment)
-            Toast.makeText(requireActivity(), "Dapat Data updated kaso wala pa (☉Д☉)!", Toast.LENGTH_SHORT).show()
-        }
+//        binding.tvConfirm.setOnClickListener{
+//            findNavController().navigate(R.id.action_settingsSleepTrackerFragment_to_homeSleepTrackerFragment)
+//            Toast.makeText(requireActivity(), "Dapat Data updated kaso wala pa (☉Д☉)!", Toast.LENGTH_SHORT).show()
+//        }
         binding.ivBack.setOnClickListener{
             findNavController().navigate(R.id.action_settingsSleepTrackerFragment_to_homeSleepTrackerFragment)
         }

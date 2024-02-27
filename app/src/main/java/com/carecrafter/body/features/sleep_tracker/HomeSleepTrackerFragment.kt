@@ -1,5 +1,6 @@
 package com.carecrafter.body.features.sleep_tracker
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,9 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.databinding.SleepTrackerHomeBinding
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 
 class HomeSleepTrackerFragment : Fragment() {
 
@@ -33,7 +42,9 @@ class HomeSleepTrackerFragment : Fragment() {
             handler.postDelayed(this, 1000)
         }
     }
+    private val scoreHistoryList = mutableListOf<Pair<Int, String>>()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +63,17 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.resetBtn.setOnClickListener{
             resetTimer()
         }
+        binding.rateBtn.setOnClickListener {
+            calculator()
+        }
+
+        // Date and Time for the TextView
+        val calendar = Calendar.getInstance().time
+        val dateFormat = DateFormat.getDateInstance(DateFormat.LONG).format(calendar)
+        val timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
+        binding.currentTime.text = "$timeFormat"
+        binding.currentDate.text = "$dateFormat"
+
         return binding.root
     }
     private fun startTimer(){
@@ -62,6 +84,7 @@ class HomeSleepTrackerFragment : Fragment() {
             binding.startBtn.isEnabled = false
             binding.stopBtn.isEnabled = true
             binding.resetBtn.isEnabled = true
+            binding.rateBtn.isEnabled = false
         }
     }
     private fun stopTimer(){
@@ -73,6 +96,7 @@ class HomeSleepTrackerFragment : Fragment() {
             binding.startBtn.text = "Resume"
             binding.stopBtn.isEnabled = false
             binding.resetBtn.isEnabled = true
+            binding.rateBtn.isEnabled = true
         }
     }
     private fun resetTimer(){
@@ -85,5 +109,37 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.stopBtn.isEnabled = false
         binding.startBtn.text = "Start"
         binding.resetBtn.isEnabled = false
+        binding.rateBtn.isEnabled = false
+    }
+
+    private fun calculator() {
+        // The 28800 is Seconds if which converted its 8 Hours
+        val rate = timerSeconds
+
+        // I use if statement to prevent the score going over 100
+        if (rate >= 100) {
+            val rate = 100
+            val currentTime = Calendar.getInstance().time
+            val timeString = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(currentTime)
+            scoreHistoryList.add(Pair(rate, timeString))
+
+            var scoreHistory = "Sleep Score History:\n"
+            for (score in scoreHistoryList) {
+                scoreHistory += " - ${score.first} over 100 at ${score.second}\n"
+            }
+            binding.scoreLogs.text = scoreHistory
+        }
+
+        else {
+            val currentTime = Calendar.getInstance().time
+            val timeString = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(currentTime)
+            scoreHistoryList.add(Pair(rate, timeString))
+
+            var scoreHistory = "Sleep Score History:\n"
+            for (score in scoreHistoryList) {
+                scoreHistory += " - ${score.first} over 100 at ${score.second}\n"
+            }
+            binding.scoreLogs.text = scoreHistory
+        }
     }
 }
