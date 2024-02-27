@@ -114,7 +114,7 @@ class HomeSleepTrackerFragment : Fragment() {
 
     private fun calculator() {
         // The 28800 is Seconds if which converted its 8 Hours
-        val rate = timerSeconds
+        val rate = (timerSeconds / 28800) * 100
 
         // I use if statement to prevent the score going over 100
         if (rate >= 100) {
