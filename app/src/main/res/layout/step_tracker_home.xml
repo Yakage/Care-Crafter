@@ -6,19 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".body.features.step_tracker.HomeStepTrackerFragment">
 
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/icon_back"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
     <TextView
         android:id="@+id/tv_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="70dp"
         android:text="TODAY"
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="40dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toEndOf="@id/ivBack"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_progress"

@@ -1,6 +1,7 @@
 package com.carecrafter.body.features.step_tracker
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -15,6 +16,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.carecrafter.R
+import com.carecrafter.body.BodyActivity
+import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 
 
@@ -40,6 +43,10 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener{
         resetSteps()
 
         sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(activity, BodyActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
@@ -89,6 +96,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener{
         Log.d("StepTrackerFragment", "$savedNumber")
         previousTotalSteps = savedNumber ?: 0f
     }
+
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // We do not have to write anything in this function for this app
