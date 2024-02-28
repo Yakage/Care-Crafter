@@ -49,7 +49,6 @@ interface CareCrafterInterfaces {
         @Field("weight") weight:String,
     ): retrofit2.Call<DefaultResponse>
 
-    @FormUrlEncoded
     @Headers("Accept: application/json")
     @GET("users")
     fun getUser(@Header("Authorization") authToken: String): Call<User>
