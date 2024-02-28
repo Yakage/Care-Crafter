@@ -1,240 +1,189 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/main"
     tools:context=".body.AccountFragment">
 
     <TextView
-        android:id="@+id/tv_profile"
-        android:layout_width="match_parent"
+        android:id="@+id/profile_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile"
-        android:textSize="35sp"
-        android:textColor="@color/main"
-        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginBottom="16dp"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_account"
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Juan Unhealthy"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="healthyboy@example.com"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/edit_profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button_background"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="30dp"
+        android:stateListAnimator="@null"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_profile"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="50dp"
-        android:elevation="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="5dp">
 
-        <ImageView
-            android:id="@+id/iv_account"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/icon_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_account"
-            android:layout_width="300dp"
+        <LinearLayout
+            android:id="@+id/change_password_option"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Account"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_account"/>
-        <TextView
-            android:layout_width="300dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pass"
+                android:tint="@android:color/black"
+                android:layout_marginStart="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change your account password"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/themes_option"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change your Personal Details"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_account"
-            app:layout_constraintStart_toEndOf="@id/iv_account"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:src="@drawable/them"
+                android:tint="@android:color/black"
+                android:layout_marginStart="8dp"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_units"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_account"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_units"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/icon_units"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Themes"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="8dp"/>
 
-        <TextView
-            android:id="@+id/tv_units"
-            android:layout_width="300dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change the theme of your profile"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logout_option"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Units"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_units"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Currently in use lbs, ft oz"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_units"
-            app:layout_constraintStart_toEndOf="@id/iv_units"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_log_out"
+                android:tint="@android:color/black"
+                android:layout_marginStart="8dp"/>
 
+            <LinearLayout
+                android:id="@+id/layout_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_widgets"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_units"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginStart="8dp"/>
 
-        <ImageView
-            android:id="@+id/iv_widgets"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icon_widgets"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign out of your account"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_widgets"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Widgets"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_widgets"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Customize widgets appearance"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_widgets"
-            app:layout_constraintStart_toEndOf="@id/iv_widgets"/>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_theme"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_widgets"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/iv_theme"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icon_theme"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_theme"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Theme"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_theme"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Set up your theme"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_theme"
-            app:layout_constraintStart_toEndOf="@id/iv_theme"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_log_out"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_theme"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/iv_log_out"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/icon_log_out"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_log_out"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_log_out"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Log out of your account"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_log_out"
-            app:layout_constraintStart_toEndOf="@id/iv_log_out"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

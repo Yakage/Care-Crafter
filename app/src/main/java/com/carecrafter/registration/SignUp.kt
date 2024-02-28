@@ -1,5 +1,6 @@
 package com.carecrafter.registration
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -118,9 +119,9 @@ class SignUp : AppCompatActivity() {
                                     response.body()!!.message,
                                     Toast.LENGTH_LONG
                                 ).show()
-                                startActivity(
-                                    Intent(this@SignUp, SignIn::class.java)
-                                )
+                                val intent = Intent(this@SignUp, SignIn::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()

@@ -12,6 +12,7 @@ import com.carecrafter.body.features.ExerciseSuggestionsActivity
 import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.body.features.StepTrackerActivity
 import com.carecrafter.body.features.WaterIntakeActivity
+import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyFeaturesBinding
 
 class FeaturesFragment : Fragment() {
@@ -30,15 +31,10 @@ class FeaturesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Assuming you have a button in your fragment layout to trigger the action
-        binding.cvWaterIntake.setOnClickListener {
-            // Open the FeatureActivity
-            val intent = Intent(activity, WaterIntakeActivity::class.java)
-            startActivity(intent)
-        }
 
         binding.cvWaterIntake.setOnClickListener {
             // Open the FeatureActivity
-            val intent = Intent(activity, WaterIntakeActivity::class.java)
+            val intent = Intent(activity, WaterIntakeBActivity::class.java)
             startActivity(intent)
         }
 

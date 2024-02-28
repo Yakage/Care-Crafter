@@ -1,9 +1,13 @@
 package com.carecrafter.retrofit_database
 
+import android.service.autofill.UserData
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.User
+import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -17,7 +21,7 @@ interface CareCrafterInterfaces {
     fun createUser(
         @Field("name") name:String,
         @Field("email") email:String,
-        @Field("age") age:String,
+        @Field("birthday") birthday:String,
         @Field("height") height:String,
         @Field("weight") weight:String,
         @Field("gender") gender:String,
@@ -35,26 +39,18 @@ interface CareCrafterInterfaces {
 
     @FormUrlEncoded
     @Headers("Accept: application/json")
-    @PUT("updateUser/{id}")
+    @PUT("updateUser")
     fun updateUser(
-        @Path("id") userId: Int,
+        @Header("Authorization") authToken: String,
         @Field("name") name:String,
-        @Field("email") email:String,
-        @Field("age") age:String,
+        @Field("birthday") birthday:String,
+        @Field("gender") gender:String,
         @Field("height") height:String,
         @Field("weight") weight:String,
-        @Field("gender") gender:String,
     ): retrofit2.Call<DefaultResponse>
 
-    @Headers("Accept: application/jason")
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
     @GET("users")
-    fun getUser(
-        @Field("name") name:String,
-        @Field("email") email:String,
-        @Field("age") age:String,
-        @Field("height") height:String,
-        @Field("weight") weight:String,
-        @Field("gender") gender:String,
-        @Field("password") password:String,
-    ):retrofit2.Call<DefaultResponse>
+    fun getUser(@Header("Authorization") authToken: String): Call<User>
 }

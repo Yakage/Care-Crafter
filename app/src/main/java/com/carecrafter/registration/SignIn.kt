@@ -1,6 +1,8 @@
 package com.carecrafter.registration
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.JsonReader
@@ -11,26 +13,21 @@ import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.RegistrationSignInBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
+import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import com.carecrafter.MainActivity
-import com.carecrafter.roomdatabase.AppDatabase
-import com.carecrafter.roomdatabase.User
-import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SignIn : AppCompatActivity() {
     private lateinit var binding: RegistrationSignInBinding
+    private lateinit var sharedPreferences : SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RegistrationSignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         binding.btLogin.setOnClickListener {
             val email = binding.EmailET.text.toString().trim()
             val password = binding.PasswordET.text.toString().trim()
@@ -66,9 +63,9 @@ class SignIn : AppCompatActivity() {
                             response: Response<DefaultResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
-//                                val userId = response.body()!!.userId
-//                                val helper = CareCrafterDatabaseHelper(applicationContext)
-//                                helper.addOrUpdateToken(userId)
+                                val accessToken = response.body()?.access_token
+                                saveTokenToSharedPreferences(accessToken)
+
                                 Toast.makeText(
                                     applicationContext,
                                     response.body()!!.message,
@@ -77,6 +74,7 @@ class SignIn : AppCompatActivity() {
                                 startActivity(
                                     Intent(this@SignIn, BodyActivity::class.java)
                                 )
+
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()
@@ -109,8 +107,12 @@ class SignIn : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+    }
 
-
+    private fun saveTokenToSharedPreferences(token: String?) {
+        val editor = sharedPreferences.edit()
+        editor.putString("authToken", token)
+        editor.apply()
     }
 
 }
