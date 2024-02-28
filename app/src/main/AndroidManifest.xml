@@ -20,6 +20,9 @@
         android:theme="@style/Theme.CareCrafter"
         tools:targetApi="31">
         <activity
+            android:name=".body.features.water_intake.WaterIntakeBActivity"
+            android:exported="false" />
+        <activity
             android:name=".body.features.WaterIntakeAltActivity"
             android:exported="false" />
         <activity
