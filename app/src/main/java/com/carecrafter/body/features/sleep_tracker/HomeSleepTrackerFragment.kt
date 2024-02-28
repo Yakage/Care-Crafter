@@ -5,22 +5,17 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -121,6 +116,9 @@ class HomeSleepTrackerFragment : Fragment() {
     private fun calculator() {
         // The 28800 is Seconds if which converted its 8 Hours
         val rate = (timerSeconds / 28800) * 100
+        val hours = timerSeconds / 3600
+        val minutes = (timerSeconds % 3600) / 60
+        val seconds = timerSeconds % 60
 
         // I use if statement to prevent the score going over 100
         if (rate >= 100) {
@@ -131,7 +129,7 @@ class HomeSleepTrackerFragment : Fragment() {
 
             var scoreHistory = "Sleep Score History:\n"
             for (score in scoreHistoryList) {
-                scoreHistory += " - ${score.first} over 100 at ${score.second}\n"
+                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
             binding.scoreLogs.text = scoreHistory
         }
@@ -143,7 +141,7 @@ class HomeSleepTrackerFragment : Fragment() {
 
             var scoreHistory = "Sleep Score History:\n"
             for (score in scoreHistoryList) {
-                scoreHistory += " - ${score.first} over 100 at ${score.second}\n"
+                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
             binding.scoreLogs.text = scoreHistory
         }

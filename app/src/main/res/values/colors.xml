@@ -19,4 +19,8 @@
     <color name="stepColor">#FCC419</color>
 
     <color name="main">#458ff6</color>
+
+    <color name="enabled_button">#F44336</color>
+    <color name="disabled_button">#aaa</color>
+
 </resources>
