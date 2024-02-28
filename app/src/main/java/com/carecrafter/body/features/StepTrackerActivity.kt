@@ -46,8 +46,8 @@ class StepTrackerActivity : AppCompatActivity(){
 
         navController.addOnDestinationChangedListener {_, destination, _ ->
             if(destination.id == R.id.homeStepTrackerFragment){
-                toolbar.visibility = View.VISIBLE
-                navigationView.visibility = View.VISIBLE
+                toolbar.visibility = View.GONE
+                navigationView.visibility = View.GONE
                 toolbar.title = ""
             }
             else if (destination.id == R.id.statisticStepTrackerFragment){
@@ -55,6 +55,8 @@ class StepTrackerActivity : AppCompatActivity(){
                 navigationView.visibility = View.GONE
             }
         }
+
+
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragmentContainerView)

@@ -45,26 +45,22 @@ class WaterIntakeActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener {_, destination, _ ->
             if(destination.id == R.id.homeFragment3){
-                toolbar.visibility = View.VISIBLE
-                navigationView.visibility = View.VISIBLE
-                binding.notification.visibility = View.VISIBLE
+                toolbar.visibility = View.GONE
+                navigationView.visibility = View.GONE
                 toolbar.title = ""
             }
             else if (destination.id == R.id.statisticFragment){
                 toolbar.visibility = View.GONE
                 navigationView.visibility = View.GONE
-                binding.notification.visibility = View.GONE
 
             }
             else if (destination.id == R.id.reminderFragment){
                 toolbar.visibility = View.GONE
                 navigationView.visibility = View.GONE
-                binding.notification.visibility = View.GONE
             }
             else if (destination.id == R.id.settingFragment){
                 toolbar.visibility = View.GONE
                 navigationView.visibility = View.GONE
-                binding.notification.visibility = View.GONE
             }
 
         }

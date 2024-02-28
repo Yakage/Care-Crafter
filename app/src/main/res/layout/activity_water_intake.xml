@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:id="@+id/toolbar"
             android:background="@color/blue"
@@ -24,17 +24,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
-        <ImageView
-            android:id="@+id/notification"
-            android:layout_width="51dp"
-            android:layout_height="60dp"
-            android:background="@color/blue"
-            android:src="@drawable/icon_notification"
-            android:foregroundGravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/toolbar"
-            app:tint="@color/white" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"

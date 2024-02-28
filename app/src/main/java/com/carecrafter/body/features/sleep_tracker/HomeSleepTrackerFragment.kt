@@ -1,5 +1,6 @@
 package com.carecrafter.body.features.sleep_tracker
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
+import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -69,6 +71,10 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.currentTime.text = "$timeFormat"
         binding.currentDate.text = "$dateFormat"
 
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(activity, BodyActivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
     private fun startTimer(){
