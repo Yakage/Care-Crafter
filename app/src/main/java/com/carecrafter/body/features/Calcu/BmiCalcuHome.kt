@@ -34,13 +34,55 @@ class BmiCalcuHome : Fragment() {
             val bmiResult = String.format("%.2f", bmi)
 
             val bmiCategory = when {
-                bmi < 1 -> "Are you even a human my guy"
+                bmi < 5 -> "Are you even a human my guy"
                 bmi < 18.5 -> "Under Weight"
                 bmi < 25 -> "Normal Weight"
                 bmi < 30 -> "Over Weight"
                 else -> "Obese"
             }
             binding.tvCalcuResult.text = "BMI: $bmiResult\nCategory: $bmiCategory"
+
+            val Nah = binding.imageUgoodbro
+            val Under = binding.imageUnder
+            val Normal = binding.imageNormal
+            val Over = binding.imageOver
+            val Obese = binding.imagObese
+
+            if (bmi <= 5) {
+                Nah.visibility = View.VISIBLE
+                Under.visibility = View.INVISIBLE
+                Normal.visibility = View.INVISIBLE
+                Over.visibility = View.INVISIBLE
+                Obese.visibility = View.INVISIBLE
+            }
+            else if (bmi <= 18.5 && bmi < 25) {
+                Nah.visibility = View.INVISIBLE
+                Under.visibility = View.VISIBLE
+                Normal.visibility = View.INVISIBLE
+                Over.visibility = View.INVISIBLE
+                Obese.visibility = View.INVISIBLE
+            }
+            else if (bmi <= 25 && bmi < 30) {
+                Nah.visibility = View.INVISIBLE
+                Under.visibility = View.INVISIBLE
+                Normal.visibility = View.VISIBLE
+                Over.visibility = View.INVISIBLE
+                Obese.visibility = View.INVISIBLE
+            }
+            else if (bmi > 25 && bmi < 30) {
+                Nah.visibility = View.INVISIBLE
+                Under.visibility = View.INVISIBLE
+                Normal.visibility = View.INVISIBLE
+                Over.visibility = View.VISIBLE
+                Obese.visibility = View.INVISIBLE
+            }
+            else if (bmi > 30) {
+                Nah.visibility = View.INVISIBLE
+                Under.visibility = View.INVISIBLE
+                Normal.visibility = View.INVISIBLE
+                Over.visibility = View.INVISIBLE
+                Obese.visibility = View.VISIBLE
+            }
         } else {
             binding.tvCalcuResult.text = "Invalid Input"
         }
