@@ -1,13 +1,11 @@
 package com.carecrafter.body.features.Calcu
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.carecrafter.R
+import androidx.fragment.app.Fragment
 import com.carecrafter.databinding.FragmentBmiCalcuHomeBinding
-import com.carecrafter.databinding.SleepTrackerSettingBinding
 import kotlin.math.pow
 
 class BmiCalcuHome : Fragment() {
@@ -36,7 +34,7 @@ class BmiCalcuHome : Fragment() {
             val bmiResult = String.format("%.2f", bmi)
 
             val bmiCategory = when {
-                bmi < 5 -> "Are you even a human my guy"
+                bmi < 1 -> "Are you even a human my guy"
                 bmi < 18.5 -> "Under Weight"
                 bmi < 25 -> "Normal Weight"
                 bmi < 30 -> "Over Weight"

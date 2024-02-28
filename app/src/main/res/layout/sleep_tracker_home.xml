@@ -6,193 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".body.features.sleep_tracker.HomeSleepTrackerFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/currentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Current Time"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.197" />
-
-        <TextView
-            android:id="@+id/currentTime"
-            android:layout_width="273dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="11:00 AM (Placeholder)"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentDate" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:text="Alarm in 6:32 - 7:00 AM"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentTime" />
-
-        <ImageView
-            android:id="@+id/ivAlarm"
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="28dp"
-            android:contentDescription="TODO"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_bell" />
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="TODO"
-            android:foregroundGravity="center"
-            android:src="@drawable/icon_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/timeTV"
-            android:layout_width="216dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:text="00:00:00"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="@+id/currentTime"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="@+id/currentTime"
-            app:layout_constraintTop_toBottomOf="@+id/currentTime" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="124dp"
-            android:layout_height="22dp"
-            android:gravity="center"
-            android:text="Hrs / Min / Sec"
-            app:layout_constraintEnd_toEndOf="@+id/timeTV"
-            app:layout_constraintStart_toStartOf="@+id/timeTV"
-            app:layout_constraintTop_toBottomOf="@+id/timeTV" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
-            android:layout_width="411dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16">
-
-            <Button
-                android:id="@+id/startBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Start"
-                app:icon="@drawable/icon_play"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/stopBtn"
-                app:layout_constraintHorizontal_bias="0.322"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.555" />
-
-            <Button
-                android:id="@+id/resetBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="28dp"
-                android:enabled="false"
-                android:text="Reset"
-                app:icon="@drawable/icon_replay"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.555" />
-
-            <Button
-                android:id="@+id/stopBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="128dp"
-                android:layout_marginBottom="24dp"
-                android:enabled="false"
-                android:text="Stop"
-                app:icon="@drawable/icon_pause"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/resetBtn" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/rateBtn"
-            android:layout_width="211dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="12dp"
-            android:text="Rate"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background_sky">
 
         <LinearLayout
-            android:id="@+id/history_section"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rateBtn">
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/text_history_title"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Score Logs"
-                android:textColor="@color/main"
-                android:textSize="20sp" />
+                android:layout_marginStart="10dp"
+                android:contentDescription="TODO"
+                android:foregroundGravity="center"
+                android:src="@drawable/icon_back" />
 
-            <ScrollView
-                android:id="@+id/score_history_scroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/score_logs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text=""
-                    android:textColor="@color/main"
-                    android:textSize="16sp" />
-            </ScrollView>
+            <ImageView
+                android:id="@+id/ivAlarm"
+                android:layout_width="53dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/icon_bell" />
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="10dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/currentDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Current Time"
+                android:textColor="@color/grey"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/currentTime"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="11:00 AM (Placeholder)"
+                android:textColor="@color/grey"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                android:text="00:00:00"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                android:text="Hrs / Min / Sec" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="116dp"
+                android:text="Alarm in 6:32 - 7:00 AM"
+                android:textColor="@color/grey"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:id="@+id/history_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_history_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Score Logs"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp" />
+
+                <ScrollView
+                    android:id="@+id/score_history_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/score_logs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textColor="@color/red"
+                        android:textSize="16sp" />
+                </ScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/startBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start"
+                    app:icon="@drawable/icon_play" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/stopBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="Stop"
+                    app:icon="@drawable/icon_pause" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/resetBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="Reset"
+                    app:icon="@drawable/icon_replay" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/rateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:text="Rate"
+                android:enabled="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </ScrollView>
