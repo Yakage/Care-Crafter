@@ -44,6 +44,12 @@ class WaterIntakeBActivity : AppCompatActivity() {
         saveHistoryButton = findViewById(R.id.button_save_history)
         dailyGoalIndicatorTextView = findViewById(R.id.text_daily_goal_indicator)
 
+        val backButton: ImageView = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
+
         middleDrinkButton.setOnClickListener { indicateDrink() }
 
         resetButton.setOnClickListener { resetProgress() }

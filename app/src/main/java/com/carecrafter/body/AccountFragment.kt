@@ -86,6 +86,4 @@ class AccountFragment : Fragment() {
             binding.textViewEmail.text = userData.email
         }
     }
-
-
 }

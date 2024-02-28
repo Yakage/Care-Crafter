@@ -2,31 +2,28 @@ package com.carecrafter.body.features.step_tracker
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 
-
-class HomeStepTrackerFragment : Fragment(), SensorEventListener{
+class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     private lateinit var binding: StepTrackerHomeBinding
     private var sensorManager: SensorManager? = null
     private var running = false
     private var totalSteps = 0f
     private var previousTotalSteps = 0f
+    private lateinit var stepHistoryAdapter: ArrayAdapter<String> // Define ArrayAdapter for step history
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,64 +39,114 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener{
         loadData()
         resetSteps()
 
-        sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        // Initialize step history adapter
+        stepHistoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1)
+        binding.listViewStepHistory.adapter = stepHistoryAdapter
+
+        sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         binding.ivBack.setOnClickListener {
-            val intent = Intent(activity, BodyActivity::class.java)
+            val intent = Intent(requireActivity(), BodyActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btStart.setOnClickListener {
+            startStepCounting()
+        }
+
+        binding.btStop.setOnClickListener {
+            stopStepCounting()
+        }
+
+        binding.btReset.setOnClickListener {
+            resetStepCount()
+        }
+
+        // Add click listener to the "Set Goal" button
+        binding.setgoal.setOnClickListener {
+            setGoal()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun startStepCounting() {
         running = true
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if (stepSensor == null) {
-            Toast.makeText(context, "No sensor detected on this device", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "No sensor detected on this device", Toast.LENGTH_SHORT).show()
         } else {
             sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
+    private fun stopStepCounting() {
+        running = false
+        sensorManager?.unregisterListener(this)
+        // Save total steps to history when stop button is clicked
+        saveStepToHistory(totalSteps.toInt())
+    }
 
-        if (running) {
-            totalSteps = event!!.values[0]
-            val currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
-            binding.tvCount.text = ("$currentSteps")
+    private fun resetStepCount() {
+        previousTotalSteps = totalSteps
+        binding.tvTotal.text = "0"
+        saveData()
+        updateStepHistory() // Update step history when reset button is clicked
+        Toast.makeText(requireContext(), "Step count reset", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setGoal() {
+        val goal = binding.etGoal.text.toString()
+        if (goal.isNotEmpty()) {
+            // Update tv_total with the entered goal
+            binding.tvTotal.text = goal
+            Toast.makeText(requireContext(), "Goal set successfully", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Please enter a valid goal", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun resetSteps() {
-        binding.tvTotal.setOnClickListener {
-            Toast.makeText(context, "Long tap to reset steps", Toast.LENGTH_SHORT).show()
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (running) {
+            totalSteps = event!!.values[0]
+            val currentSteps = totalSteps.toInt() - previousTotalSteps.toInt()
+            binding.tvCount.text = currentSteps.toString()
         }
+    }
 
+    private fun resetSteps() {
         binding.tvTotal.setOnLongClickListener {
-            previousTotalSteps = totalSteps
-            binding.tvTotal.text = 0.toString()
-            saveData()
+            resetStepCount()
             true
         }
     }
 
+    private fun saveStepToHistory(steps: Int) {
+        // Add steps to step history
+        stepHistoryAdapter.add("Steps: $steps")
+    }
+
+    private fun updateStepHistory() {
+        // Clear step history and reload saved steps
+        stepHistoryAdapter.clear()
+        val sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val savedNumber = sharedPreferences.getFloat("key1", 0f)
+        previousTotalSteps = savedNumber ?: 0f
+        saveStepToHistory(previousTotalSteps.toInt())
+    }
+
     private fun saveData() {
-        val sharedPreferences = this.activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
-        editor?.putFloat("key1", previousTotalSteps)
-        editor?.apply()
+        val sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putFloat("key1", previousTotalSteps)
+        editor.apply()
     }
 
     private fun loadData() {
-        val sharedPreferences = this.activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val savedNumber = sharedPreferences?.getFloat("key1", 0f)
-        Log.d("StepTrackerFragment", "$savedNumber")
+        val sharedPreferences = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val savedNumber = sharedPreferences.getFloat("key1", 0f)
         previousTotalSteps = savedNumber ?: 0f
     }
-
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // We do not have to write anything in this function for this app
     }
-
 }
