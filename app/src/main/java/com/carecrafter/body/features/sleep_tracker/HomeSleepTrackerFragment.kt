@@ -1,19 +1,30 @@
 package com.carecrafter.body.features.sleep_tracker
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.JsonReader
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
+import com.carecrafter.models.DefaultResponse
+import com.carecrafter.retrofit_database.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.StringReader
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -26,6 +37,7 @@ class HomeSleepTrackerFragment : Fragment() {
     private var timerSeconds = 0
 
     private val handler = Handler(Looper.getMainLooper())
+    private lateinit var sharedPreferences: SharedPreferences
     private val runnable = object : Runnable {
         override fun run() {
             timerSeconds++
@@ -47,7 +59,8 @@ class HomeSleepTrackerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = SleepTrackerHomeBinding.inflate(inflater, container, false)
-
+        sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = sharedPreferences.getString("authToken", "")
         binding.ivAlarm.setOnClickListener{
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_settingsSleepTrackerFragment)
         }
@@ -61,7 +74,7 @@ class HomeSleepTrackerFragment : Fragment() {
             resetTimer()
         }
         binding.rateBtn.setOnClickListener {
-            calculator()
+            calculator(authToken.toString())
         }
 
         // Date and Time for the TextView
@@ -113,7 +126,7 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.rateBtn.isEnabled = false
     }
 
-    private fun calculator() {
+    private fun calculator(authToken: String) {
         // The 28800 is Seconds if which converted its 8 Hours
         val rate = (timerSeconds / 28800) * 100
         val hours = timerSeconds / 3600
@@ -143,7 +156,64 @@ class HomeSleepTrackerFragment : Fragment() {
             for (score in scoreHistoryList) {
                 scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
-            binding.scoreLogs.text = scoreHistory
+            binding.scoreLogs.text = scoreHistory.toString()
+            createScore(authToken, scoreHistory)
+        }
+    }
+    private fun createScore(authToken: String, score_logs: String ){
+
+        val score_logs = score_logs
+        val createScoreDataJson =
+            "{\"authToken\":\"$authToken\"\"score_logs\":\"$score_logs\"}"
+
+
+        //correct malformed data
+        try {
+            val reader = JsonReader(StringReader(createScoreDataJson))
+            reader.isLenient = true
+            reader.beginObject()
+            reader.close()
+            ApiClient.instance.createScore(
+                "Bearer $authToken",
+                score_logs,
+            )
+                .enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(
+                                requireContext(),
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string()
+                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(
+                                requireContext(),
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Log.e("API_RESPONSE", errorMessage)
+                        }
+                    }
+                })
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
         }
     }
 }

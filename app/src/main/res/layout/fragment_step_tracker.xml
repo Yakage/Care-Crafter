@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".body.features.step_tracker.StepTrackerFragment">
+    >
 
     <TextView
         android:id="@+id/stepCountTextView"

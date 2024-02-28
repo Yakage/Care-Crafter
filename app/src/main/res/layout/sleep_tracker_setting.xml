@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Pick the Time"
+                android:text="Pick the Date"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 

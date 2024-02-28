@@ -52,4 +52,31 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @GET("users")
     fun getUser(@Header("Authorization") authToken: String): Call<User>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createAlarm")
+    fun createAlarm(
+        @Header("Authorization") authToken: String,
+        @Field("title") title: String,
+        @Field("message") message: String,
+        @Field("time") time: String,
+        @Field("date") date: String
+    ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("getAlarm")
+    fun getAlarm(@Header("Authorization") authToken: String): Call<User>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createScore")
+    fun createScore(
+        @Header("Authorization") authToken: String,
+        @Field("score_logs") scoreLogs:String,
+    ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("getScore")
+    fun getScore(@Header("Authorization") authToken: String): Call<User>
 }

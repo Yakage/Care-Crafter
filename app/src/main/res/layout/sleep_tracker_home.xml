@@ -26,7 +26,8 @@
                 android:layout_marginStart="10dp"
                 android:contentDescription="TODO"
                 android:foregroundGravity="center"
-                android:src="@drawable/icon_back" />
+                android:src="@drawable/icon_back"
+                app:tint="@color/white" />
 
             <View
                 android:layout_width="0dp"
@@ -39,7 +40,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/icon_bell" />
+                app:srcCompat="@drawable/icon_bell"
+                app:tint="@color/white" />
         </LinearLayout>
 
 
