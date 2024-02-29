@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import android.util.JsonReader
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -49,7 +50,7 @@ class UpdateAccount : Fragment() {
         return binding.root
     }
     private fun getUserInfo(authToken: String) {
-        ApiClient.instance.getUser("Bearer$authToken").enqueue(object : Callback<User>{
+        ApiClient.instance.getUser("Bearer $authToken").enqueue(object : Callback<User>{
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val userData = response.body()
@@ -72,11 +73,11 @@ class UpdateAccount : Fragment() {
     }
     fun updateInfo(userData: User){
         if (userData != null) {
-            binding.FullNameET.hint = userData.name
-            binding.BirthdayET.hint = userData.birthday
-            binding.GenderET.hint = userData.gender
-            binding.HeightET.hint = userData.height
-            binding.WeightET.hint = userData.weight
+            binding.FullNameET.text = Editable.Factory.getInstance().newEditable(userData.name)
+            binding.BirthdayET.text = Editable.Factory.getInstance().newEditable(userData.birthday)
+            binding.GenderET.text = Editable.Factory.getInstance().newEditable(userData.gender)
+            binding.HeightET.text = Editable.Factory.getInstance().newEditable(userData.height)
+            binding.WeightET.text = Editable.Factory.getInstance().newEditable(userData.weight)
         }
     }
 

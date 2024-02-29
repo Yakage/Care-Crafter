@@ -15,11 +15,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
+import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.SharedPrefsViewModel
+import com.carecrafter.models.User
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,7 +64,9 @@ class HomeSleepTrackerFragment : Fragment() {
     ): View {
         binding = SleepTrackerHomeBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+
         val authToken = sharedPreferences.getString("authToken", "")
+        authToken?.let { getAlarmInfo(it) }
         binding.ivAlarm.setOnClickListener{
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_settingsSleepTrackerFragment)
         }
@@ -154,6 +160,7 @@ class HomeSleepTrackerFragment : Fragment() {
             for (score in scoreHistoryList) {
                 scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
+            createScore(authToken, scoreHistory)
             binding.scoreLogs.text = scoreHistory
         }
 
@@ -166,15 +173,15 @@ class HomeSleepTrackerFragment : Fragment() {
             for (score in scoreHistoryList) {
                 scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
-            binding.scoreLogs.text = scoreHistory.toString()
             createScore(authToken, scoreHistory)
+            binding.scoreLogs.text = scoreHistory.toString()
+
         }
     }
-    private fun createScore(authToken: String, score_logs: String ){
+    private fun createScore(authToken: String, scoreHistory: String ){
 
-        val score_logs = score_logs
         val createScoreDataJson =
-            "{\"authToken\":\"$authToken\"\"score_logs\":\"$score_logs\"}"
+            "{\"authToken\":\"$authToken\"\"score\":\"$scoreHistory\"}"
 
 
         //correct malformed data
@@ -185,7 +192,7 @@ class HomeSleepTrackerFragment : Fragment() {
             reader.close()
             ApiClient.instance.createScore(
                 "Bearer $authToken",
-                score_logs,
+                scoreHistory
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
@@ -224,6 +231,35 @@ class HomeSleepTrackerFragment : Fragment() {
             Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
                 .show()
             e.printStackTrace()
+        }
+    }
+
+    private fun getAlarmInfo(authToken: String) {
+        ApiClient.instance.getAlarm("Bearer $authToken").enqueue(object : Callback<Alarm>{
+            override fun onResponse(call: Call<Alarm>, response: Response<Alarm>) {
+                if (response.isSuccessful) {
+                    val alarmData = response.body()
+                    if (alarmData != null) {
+                        updateInfo(alarmData)
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<Alarm>, t: Throwable) {
+                Log.e("AccountFragment", "Failed to get user info", t)
+                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateInfo(alarmData: Alarm){
+        if (alarmData != null) {
+            binding.textView3.text = alarmData.time
         }
     }
 }

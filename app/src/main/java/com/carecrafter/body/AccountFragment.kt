@@ -58,7 +58,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun getUserInfo(authToken: String) {
-        ApiClient.instance.getUser("Bearer$authToken").enqueue(object : Callback<User>{
+        ApiClient.instance.getUser("Bearer $authToken").enqueue(object : Callback<User>{
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val userData = response.body()

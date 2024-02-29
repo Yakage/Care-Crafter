@@ -1,6 +1,7 @@
 package com.carecrafter.retrofit_database
 
 import android.service.autofill.UserData
+import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
 import retrofit2.Call
@@ -66,14 +67,14 @@ interface CareCrafterInterfaces {
 
     @Headers("Accept: application/json")
     @GET("getAlarm")
-    fun getAlarm(@Header("Authorization") authToken: String): Call<User>
+    fun getAlarm(@Header("Authorization") authToken: String): Call<Alarm>
 
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createScore")
     fun createScore(
         @Header("Authorization") authToken: String,
-        @Field("score_logs") scoreLogs:String,
+        @Field("score_logs") score:String,
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
