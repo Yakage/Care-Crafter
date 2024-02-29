@@ -2,19 +2,30 @@ package com.carecrafter.body.features.step_tracker
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.JsonReader
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.body.BodyActivity
+import com.carecrafter.body.profile.UpdateAccountDirections
 import com.carecrafter.databinding.StepTrackerHomeBinding
+import com.carecrafter.models.DefaultResponse
+import com.carecrafter.retrofit_database.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.StringReader
 
 class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     private lateinit var binding: StepTrackerHomeBinding
@@ -23,6 +34,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     private var totalSteps = 0f
     private var previousTotalSteps = 0f
     private lateinit var stepHistoryAdapter: ArrayAdapter<String> // Define ArrayAdapter for step history
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +54,8 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         stepHistoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1)
         binding.listViewStepHistory.adapter = stepHistoryAdapter
 
+        sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = sharedPreferences.getString("authToken", "")
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
         binding.ivBack.setOnClickListener {
             val intent = Intent(requireActivity(), BodyActivity::class.java)
@@ -53,7 +67,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         }
 
         binding.btStop.setOnClickListener {
-            stopStepCounting()
+            stopStepCounting(authToken.toString())
         }
 
         binding.btReset.setOnClickListener {
@@ -82,7 +96,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         }
     }
 
-    private fun stopStepCounting() {
+    private fun stopStepCounting(authToken: String) {
 
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false
@@ -92,6 +106,8 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         sensorManager?.unregisterListener(this)
         // Save total steps to history when stop button is clicked
         saveStepToHistory(totalSteps.toInt())
+        val step_history = totalSteps.toString()
+        createStepHistoryData(authToken, totalSteps.toString())
     }
 
     private fun resetStepCount() {
@@ -146,10 +162,10 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun saveStepToHistory(steps: Int) {
+        // Add steps to step history
         val goal = binding.tvTotal.text.toString().toInt()
         stepHistoryAdapter.add("Steps: $steps - Goal: $goal")
     }
-
 
     private fun updateStepHistory() {
         // Clear step history and reload saved steps
@@ -176,6 +192,63 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // We do not have to write anything in this function for this app
     }
+
+    private fun createStepHistoryData(authToken: String, step_history: String){
+        val createStepHistoryDataJson =
+            "{\"authToken\":\"$authToken\",\"step_history\":\"$step_history\"}"
+
+
+
+        //correct malformed data
+        try {
+            val reader = JsonReader(StringReader(createStepHistoryDataJson))
+            reader.isLenient = true
+            reader.beginObject()
+            reader.close()
+            ApiClient.instance.createStepHistory(
+                "Bearer $authToken",
+                step_history
+            )
+                .enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(
+                                requireContext(),
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string()
+                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(
+                                requireContext(),
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Log.e("API_RESPONSE", errorMessage)
+                        }
+                    }
+                })
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
+        }
+    }
+
 
 
 }
