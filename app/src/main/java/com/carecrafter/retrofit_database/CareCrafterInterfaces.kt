@@ -2,6 +2,7 @@ package com.carecrafter.retrofit_database
 
 import android.service.autofill.UserData
 import com.carecrafter.models.Alarm
+import com.carecrafter.models.BMI
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
 import retrofit2.Call
@@ -80,4 +81,16 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @GET("getScore")
     fun getScore(@Header("Authorization") authToken: String): Call<User>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createBMI")
+    fun createBMI(
+        @Header("Authorization") authToken: String,
+        @Field("results") results:String,
+    ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("getBMI")
+    fun getBMI(@Header("Authorization") authToken: String): Call<BMI>
 }
