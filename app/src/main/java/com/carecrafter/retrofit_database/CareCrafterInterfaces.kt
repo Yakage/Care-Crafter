@@ -93,4 +93,13 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @GET("getBMI")
     fun getBMI(@Header("Authorization") authToken: String): Call<BMI>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createStepHistory")
+    fun createStepHistory(
+        @Header("Authorization") authToken: String,
+        @Field("step_history") results:String,
+    ):retrofit2.Call<DefaultResponse>
+
 }
