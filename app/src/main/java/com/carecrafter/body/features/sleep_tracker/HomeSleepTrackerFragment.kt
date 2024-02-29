@@ -15,15 +15,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
-import com.carecrafter.models.SharedPrefsViewModel
-import com.carecrafter.models.User
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -160,8 +157,9 @@ class HomeSleepTrackerFragment : Fragment() {
             for (score in scoreHistoryList) {
                 scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
-            createScore(authToken, scoreHistory)
-            binding.scoreLogs.text = scoreHistory
+            val scoreData = "Score: $rate Time: $timeString"
+            createScore(authToken, scoreData)
+            binding.scoreLogs.text = scoreHistory.toString()
         }
 
         else {
@@ -173,7 +171,8 @@ class HomeSleepTrackerFragment : Fragment() {
             for (score in scoreHistoryList) {
                 scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
             }
-            createScore(authToken, scoreHistory)
+            val scoreData = "Score: $rate Time: $timeString"
+            createScore(authToken, scoreData)
             binding.scoreLogs.text = scoreHistory.toString()
 
         }

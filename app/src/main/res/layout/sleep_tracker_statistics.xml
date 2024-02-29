@@ -187,7 +187,6 @@
                 android:gravity="center"
                 android:textSize="20sp"/>
 
-
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"

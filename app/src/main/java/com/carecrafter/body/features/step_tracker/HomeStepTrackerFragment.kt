@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 
@@ -68,6 +67,11 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun startStepCounting() {
+
+        binding.btStart.isEnabled = false
+        binding.btStop.isEnabled = true
+        binding.btReset.isEnabled = true
+
         running = true
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
@@ -79,6 +83,11 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun stopStepCounting() {
+
+        binding.btStart.isEnabled = true
+        binding.btStop.isEnabled = false
+        binding.btReset.isEnabled = true
+
         running = false
         sensorManager?.unregisterListener(this)
         // Save total steps to history when stop button is clicked
@@ -86,8 +95,17 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun resetStepCount() {
+
+        binding.etGoal.visibility = View.VISIBLE
+        binding.setgoal.visibility = View.VISIBLE
+
+        binding.btStart.isEnabled = true
+        binding.btStop.isEnabled = false
+        binding.btReset.isEnabled = false
+
+
         previousTotalSteps = totalSteps
-        binding.tvTotal.text = "0"
+        binding.tvTotal.text = "Total Step"
         saveData()
         updateStepHistory() // Update step history when reset button is clicked
         Toast.makeText(requireContext(), "Step count reset", Toast.LENGTH_SHORT).show()
@@ -95,9 +113,17 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
 
     private fun setGoal() {
         val goal = binding.etGoal.text.toString()
+
+        binding.etGoal.visibility = View.INVISIBLE
+        binding.setgoal.visibility = View.INVISIBLE
+
+        binding.btStart.isEnabled = true
+        binding.btStop.isEnabled = false
+        binding.btReset.isEnabled = true
+
         if (goal.isNotEmpty()) {
             // Update tv_total with the entered goal
-            binding.tvTotal.text = goal
+            binding.tvTotal.text = "$goal"
             Toast.makeText(requireContext(), "Goal set successfully", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(requireContext(), "Please enter a valid goal", Toast.LENGTH_SHORT).show()
