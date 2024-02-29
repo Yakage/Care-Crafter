@@ -122,24 +122,20 @@
                 android:layout_marginStart="8dp"/>
 
             <LinearLayout
+                android:id="@+id/themeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
+                <Switch
+                    android:id="@+id/themeSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Themes"
+                    android:text="Dark Mode"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginStart="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Change the theme of your profile"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
+                    android:checked="false"
+                    android:layout_gravity="start"
                     android:layout_marginStart="8dp"/>
             </LinearLayout>
         </LinearLayout>
