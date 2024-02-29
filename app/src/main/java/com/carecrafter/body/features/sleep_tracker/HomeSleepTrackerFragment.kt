@@ -64,6 +64,9 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.ivAlarm.setOnClickListener{
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_settingsSleepTrackerFragment)
         }
+        binding.statsBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_statisticSleepTrackerFragment)
+        }
         binding.startBtn.setOnClickListener{
             startTimer()
         }
@@ -99,6 +102,7 @@ class HomeSleepTrackerFragment : Fragment() {
             binding.stopBtn.isEnabled = true
             binding.resetBtn.isEnabled = true
             binding.rateBtn.isEnabled = false
+            binding.statsBtn.isEnabled = false
         }
     }
     private fun stopTimer(){
@@ -111,6 +115,7 @@ class HomeSleepTrackerFragment : Fragment() {
             binding.stopBtn.isEnabled = false
             binding.resetBtn.isEnabled = true
             binding.rateBtn.isEnabled = true
+            binding.statsBtn.isEnabled = false
         }
     }
     private fun resetTimer(){
@@ -124,14 +129,19 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.startBtn.text = "Start"
         binding.resetBtn.isEnabled = false
         binding.rateBtn.isEnabled = false
+        binding.statsBtn.isEnabled = false
     }
 
     private fun calculator(authToken: String) {
+        binding.startBtn.isEnabled = true
+        binding.stopBtn.isEnabled = false
+        binding.resetBtn.isEnabled = false
+        binding.rateBtn.isEnabled = false
+        binding.statsBtn.isEnabled = true
         // The 28800 is Seconds if which converted its 8 Hours
         val rate = (timerSeconds / 28800) * 100
         val hours = timerSeconds / 3600
         val minutes = (timerSeconds % 3600) / 60
-        val seconds = timerSeconds % 60
 
         // I use if statement to prevent the score going over 100
         if (rate >= 100) {

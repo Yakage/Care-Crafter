@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:foregroundGravity="center"
-            android:src="@drawable/icon_back"
+            android:src="@drawable/icon_back_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_reminder"
             android:contentDescription="TODO" />
