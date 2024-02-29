@@ -146,9 +146,10 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun saveStepToHistory(steps: Int) {
-        // Add steps to step history
-        stepHistoryAdapter.add("Steps: $steps")
+        val goal = binding.tvTotal.text.toString().toInt()
+        stepHistoryAdapter.add("Steps: $steps - Goal: $goal")
     }
+
 
     private fun updateStepHistory() {
         // Clear step history and reload saved steps
