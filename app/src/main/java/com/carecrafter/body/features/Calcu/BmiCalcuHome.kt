@@ -11,10 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.carecrafter.body.profile.UpdateAccountDirections
 import com.carecrafter.databinding.FragmentBmiCalcuHomeBinding
-import com.carecrafter.models.BMI
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
 import com.carecrafter.retrofit_database.ApiClient
@@ -65,47 +62,6 @@ class BmiCalcuHome : Fragment() {
             binding.tvCalcuResult.text = results
             createBMIData(authToken,results)
 
-            val Nah = binding.imageUgoodbro
-            val Under = binding.imageUnder
-            val Normal = binding.imageNormal
-            val Over = binding.imageOver
-            val Obese = binding.imagObese
-
-            if (bmi <= 5) {
-                Nah.visibility = View.VISIBLE
-                Under.visibility = View.INVISIBLE
-                Normal.visibility = View.INVISIBLE
-                Over.visibility = View.INVISIBLE
-                Obese.visibility = View.INVISIBLE
-            }
-            else if (bmi <= 18.5 && bmi < 25) {
-                Nah.visibility = View.INVISIBLE
-                Under.visibility = View.VISIBLE
-                Normal.visibility = View.INVISIBLE
-                Over.visibility = View.INVISIBLE
-                Obese.visibility = View.INVISIBLE
-            }
-            else if (bmi <= 25 && bmi < 30) {
-                Nah.visibility = View.INVISIBLE
-                Under.visibility = View.INVISIBLE
-                Normal.visibility = View.VISIBLE
-                Over.visibility = View.INVISIBLE
-                Obese.visibility = View.INVISIBLE
-            }
-            else if (bmi > 25 && bmi < 30) {
-                Nah.visibility = View.INVISIBLE
-                Under.visibility = View.INVISIBLE
-                Normal.visibility = View.INVISIBLE
-                Over.visibility = View.VISIBLE
-                Obese.visibility = View.INVISIBLE
-            }
-            else if (bmi > 30) {
-                Nah.visibility = View.INVISIBLE
-                Under.visibility = View.INVISIBLE
-                Normal.visibility = View.INVISIBLE
-                Over.visibility = View.INVISIBLE
-                Obese.visibility = View.VISIBLE
-            }
         } else {
             binding.tvCalcuResult.text = "Invalid Input"
         }

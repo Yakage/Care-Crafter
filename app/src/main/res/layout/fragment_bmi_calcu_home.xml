@@ -4,181 +4,198 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".body.features.Calcu.BmiCalcuHome">
+    tools:context=".body.features.Calcu.BmiCalcuHome"
+    android:background="@drawable/border_blue">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BMI CALCULATOR"
-            android:textStyle="bold"
-            android:textSize="40dp"
-            android:gravity="center"
-            android:layout_marginTop="40dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
-        <androidx.cardview.widget.CardView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+
+                android:src="@drawable/icon_back"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="CareCrafter"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="10dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:layout_marginLeft="10dp"
+                android:text="BMI Calculator"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"/>
 
-                <LinearLayout
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/maleIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/image_selector"
+                android:contentDescription="Male Icon"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <ImageView
+                android:id="@+id/femaleIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:src="@drawable/image_selector2"
+                android:layout_weight="1"
+                android:contentDescription="Female Icon"
+                android:layout_marginStart="16dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/background_white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/height"
+                    />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tvWeightCalcu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:gravity="center"
-                        android:text="Weight"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"/>
-
-                    <EditText
-                        android:id="@+id/etWeightCalcu"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:textSize="20sp"
-                        android:hint="kg"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvHeightCalcu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:gravity="center"
-                        android:text="Height"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"/>
-
-                    <EditText
-                        android:id="@+id/etHeightCalcu"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:textSize="20sp"
-                        android:hint="cm"
-                        android:layout_marginStart="6dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
+                    android:text="Height"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <EditText
+                android:id="@+id/etHeightCalcu"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:textSize="20sp"
+                android:hint="cm (ex. 1ft = 30.48)"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/background_white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/weight"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etWeightCalcu"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:textSize="20sp"
+                android:hint="kg (ex. 2.2lbs = 1kg)"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <!-- Calculate Button -->
         <Button
             android:id="@+id/btnCalcu"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Calculate your BMI"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:backgroundTint="@color/blue"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/tvCalcuResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Result"
+            android:text="Result Placeholder"
             android:textSize="20dp"
             android:textColor="@color/grey"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="50dp"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="330dp">
-
-            <ImageView
-                android:id="@+id/imageUgoodbro"
-                android:layout_width="414dp"
-                android:layout_height="0dp"
-                android:src="@drawable/bmi_skull"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageUnder"
-                android:layout_width="414dp"
-                android:layout_height="0dp"
-                android:src="@drawable/bmi_underweight"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageNormal"
-                android:layout_width="414dp"
-                android:layout_height="0dp"
-                android:src="@drawable/bmi_normal"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageOver"
-                android:layout_width="414dp"
-                android:layout_height="0dp"
-                android:src="@drawable/bmi_overweight"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imagObese"
-                android:layout_width="414dp"
-                android:layout_height="0dp"
-                android:src="@drawable/bmi_obese"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
