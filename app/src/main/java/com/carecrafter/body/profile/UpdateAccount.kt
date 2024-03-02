@@ -20,8 +20,6 @@ import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.SharedPrefsViewModel
 import com.carecrafter.models.User
 import com.carecrafter.retrofit_database.ApiClient
-import com.carecrafter.roomdatabase.UserDao
-import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

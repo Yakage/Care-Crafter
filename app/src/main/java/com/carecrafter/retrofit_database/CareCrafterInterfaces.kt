@@ -1,8 +1,8 @@
 package com.carecrafter.retrofit_database
 
-import android.service.autofill.UserData
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.BMI
+import com.carecrafter.models.StepsApi
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
 import retrofit2.Call
@@ -13,7 +13,6 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Path
 
 interface CareCrafterInterfaces {
 
@@ -102,4 +101,23 @@ interface CareCrafterInterfaces {
         @Field("step_history") results:String,
     ):retrofit2.Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createStep")
+    fun createStep(
+        @Header("Authorization") authToken: String,
+        @Field("steps") results:String,
+    ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("getDailyStep")
+    fun getDailySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("getWeeklyStep")
+    fun getWeeklySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("getMonthlyStep")
+    fun getMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
 }

@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
+import com.carecrafter.body.FeaturesFragment
 import com.carecrafter.databinding.SleepTrackerHomeBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
@@ -91,7 +92,7 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.currentDate.text = "$dateFormat"
 
         binding.ivBack.setOnClickListener {
-            val intent = Intent(activity, BodyActivity::class.java)
+            val intent = Intent(activity, FeaturesFragment::class.java)
             startActivity(intent)
         }
         return binding.root
