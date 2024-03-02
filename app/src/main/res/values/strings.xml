@@ -9,4 +9,6 @@
 
     <string name="test"><font color='#00B0FF'>Your</font> Summary</string>
 
+    <string name="sleepBoards"><font color='#00B0FF'>Your Name&#10;</font>Score: 232</string>
+
 </resources>

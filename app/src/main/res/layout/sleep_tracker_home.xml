@@ -4,197 +4,261 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".body.features.sleep_tracker.HomeSleepTrackerFragment">
+    tools:context=".body.features.sleep_tracker.HomeSleepTrackerFragment"
+    android:background="@drawable/border_blue">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/background_sky">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:contentDescription="TODO"
-                android:foregroundGravity="center"
-                android:src="@drawable/icon_back"
-                app:tint="@color/white" />
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/icon_back"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="CareCrafter"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:textSize="20dp"/>
 
-            <ImageView
-                android:id="@+id/ivAlarm"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/icon_bell"
-                app:tint="@color/white" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:layout_marginLeft="10dp"
+                android:text="Sleep Tracker"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background_white"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quality:"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="80%"
+                        android:textSize="25sp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background_white"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration:"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20.1hrs"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Sleep"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20.1hrs"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="In Bed"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="25dp"
+            android:background="@drawable/background_white">
 
             <TextView
-                android:id="@+id/currentDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="Current Time"
-                android:textColor="@color/grey"
-                android:textSize="30sp"/>
-
-            <TextView
-                android:id="@+id/currentTime"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="11:00 AM (Placeholder)"
-                android:textColor="@color/grey"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/timeTV"
-                android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:layout_marginTop="32dp"
-                android:gravity="center"
-                android:textColor="@color/grey"
-                android:text="00:00:00"
-                android:textSize="30dp" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:gravity="center"
-                android:textColor="@color/grey"
-                android:text="Hrs / Min / Sec" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="130dp"
-                android:text="Alarm in 6:32 - 7:00 AM"
-                android:textColor="@color/grey"
-                android:textSize="20sp"/>
+                android:text="Current Ranking:"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center">
+                android:padding="20dp"
+                android:background="@drawable/background_white">
 
-                <Button
-                    android:id="@+id/startBtn"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/sleepBoards"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     android:layout_weight="1"
-                    android:text="Start"
-                    app:icon="@drawable/icon_play" />
+                    android:layout_gravity="center"/>
 
-                <Space
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/stopBtn"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="Stop"
-                    app:icon="@drawable/icon_pause" />
-
-                <Space
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/resetBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:text="Reset"
-                    app:icon="@drawable/icon_replay" />
+                    android:text="#1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/rateBtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:text="Rate"
-                android:enabled="false"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Proceed to Leaderboards"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/history_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/background_white">
 
             <TextView
-                android:id="@+id/text_history_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Score Logs"
-                android:textColor="@color/grey"
-                android:textSize="20sp" />
+                android:text="Average Sleep Time:"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-            <ScrollView
-                android:id="@+id/score_history_scroll"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="20.1hrs"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/score_logs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text=""
-                    android:textColor="@color/red"
-                    android:textSize="16sp" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:max="100"
+                android:progress="90"/>
 
-            </ScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Score Accuracy:"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="70%"
+                android:textSize="15sp" />
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:max="100"
+                android:progress="70"/>
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/statsBtn"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="Check Stats"
-            android:enabled="false"
-            android:layout_marginBottom="30dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Started Trackin"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 
