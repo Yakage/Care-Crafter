@@ -40,21 +40,21 @@
             android:background="@drawable/edit_text_background"
             android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notification Interval"
-            android:textSize="25sp"
-            android:textColor="@color/main"
-            android:gravity="center"
-            android:layout_marginTop="16dp"/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Notification Interval"-->
+<!--            android:textSize="25sp"-->
+<!--            android:textColor="@color/main"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="16dp"/>-->
 
-        <Spinner
-            android:id="@+id/interval_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp" />
+<!--        <Spinner-->
+<!--            android:id="@+id/interval_spinner"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="8dp" />-->
 
         <LinearLayout
             android:id="@+id/progress_layout"

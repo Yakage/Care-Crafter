@@ -82,4 +82,23 @@
             android:id="@+id/action_updateAccount_to_accountFragment"
             app:destination="@id/accountFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/leaderBoardStepTrackerFragment"
+        android:name="com.carecrafter.body.features.step_tracker.LeaderBoardStepTrackerFragment"
+        android:label="step_tracker_leaderboard"
+        tools:layout="@layout/step_tracker_leaderboard" />
+    <fragment
+        android:id="@+id/leaderboardSleepTrackerFragment"
+        android:name="com.carecrafter.body.features.sleep_tracker.LeaderboardSleepTrackerFragment"
+        android:label="fragment_leaderboard_for_sleep_tracker"
+        tools:layout="@layout/sleep_tracker_leaderboard" />
+    <fragment
+        android:id="@+id/leaderboardWaterIntakeFragment"
+        android:name="com.carecrafter.body.features.water_intake.LeaderboardWaterIntakeFragment"
+        android:label="fragment_leaderboard_water_intake"
+        tools:layout="@layout/water_intake_leaderboard" />
+    <fragment
+        android:id="@+id/leaderboardsFragment"
+        android:name="com.carecrafter.body.LeaderboardsFragment"
+        android:label="LeaderboardsFragment" />
 </navigation>

@@ -1,5 +1,3 @@
-package com.carecrafter.body.features.step_tracker
-
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -9,96 +7,95 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.carecrafter.R
+import com.carecrafter.databinding.FragmentStepTrackerBinding
+import com.carecrafter.databinding.StepTrackerHomeBinding
 
-class StepTrackerFragment : Fragment() {
+
+class StepTrackerFragment : Fragment(), SensorEventListener {
+    private lateinit var binding: StepTrackerHomeBinding
     private lateinit var sensorManager: SensorManager
-    private lateinit var stepSensor: Sensor
-    private lateinit var stepCountTextView: TextView
-    private lateinit var startButton: Button
-    private lateinit var stopButton: Button
-    private lateinit var resetButton: Button
-    private var isRunning: Boolean = false
-    private var stepCount: Int = 0
+    private var stepCount = 0
 
-    private val stepSensorListener = object : SensorEventListener {
-        override fun onSensorChanged(event: SensorEvent) {
-            if (isRunning) {
-                stepCount = event.values[0].toInt()
-                updateStepCount(stepCount)
-            }
-        }
-
-        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = StepTrackerHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_step_tracker, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        stepCountTextView = view.findViewById(R.id.stepCountTextView)
-        startButton = view.findViewById(R.id.startButton)
-        stopButton = view.findViewById(R.id.stopButton)
-        resetButton = view.findViewById(R.id.resetButton)
-
+        // Initialize sensor manager
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-            ?: run {
-                Toast.makeText(requireContext(), "Step counter sensor not available on this device", Toast.LENGTH_SHORT).show()
-                requireActivity().finish()
-                return view
-            }
 
-        stepCountTextView.text = "Click Start"
-
-        startButton.setOnClickListener {
-            isRunning = true
-            stepCountTextView.text = "Tracking Steps..."
-        }
-
-        stopButton.setOnClickListener {
-            if (isRunning) {
-                isRunning = false
-                stepCountTextView.text = "Step Count: $stepCount"
-            } else {
-                Toast.makeText(requireContext(), "Please start tracking steps first", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        resetButton.setOnClickListener {
-            stepCount = 0
-            stepCountTextView.text = "Click Start"
-        }
-
-        return view
+        // Set listeners
+        binding.setgoal.setOnClickListener { setGoal() }
+        binding.btStart.setOnClickListener { startTracking() }
+        binding.btStop.setOnClickListener { stopTracking() }
+        binding.btReset.setOnClickListener { resetTracking() }
     }
 
     override fun onResume() {
         super.onResume()
-        if (::stepSensor.isInitialized) {
-            sensorManager.registerListener(stepSensorListener, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
-        } else {
-            Toast.makeText(requireContext(), "Step counter sensor not available on this device", Toast.LENGTH_SHORT).show()
-            requireActivity().finish()
+        // Register the step counter sensor
+        val stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        stepCounterSensor?.let {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        if (::stepSensor.isInitialized) {
-            sensorManager.unregisterListener(stepSensorListener)
+        // Unregister the sensor to save battery
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Do nothing
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        // Update step count when sensor data changes
+        event?.let {
+            if (it.sensor.type == Sensor.TYPE_STEP_COUNTER) {
+                stepCount = it.values[0].toInt()
+                updateStepCount()
+            }
         }
     }
 
-    private fun updateStepCount(steps: Int) {
-        if (!isRunning) {
-            stepCountTextView.text = "Step Count: $steps"
+    private fun setGoal() {
+        val goal = binding.etGoal.text.toString().toIntOrNull()
+        if (goal != null) {
+            // Set the daily step goal
+            // You can implement this part according to your requirement
         } else {
-            stepCountTextView.text = "Tracking Steps..."
+            // Handle invalid input
         }
+    }
+
+    private fun startTracking() {
+        // Start tracking steps
+        // In this implementation, step counting is automatic once the sensor is registered
+    }
+
+    private fun stopTracking() {
+        // Stop tracking steps
+        // In this implementation, step counting is continuous until the sensor is unregistered
+    }
+
+    private fun resetTracking() {
+        // Reset step count
+        stepCount = 0
+        updateStepCount()
+    }
+
+    private fun updateStepCount() {
+        binding.tvCount.text = stepCount.toString()
+        // Update progress bar or any other UI element here based on step count
     }
 }

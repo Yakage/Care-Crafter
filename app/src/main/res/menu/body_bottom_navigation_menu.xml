@@ -5,7 +5,7 @@
         android:title=""
         android:icon="@drawable/icon_home" />
     <item
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/leaderboardsFragment"
         android:title=""
         android:icon="@drawable/icon_chart" />
     <item
