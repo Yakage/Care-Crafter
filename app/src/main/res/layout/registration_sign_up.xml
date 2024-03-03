@@ -172,7 +172,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_gender"
+                android:id="@+id/et_gender2"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -180,7 +180,7 @@
                 android:hint="Select your Sex">
 
                 <Spinner
-                    android:id="@+id/GenderET"
+                    android:id="@+id/GenderET2"
                     android:layout_width="250dp"
                     android:layout_height="55dp" />
 
