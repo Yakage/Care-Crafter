@@ -10,6 +10,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.text.Editable
 import android.util.JsonReader
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,11 +18,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.body.profile.UpdateAccountDirections
 import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
@@ -80,7 +78,12 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
 
         // Add click listener to the "Set Goal" button
         binding.setgoal.setOnClickListener {
-            setGoal()
+            if (binding.etGoal.text.toString().isEmpty()){
+                binding.etGoal.error = "Set a Goal"
+                binding.etGoal.requestFocus()
+            } else {
+                setGoal()
+            }
         }
     }
 
@@ -122,9 +125,8 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
 
     private fun resetStepCount() {
 
-
-        binding.etGoal.visibility = View.VISIBLE
-        binding.setgoal.visibility = View.VISIBLE
+        binding.setGoalLayout.visibility = View.VISIBLE
+        binding.setButtonsLayout.visibility = View.GONE
 
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false
@@ -133,6 +135,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         previousTotalSteps = totalSteps
         binding.tvTotal.text = "Total Steps"
         binding.tvCount.text = "0"
+        binding.etGoal.text = Editable.Factory.getInstance().newEditable("")
         stepHistoryAdapter.clear()
         Toast.makeText(requireContext(), "Step count reset", Toast.LENGTH_SHORT).show()
     }
@@ -140,8 +143,8 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
     private fun setGoal() {
         val goal = binding.etGoal.text.toString()
 
-        binding.etGoal.visibility = View.INVISIBLE
-        binding.setgoal.visibility = View.INVISIBLE
+        binding.setGoalLayout.visibility = View.GONE
+        binding.setButtonsLayout.visibility = View.VISIBLE
 
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false

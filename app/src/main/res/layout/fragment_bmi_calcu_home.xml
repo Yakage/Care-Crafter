@@ -74,21 +74,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_weight="1"
-                android:src="@drawable/image_selector"
-                android:contentDescription="Male Icon"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/boy_2"
+                app:tint="@color/grey" />
 
             <ImageView
                 android:id="@+id/femaleIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:src="@drawable/image_selector2"
+                android:src="@drawable/woman"
                 android:layout_weight="1"
                 android:contentDescription="Female Icon"
                 android:layout_marginStart="16dp"
-                android:clickable="true"
-                android:focusable="true" />
+                app:tint="@color/grey"/>
+
         </LinearLayout>
 
         <LinearLayout
