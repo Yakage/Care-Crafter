@@ -1,28 +1,29 @@
 package com.carecrafter.registration
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.JsonReader
 import android.util.Log
 import android.widget.Toast
-import com.carecrafter.R
+import androidx.appcompat.app.AppCompatActivity
 import com.carecrafter.databinding.RegistrationSignUpBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
-import com.carecrafter.retrofit_database.CareCrafterInterfaces
-import java.io.StringReader
-import android.util.JsonReader
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import java.io.StringReader
 
 
 class SignUp : AppCompatActivity() {
     private lateinit var binding: RegistrationSignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Spinner Test
+
+
+
         binding = RegistrationSignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
