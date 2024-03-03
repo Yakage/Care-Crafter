@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.carecrafter.R
 import com.carecrafter.databinding.FragmentBmiCalcuHomeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
@@ -38,6 +40,20 @@ class BmiCalcuHome : Fragment() {
 
         binding.btnCalcu.setOnClickListener{
             calculatedBMI(authToken.toString())
+        }
+
+        binding.maleIcon.setOnClickListener{
+            val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
+            binding.femaleIcon.imageTintList = (colorStateList)
+            binding.maleIcon.setImageTintList(null);
+
+        }
+
+        binding.femaleIcon.setOnClickListener{
+            val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
+            binding.maleIcon.imageTintList = (colorStateList)
+            binding.femaleIcon.setImageTintList(null);
+            var gender = "male"
         }
 
         return binding.root
