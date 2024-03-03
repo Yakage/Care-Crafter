@@ -36,6 +36,11 @@
             android:gravity="center"
             >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="180dp"
+                android:src="@drawable/asddd" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +49,7 @@
                 android:textSize="40sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
                 />
 
             <TextView
