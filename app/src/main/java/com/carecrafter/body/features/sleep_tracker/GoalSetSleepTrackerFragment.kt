@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.databinding.FragmentGoalSetSleepTrackerBinding
 
@@ -17,8 +18,12 @@ class GoalSetSleepTrackerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGoalSetSleepTrackerBinding.inflate(inflater, container, false)
-        return inflater.inflate(R.layout.fragment_goal_set_sleep_tracker, container, false)
+
+        binding.nextBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_goalSetSleepTrackerFragment_to_sleepTrackingFragment)
+        }
 
         return binding.root
     }
+
 }

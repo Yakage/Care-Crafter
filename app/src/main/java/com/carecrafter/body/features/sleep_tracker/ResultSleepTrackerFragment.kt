@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.carecrafter.R
 import com.carecrafter.databinding.FragmentResultSleepTrackerBinding
 
 
@@ -17,7 +16,6 @@ class ResultSleepTrackerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentResultSleepTrackerBinding.inflate(inflater, container, false)
-        return inflater.inflate(R.layout.fragment_goal_set_sleep_tracker, container, false)
 
         return binding.root
     }

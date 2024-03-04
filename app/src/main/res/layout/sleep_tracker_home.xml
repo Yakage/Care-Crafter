@@ -80,13 +80,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-<!--                    <ProgressBar-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="100"
+                        android:progress="80"
+                        android:scaleX="-1"
+                        android:indeterminateOnly="false"
+                        android:progressDrawable="@drawable/progressbar_sleep"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -116,6 +121,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,56 +158,58 @@
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="20dp"-->
-<!--            android:layout_marginTop="25dp"-->
-<!--            android:background="@drawable/background_white">-->
+<!--        Need Reworking-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/background_white"
+            android:visibility="gone">
 
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Current Ranking:"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="bold"/>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Ranking:"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-<!--            <LinearLayout-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:padding="20dp"-->
-<!--                android:background="@drawable/background_white">-->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="@drawable/background_white">
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/sleepBoards"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:layout_gravity="center"/>-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sleepBoards"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"/>
 
-<!--                <TextView-->
-<!--                    android:layout_width="70dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="#1"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:textColor="@color/yellow"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_weight="1"/>-->
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="#1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
 
-<!--            </LinearLayout>-->
+            </LinearLayout>
 
-<!--            <Button-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="Proceed to Leaderboards"/>-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Proceed to Leaderboards"/>
 
-<!--        </LinearLayout>-->
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -255,6 +263,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/setGoalBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Get Started Trackin"
