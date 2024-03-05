@@ -5,6 +5,9 @@ import com.carecrafter.models.BMI
 import com.carecrafter.models.StepsApi
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.SleepsApi
+import com.carecrafter.models.StepsDailyStatsApi
+import com.carecrafter.models.StepsMonthlyStatsApi
+import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.models.User
 import com.carecrafter.models.WaterApi
 import retrofit2.Call
@@ -94,15 +97,15 @@ interface CareCrafterInterfaces {
 
     @Headers("Accept: application/json")
     @GET("getDailySleep")
-    fun getDailySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
+    fun showDailySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
 
     @Headers("Accept: application/json")
     @GET("getWeeklySleep")
-    fun getWeeklySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
+    fun showWeeklySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
 
     @Headers("Accept: application/json")
     @GET("getMonthlySleep")
-    fun getMonthlySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
+    fun showMonthlySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
 
     //For BMI
     @FormUrlEncoded
@@ -117,7 +120,7 @@ interface CareCrafterInterfaces {
     @GET("getBMI")
     fun getBMI(@Header("Authorization") authToken: String): Call<BMI>
 
-    //For Step
+    //For Step Tracker
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createStepHistory")
@@ -135,16 +138,28 @@ interface CareCrafterInterfaces {
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
+    @GET("showDailyStep")
+    fun showDailySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("showWeeklyStep")
+    fun showWeeklySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("showMonthlyStep")
+    fun showMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
+    @Headers("Accept: application/json")
     @GET("getDailyStep")
-    fun getDailySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+    fun getDailySteps(@Header("Authorization") authToken: String): Call<List<StepsDailyStatsApi>>
 
     @Headers("Accept: application/json")
     @GET("getWeeklyStep")
-    fun getWeeklySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+    fun getWeeklySteps(@Header("Authorization") authToken: String): Call<List<StepsWeeklyStatsApi>>
 
     @Headers("Accept: application/json")
     @GET("getMonthlyStep")
-    fun getMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+    fun getMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsMonthlyStatsApi>>
 
     //For Water Intake
     @FormUrlEncoded
@@ -156,14 +171,14 @@ interface CareCrafterInterfaces {
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
-    @GET("getDailyWater")
-    fun getDailyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
+    @GET("showDailyWater")
+    fun showDailyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
 
     @Headers("Accept: application/json")
-    @GET("getWeeklyWater")
-    fun getWeeklyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
+    @GET("showWeeklyWater")
+    fun showWeeklyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
 
     @Headers("Accept: application/json")
-    @GET("getMonthlyWater")
-    fun getMonthlyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
+    @GET("showMonthlyWater")
+    fun showMonthlyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
 }

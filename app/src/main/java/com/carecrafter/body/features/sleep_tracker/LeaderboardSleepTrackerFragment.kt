@@ -75,7 +75,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
     }
 
     private fun getDailySleeps(authToken: String) {
-        ApiClient.instance.getDailySleep("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showDailySleep("Bearer $authToken").enqueue(object :
             Callback<List<SleepsApi>> {
             override fun onResponse(call: Call<List<SleepsApi>>, response: Response<List<SleepsApi>>) {
                 if (response.isSuccessful) {
@@ -101,7 +101,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
     }
 
     private fun getWeeklySleeps(authToken: String) {
-        ApiClient.instance.getWeeklySleep("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showWeeklySleep("Bearer $authToken").enqueue(object :
             Callback<List<SleepsApi>> {
             override fun onResponse(call: Call<List<SleepsApi>>, response: Response<List<SleepsApi>>) {
                 if (response.isSuccessful) {
@@ -127,7 +127,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
     }
 
     private fun getMonthlySleeps(authToken: String) {
-        ApiClient.instance.getMonthlySleep("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showMonthlySleep("Bearer $authToken").enqueue(object :
             Callback<List<SleepsApi>> {
             override fun onResponse(call: Call<List<SleepsApi>>, response: Response<List<SleepsApi>>) {
                 if (response.isSuccessful) {

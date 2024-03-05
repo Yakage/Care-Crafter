@@ -75,7 +75,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
     }
 
     private fun getDailyWaterIntake(authToken: String) {
-        ApiClient.instance.getDailyWater("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showDailyWater("Bearer $authToken").enqueue(object :
             Callback<List<WaterApi>> {
             override fun onResponse(call: Call<List<WaterApi>>, response: Response<List<WaterApi>>) {
                 if (response.isSuccessful) {
@@ -101,7 +101,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
     }
 
     private fun getWeeklyWaterIntake(authToken: String) {
-        ApiClient.instance.getWeeklyWater("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showWeeklyWater("Bearer $authToken").enqueue(object :
             Callback<List<WaterApi>> {
             override fun onResponse(call: Call<List<WaterApi>>, response: Response<List<WaterApi>>) {
                 if (response.isSuccessful) {
@@ -127,7 +127,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
     }
 
     private fun getMonthlyWaterIntake(authToken: String) {
-        ApiClient.instance.getMonthlyWater("Bearer $authToken").enqueue(object :
+        ApiClient.instance.showMonthlyWater("Bearer $authToken").enqueue(object :
             Callback<List<WaterApi>> {
             override fun onResponse(call: Call<List<WaterApi>>, response: Response<List<WaterApi>>) {
                 if (response.isSuccessful) {

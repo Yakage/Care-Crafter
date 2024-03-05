@@ -80,7 +80,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
     }
 
     private fun getDailySteps(authToken: String) {
-        ApiClient.instance.getDailySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
+        ApiClient.instance.showDailySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
             override fun onResponse(call: Call<List<StepsApi>>, response: Response<List<StepsApi>>) {
                 if (response.isSuccessful) {
                     val entries = response.body()?.map { dailyStepsApi ->
@@ -105,7 +105,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
     }
 
     private fun getWeeklySteps(authToken: String) {
-        ApiClient.instance.getWeeklySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
+        ApiClient.instance.showWeeklySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
             override fun onResponse(call: Call<List<StepsApi>>, response: Response<List<StepsApi>>) {
                 if (response.isSuccessful) {
                     val entries = response.body()?.map { dailyStepsApi ->
@@ -130,7 +130,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
     }
 
     private fun getMonthlySteps(authToken: String) {
-        ApiClient.instance.getMonthlySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
+        ApiClient.instance.showMonthlySteps("Bearer $authToken").enqueue(object : Callback<List<StepsApi>> {
             override fun onResponse(call: Call<List<StepsApi>>, response: Response<List<StepsApi>>) {
                 if (response.isSuccessful) {
                     val entries = response.body()?.map { dailyStepsApi ->
