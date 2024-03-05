@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerStatisticsBinding
@@ -45,8 +46,7 @@ class StatisticStepTrackerFragment : Fragment() {
         setupViews(authToken.toString())
 
         binding.ivBack.setOnClickListener {
-            val intent = Intent(requireActivity(), BodyActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
         }
 
         return binding.root
