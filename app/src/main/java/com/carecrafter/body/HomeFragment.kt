@@ -2,14 +2,13 @@ package com.carecrafter.body
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.carecrafter.R
+import androidx.fragment.app.Fragment
+import com.carecrafter.body.features.BmiCalcuActivity
 import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.body.features.StepTrackerActivity
-import com.carecrafter.body.features.WaterIntakeActivity
 import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyHomeBinding
 
@@ -32,6 +31,10 @@ class HomeFragment : Fragment() {
         }
         binding.waterFT.setOnClickListener {
             val intent = Intent(activity, WaterIntakeBActivity::class.java)
+            startActivity(intent)
+        }
+        binding.bmiFT.setOnClickListener {
+            val intent = Intent(activity, BmiCalcuActivity::class.java)
             startActivity(intent)
         }
 
