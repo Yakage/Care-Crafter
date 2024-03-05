@@ -77,8 +77,7 @@ class SettingsSleepTrackerFragment : Fragment() {
                 "Bearer $authToken",
                 title,
                 message,
-                time,
-                date
+
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

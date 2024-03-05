@@ -4,6 +4,7 @@ import com.carecrafter.models.Alarm
 import com.carecrafter.models.BMI
 import com.carecrafter.models.StepsApi
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.SleepScoreLogs
 import com.carecrafter.models.SleepsApi
 import com.carecrafter.models.StepsDailyStatsApi
 import com.carecrafter.models.StepsMonthlyStatsApi
@@ -65,10 +66,8 @@ interface CareCrafterInterfaces {
     @POST("createAlarm")
     fun createAlarm(
         @Header("Authorization") authToken: String,
-        @Field("title") title: String,
-        @Field("message") message: String,
+        @Field("daily_goal") dailyGoal: String,
         @Field("time") time: String,
-        @Field("date") date: String
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
@@ -81,11 +80,12 @@ interface CareCrafterInterfaces {
     fun createScore(
         @Header("Authorization") authToken: String,
         @Field("score_logs") score:String,
+        @Field("total_time") totalTime:String,
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
     @GET("getScore")
-    fun getScore(@Header("Authorization") authToken: String): Call<User>
+    fun getScore(@Header("Authorization") authToken: String): Call<SleepScoreLogs>
 
     @FormUrlEncoded
     @Headers("Accept: application/json")

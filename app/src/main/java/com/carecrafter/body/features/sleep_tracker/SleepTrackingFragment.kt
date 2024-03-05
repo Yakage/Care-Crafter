@@ -1,5 +1,6 @@
 package com.carecrafter.body.features.sleep_tracker
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -57,9 +58,9 @@ class SleepTrackingFragment : Fragment() {
     ): View? {
         binding = FragmentSleepTrackingBinding.inflate(inflater, container, false)
 
-
-        //val authToken = sharedPreferences.getString("authToken", "")
-        //authToken?.let { getAlarmInfo(it) }
+        sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = sharedPreferences.getString("authToken", "")
+        authToken?.let { getAlarmInfo(it) }
 
         binding.startBtn.setOnClickListener{
             startTimer()
@@ -71,8 +72,7 @@ class SleepTrackingFragment : Fragment() {
             resetTimer()
         }
         binding.endBtn.setOnClickListener {
-            calculator()
-            //calculator(authToken.toString())
+            calculator(authToken.toString())
             findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
         }
 
@@ -133,15 +133,19 @@ class SleepTrackingFragment : Fragment() {
     }
 
     //private fun calculator(authToken: String)
-    private fun calculator() {
+    private fun calculator(authToken: String) {
         binding.startBtn.isEnabled = true
         binding.stopBtn.isEnabled = false
         binding.resetBtn.isEnabled = false
         binding.endBtn.isEnabled = false
         // The 28800 is Seconds if which converted its 8 Hours
-        val rate = (timerSeconds / 28800) * 100
+
+        val input = binding.tvIdk.text.toString().toInt()
+        val scoreDivide = (input * 60) * 60
+        val rate = (timerSeconds / scoreDivide) * 100
         val hours = timerSeconds / 3600
         val minutes = (timerSeconds % 3600) / 60
+        val seconds = timerSeconds % 60
 
         // I use if statement to prevent the score going over 100
         if (rate >= 100) {
@@ -152,11 +156,12 @@ class SleepTrackingFragment : Fragment() {
 
             var scoreHistory = "Sleep Score History:\n"
             for (score in scoreHistoryList) {
-                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
+                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes.$seconds hrs of sleep at ${score.second}\n"
             }
             val scoreData = "Score: $rate Time: $timeString"
             //createScore(authToken, scoreData)
             binding.scoreLogs.text = scoreHistory.toString()
+            createScore(authToken, scoreData, timerSeconds.toString() )
         }
 
         else {
@@ -166,18 +171,19 @@ class SleepTrackingFragment : Fragment() {
 
             var scoreHistory = "Sleep Score History:\n"
             for (score in scoreHistoryList) {
-                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes hrs of sleep at ${score.second}\n"
+                scoreHistory += " - ${score.first} over 100 with a total of $hours.$minutes.$seconds hrs of sleep at ${score.second}\n"
             }
             val scoreData = "Score: $rate Time: $timeString"
             //createScore(authToken, scoreData)
-            binding.scoreLogs.text = scoreHistory.toString()
+            binding.scoreLogs.text = scoreHistory
+            createScore(authToken, scoreData, timerSeconds.toString() )
 
         }
     }
-    private fun createScore(authToken: String, scoreHistory: String ){
+    private fun createScore(authToken: String, score: String, totalTime: String){
 
         val createScoreDataJson =
-            "{\"authToken\":\"$authToken\"\"score\":\"$scoreHistory\"}"
+            "{\"authToken\":\"$authToken\",\"score\":\"$score\",\"totalTime\":\"$totalTime\"}"
 
 
         //correct malformed data
@@ -188,7 +194,8 @@ class SleepTrackingFragment : Fragment() {
             reader.close()
             ApiClient.instance.createScore(
                 "Bearer $authToken",
-                scoreHistory
+                score,
+                totalTime
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
@@ -247,7 +254,7 @@ class SleepTrackingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<Alarm>, t: Throwable) {
-                Log.e("AccountFragment", "Failed to get user info", t)
+                Log.e("SleepTracker", "Failed to get user info", t)
                 Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
@@ -255,7 +262,7 @@ class SleepTrackingFragment : Fragment() {
 
     fun updateInfo(alarmData: Alarm){
         if (alarmData != null) {
-            binding.textView3.text = alarmData.time
+            binding.tvIdk.text = alarmData.daily_goal
         }
     }
 }
