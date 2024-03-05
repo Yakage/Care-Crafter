@@ -133,6 +133,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Notification Time"
+                android:textSize="25sp"
+                android:textColor="@color/main"
+                android:gravity="center"
+                android:layout_marginTop="16dp"/>
+
+            <TimePicker
+                android:id="@+id/notification_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:timePickerMode="spinner" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Notification Interval"
                 android:textSize="25sp"
                 android:textColor="@color/main"
