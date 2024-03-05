@@ -1,0 +1,15 @@
+<!-- res/drawable/progress_bar_segmented.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/underweight">
+        <shape android:shape="rectangle">
+            <solid android:color="#606060" />
+        </shape>
+    </item>
+    <!-- Green segment -->
+    <item android:id="@+id/normal">
+        <shape android:shape="rectangle">
+            <solid android:color="#00FF00" />
+        </shape>
+    </item>
+</layer-list>

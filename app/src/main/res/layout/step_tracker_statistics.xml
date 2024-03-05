@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".body.features.step_tracker.StatisticStepTrackerFragment">
+    tools:context=".body.features.step_tracker.StatisticStepTrackerFragment"
+    android:background="@drawable/border_blue">
 
 
     <ImageView
@@ -22,11 +23,11 @@
         android:id="@+id/tv_statistic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Statistics"
         android:textSize="37sp"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/iv_back"
-        app:layout_constraintStart_toEndOf="@id/iv_back"/>
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
 
     <Spinner
         android:id="@+id/spinnerTimeFrame"

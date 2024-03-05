@@ -1,6 +1,7 @@
 package com.carecrafter.body.features.Calcu
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.carecrafter.R
+import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.FragmentBmiCalcuHomeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
@@ -54,6 +56,11 @@ class BmiCalcuHome : Fragment() {
             binding.maleIcon.imageTintList = (colorStateList)
             binding.femaleIcon.setImageTintList(null);
             var gender = "male"
+        }
+
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(requireActivity(), BodyActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

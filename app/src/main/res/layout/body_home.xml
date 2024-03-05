@@ -80,7 +80,7 @@
                 android:text="Today's Statistics:"
                 android:textColor="@color/main"
                 android:textStyle="bold"
-                android:textSize="25dp"/>
+                android:textSize="25dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,11 +99,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_white"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:orientation="vertical"
-                        android:clickable="true">
+                        android:clickable="true"
+                        android:elevation="5dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -172,14 +173,14 @@
                     <LinearLayout
                         android:id="@+id/bmiFT"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="85dp"
                         android:background="@drawable/background_white"
-                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
                         android:orientation="vertical"
-                        android:clickable="true">
+                        android:clickable="true"
+                        android:elevation="5dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -222,7 +223,8 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/background_white"
                         android:orientation="vertical"
-                        android:clickable="true">
+                        android:clickable="true"
+                        android:elevation="5dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -265,8 +267,9 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/background_white"
-                        android:orientation="vertical"
-                        android:clickable="true">
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -349,7 +352,7 @@
                     app:cardCornerRadius="10dp"
                     app:cardElevation="4dp"
                     app:cardBackgroundColor="@color/white"
-                    >
+                    android:elevation="5dp">
 
                     <ImageView
                         android:layout_width="match_parent"

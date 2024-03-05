@@ -19,9 +19,9 @@
             android:layout_marginTop="10dp">
 
             <ImageView
+                android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-
                 android:src="@drawable/icon_back"/>
 
             <TextView
@@ -84,14 +84,37 @@
                 android:gravity="center"/>
 
             <ProgressBar
-                android:id="@+id/myProgressBar"
+                android:id="@+id/levelRed"
                 android:layout_marginTop="10dp"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progressDrawable="@drawable/progressbar"
+                android:progressDrawable="@drawable/progressbar_red"
                 android:max="100"
-                android:progress="10" />
+                android:progress="10"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                android:id="@+id/levelYellow"
+                android:layout_marginTop="10dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progressDrawable="@drawable/progressbar_yellow"
+                android:max="100"
+                android:progress="10"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                android:id="@+id/levelGreen"
+                android:layout_marginTop="10dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progressDrawable="@drawable/progressbar_green"
+                android:max="100"
+                android:progress="10"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_marginTop="10dp"

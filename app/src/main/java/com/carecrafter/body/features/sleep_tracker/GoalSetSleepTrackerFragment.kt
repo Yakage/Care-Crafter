@@ -1,6 +1,7 @@
 package com.carecrafter.body.features.sleep_tracker
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.JsonReader
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
+import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.FragmentGoalSetSleepTrackerBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
@@ -33,6 +35,10 @@ class GoalSetSleepTrackerFragment : Fragment() {
         val authToken = sharedPreferences.getString("authToken", "")
         binding.nextBtn.setOnClickListener {
             createAlarm(authToken.toString())
+        }
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(requireActivity(), BodyActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

@@ -75,9 +75,9 @@ class SleepTrackingFragment : Fragment() {
             calculator(authToken.toString())
             findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
         }
-
-        binding.enddBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
+        binding.ivBack.setOnClickListener {
+            val intent = Intent(requireActivity(), BodyActivity::class.java)
+            startActivity(intent)
         }
 
         // Date and Time for the TextView

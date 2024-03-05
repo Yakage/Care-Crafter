@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.carecrafter.databinding.RegistrationSignUpBinding
@@ -17,12 +21,11 @@ import java.io.StringReader
 
 class SignUp : AppCompatActivity() {
     private lateinit var binding: RegistrationSignUpBinding
+    private lateinit var spinner: Spinner
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //Spinner Test
-
-
 
         binding = RegistrationSignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -31,19 +34,45 @@ class SignUp : AppCompatActivity() {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
         }
+
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+        val genderSpinner : Spinner = binding.spinnerGender
+        val genderIdentities = arrayOf(
+            "Male",
+            "Female",
+        )
+
+        val genderAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderIdentities)
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        genderSpinner.adapter = genderAdapter
+
+        genderSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //Gender data
+                val selectedGender = parent?.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
 
         binding.btSubmit.setOnClickListener {
+            val selectedGender = genderSpinner.selectedItem.toString()
             val name = binding.FullNameET.text.toString().trim()
             val email = binding.EmailET.text.toString().trim()
             val age = binding.AgeET.text.toString().trim()
             val height = binding.HeightET.text.toString().trim()
             val weight = binding.WeightET.text.toString().trim()
-            val gender = binding.GenderET.text.toString().trim()
+            //val gender = binding.GenderET.text.toString().trim()
+            var gender = ""
             val password = binding.PasswordET.text.toString().trim()
             val confirmPassword = binding.ConfirmPasswordET.text.toString().trim()
+
+            when (selectedGender){
+                "Male" -> gender = "male"
+                "Female" -> gender = "female"
+            }
 
             //json data
             val signupDataJson =
@@ -73,11 +102,6 @@ class SignUp : AppCompatActivity() {
             if (weight.isEmpty()) {
                 binding.WeightET.error = "Weight required"
                 binding.WeightET.requestFocus()
-            }
-
-            if (gender.isEmpty()) {
-                binding.GenderET.error = "Gender required"
-                binding.GenderET.requestFocus()
             }
 
             if (password.isEmpty()) {

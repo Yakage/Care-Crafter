@@ -53,7 +53,6 @@
                     android:progressDrawable="@drawable/progressbar_sleep"
                     android:max="100"
                     android:progress="75"
-                    android:scaleX="-1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
