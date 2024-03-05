@@ -1,6 +1,7 @@
 package com.carecrafter.body
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,13 @@ class HomeFragment : Fragment() {
         }
         binding.bmiFT.setOnClickListener {
             val intent = Intent(activity, BmiCalcuActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnVisitWebsite.setOnClickListener {
+            val url = "https://example.com" //put the fuckining website here
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
             startActivity(intent)
         }
 
