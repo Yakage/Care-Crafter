@@ -30,7 +30,8 @@
                     android:id="@+id/iv_profile_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/doge"
+                    android:src="@drawable/boy"
+                    android:background="@color/main"
                     android:scaleType="centerCrop" />
 
             </androidx.cardview.widget.CardView>
@@ -48,8 +49,8 @@
                     android:layout_marginStart="20dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="Welcome Back,"
-                    android:textColor="@color/black"
+                    android:text="Hello User, How are you today?"
+                    android:textColor="@color/white"
                     android:textSize="15sp"/>
 
                 <TextView
@@ -59,7 +60,7 @@
                     android:layout_weight="1"
                     android:text="Almighty Doge"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="20sp"/>
             </LinearLayout>
 
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Today's Statistics:"
+                android:textColor="@color/main"
                 android:textStyle="bold"
                 android:textSize="25dp"/>
 
@@ -157,12 +159,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Steps: 8k"
-                                android:textColor="@color/blue"
+                                android:textColor="@color/main"
                                 android:layout_weight="1"
                                 android:layout_marginRight="10dp"
                                 android:layout_marginBottom="20dp"
                                 />
-
 
                         </LinearLayout>
 
@@ -250,6 +251,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:text="Total Water Intake"
+                            android:textColor="@color/main"
                             android:textSize="15sp"
                             android:layout_marginBottom="20dp"/>
 
