@@ -19,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
@@ -74,6 +76,10 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
 
         binding.btReset.setOnClickListener {
             resetStepCount()
+        }
+
+        binding.btStatistics.setOnClickListener {
+            findNavController().navigate(R.id.action_homeStepTrackerFragment_to_statisticStepTrackerFragment)
         }
 
         // Add click listener to the "Set Goal" button
