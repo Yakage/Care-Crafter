@@ -9,7 +9,7 @@
         android:id="@+id/bmiCalcuHome"
         android:name="com.carecrafter.body.features.Calcu.BmiCalcuHome"
         android:label="fragment_bmi_calcu_home"
-        tools:layout="@layout/fragment_bmi_calcu_home" />
+        tools:layout="@layout/bmi_home" />
     <activity
         android:id="@+id/bmiCalcuActivity"
         android:name="com.carecrafter.body.features.BmiCalcuActivity"

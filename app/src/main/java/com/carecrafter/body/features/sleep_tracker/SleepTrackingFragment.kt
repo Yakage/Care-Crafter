@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.databinding.FragmentSleepTrackingBinding
+import com.carecrafter.databinding.SleepTrackingBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
@@ -31,7 +31,7 @@ import java.util.Locale
 
 class SleepTrackingFragment : Fragment() {
 
-    private lateinit var binding: FragmentSleepTrackingBinding
+    private lateinit var binding: SleepTrackingBinding
     private var isRunning = false
     private var timerSeconds = 0
 
@@ -56,7 +56,7 @@ class SleepTrackingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSleepTrackingBinding.inflate(inflater, container, false)
+        binding = SleepTrackingBinding.inflate(inflater, container, false)
 
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")

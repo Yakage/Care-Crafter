@@ -8,18 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.databinding.FragmentBmiResultBinding
+import com.carecrafter.databinding.BmiResultBinding
 
 class BmiResult : Fragment() {
 
-    private lateinit var binding: FragmentBmiResultBinding
+    private lateinit var binding: BmiResultBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBmiResultBinding.inflate(inflater, container, false)
-        return inflater.inflate(R.layout.fragment_bmi_result, container, false)
+        binding = BmiResultBinding.inflate(inflater, container, false)
+        return inflater.inflate(R.layout.bmi_result, container, false)
 
         binding.ivBack.setOnClickListener {
             val intent = Intent(requireActivity(), BodyActivity::class.java)

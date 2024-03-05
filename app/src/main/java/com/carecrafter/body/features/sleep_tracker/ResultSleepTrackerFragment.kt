@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
-import com.carecrafter.databinding.FragmentResultSleepTrackerBinding
+import com.carecrafter.databinding.SleepTrackerResultBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.SleepScoreLogs
 import com.carecrafter.retrofit_database.ApiClient
@@ -21,7 +21,7 @@ import retrofit2.Response
 
 
 class ResultSleepTrackerFragment : Fragment() {
-    private lateinit var binding: FragmentResultSleepTrackerBinding
+    private lateinit var binding: SleepTrackerResultBinding
     private lateinit var sharedPreferences: SharedPreferences
     private var progress = 0
 
@@ -29,7 +29,7 @@ class ResultSleepTrackerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentResultSleepTrackerBinding.inflate(inflater, container, false)
+        binding = SleepTrackerResultBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         authToken?.let { getAlarmInfo(it) }

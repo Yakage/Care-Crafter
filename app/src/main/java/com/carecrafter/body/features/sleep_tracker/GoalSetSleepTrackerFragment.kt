@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.databinding.FragmentGoalSetSleepTrackerBinding
+import com.carecrafter.databinding.SleepTrackerSetGoalBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
@@ -24,13 +24,13 @@ import java.io.StringReader
 
 class GoalSetSleepTrackerFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var binding: FragmentGoalSetSleepTrackerBinding
+    private lateinit var binding: SleepTrackerSetGoalBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGoalSetSleepTrackerBinding.inflate(inflater, container, false)
+        binding = SleepTrackerSetGoalBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         binding.nextBtn.setOnClickListener {

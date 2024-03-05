@@ -47,7 +47,7 @@
         android:id="@+id/goalSetSleepTrackerFragment"
         android:name="com.carecrafter.body.features.sleep_tracker.GoalSetSleepTrackerFragment"
         android:label="fragment_goal_set_sleep_tracker"
-        tools:layout="@layout/fragment_goal_set_sleep_tracker" >
+        tools:layout="@layout/sleep_tracker_set_goal" >
         <action
             android:id="@+id/action_goalSetSleepTrackerFragment_to_sleepTrackingFragment"
             app:destination="@id/sleepTrackingFragment" />
@@ -56,7 +56,7 @@
         android:id="@+id/resultSleepTrackerFragment"
         android:name="com.carecrafter.body.features.sleep_tracker.ResultSleepTrackerFragment"
         android:label="fragment_result_sleep_tracker"
-        tools:layout="@layout/fragment_result_sleep_tracker" >
+        tools:layout="@layout/sleep_tracker_result" >
         <action
             android:id="@+id/action_resultSleepTrackerFragment_to_homeSleepTrackerFragment"
             app:destination="@id/homeSleepTrackerFragment" />
@@ -65,7 +65,7 @@
         android:id="@+id/sleepTrackingFragment"
         android:name="com.carecrafter.body.features.sleep_tracker.SleepTrackingFragment"
         android:label="fragment_sleep_tracking"
-        tools:layout="@layout/fragment_sleep_tracking" >
+        tools:layout="@layout/sleep_tracking" >
         <action
             android:id="@+id/action_sleepTrackingFragment_to_resultSleepTrackerFragment"
             app:destination="@id/resultSleepTrackerFragment" />

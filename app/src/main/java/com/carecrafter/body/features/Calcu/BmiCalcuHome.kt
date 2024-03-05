@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.databinding.FragmentBmiCalcuHomeBinding
+import com.carecrafter.databinding.BmiHomeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.User
 import com.carecrafter.retrofit_database.ApiClient
@@ -27,7 +27,7 @@ import kotlin.math.pow
 
 class BmiCalcuHome : Fragment() {
 
-    private lateinit var binding: FragmentBmiCalcuHomeBinding
+    private lateinit var binding: BmiHomeBinding
     private lateinit var sharedPreferences: SharedPreferences
 
 
@@ -35,7 +35,7 @@ class BmiCalcuHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBmiCalcuHomeBinding.inflate(inflater, container, false)
+        binding = BmiHomeBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         authToken.toString().let { getUserInfo(it) }
