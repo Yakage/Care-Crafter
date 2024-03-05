@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
@@ -78,10 +77,6 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
             resetStepCount()
         }
 
-        binding.btStatistics.setOnClickListener {
-            findNavController().navigate(R.id.action_homeStepTrackerFragment_to_statisticStepTrackerFragment)
-        }
-
         // Add click listener to the "Set Goal" button
         binding.setgoal.setOnClickListener {
             if (binding.etGoal.text.toString().isEmpty()){
@@ -90,6 +85,10 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
             } else {
                 setGoal()
             }
+        }
+
+        binding.btStatistics.setOnClickListener {
+            findNavController().navigate(HomeStepTrackerFragmentDirections.actionHomeStepTrackerFragmentToStatisticStepTrackerFragment())
         }
     }
 
@@ -188,17 +187,17 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
 
         // Call your API to save steps to your online database here
         // Example: YourApiService.saveStepToDatabase(steps)
-        createStepHistoryData(authToken, "$steps / $goal")
-        createStepSata(authToken,steps.toString())
+        createStepHistoryData(authToken, "$goal", "$steps")
+
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // We do not have to write anything in this function for this app
     }
 
-    private fun createStepHistoryData(authToken: String, step_history: String){
+    private fun createStepHistoryData(authToken: String, daily_goal: String, current_steps: String){
         val createStepHistoryDataJson =
-            "{\"authToken\":\"$authToken\",\"step_history\":\"$step_history\"}"
+            "{\"authToken\":\"$authToken\",\"daily_goal\":\"$daily_goal\",\"current_steps\":\"$current_steps\"}"
 
         //correct malformed data
         try {
@@ -208,60 +207,8 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
             reader.close()
             ApiClient.instance.createStepHistory(
                 "Bearer $authToken",
-                step_history
-            )
-                .enqueue(object : Callback<DefaultResponse> {
-                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                            .show()
-                    }
-
-                    override fun onResponse(
-                        call: Call<DefaultResponse>,
-                        response: Response<DefaultResponse>
-                    ) {
-                        if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        } else {
-                            val errorMessage: String = try {
-                                response.errorBody()?.string()
-                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
-                            } catch (e: Exception) {
-                                "Failed to get a valid response. Response code: ${response.code()}"
-                            }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-                            Log.e("API_RESPONSE", errorMessage)
-                        }
-                    }
-                })
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
-            e.printStackTrace()
-        }
-    }
-    private fun createStepSata(authToken: String, steps: String){
-        val createStepDataJson =
-            "{\"authToken\":\"$authToken\",\"steps\":\"$steps\"}"
-
-        //correct malformed data
-        try {
-            val reader = JsonReader(StringReader(createStepDataJson))
-            reader.isLenient = true
-            reader.beginObject()
-            reader.close()
-            ApiClient.instance.createStep(
-                "Bearer $authToken",
-                steps
+                daily_goal,
+                current_steps
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

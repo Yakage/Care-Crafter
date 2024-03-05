@@ -6,6 +6,7 @@ import com.carecrafter.models.StepsApi
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.models.SleepScoreLogs
 import com.carecrafter.models.SleepsApi
+import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepsDailyStatsApi
 import com.carecrafter.models.StepsMonthlyStatsApi
 import com.carecrafter.models.StepsWeeklyStatsApi
@@ -87,12 +88,17 @@ interface CareCrafterInterfaces {
     @GET("getScore")
     fun getScore(@Header("Authorization") authToken: String): Call<SleepScoreLogs>
 
+    @Headers("Accept: application/json")
+    @GET("getSleepTime")
+    fun getSleepTime(@Header("Authorization") authToken: String): Call<SleepsApi>
+
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createSleep")
     fun createSleep(
         @Header("Authorization") authToken: String,
-        @Field("steps") results:String,
+        @Field("score") score:String,
+        @Field("sleeps") sleeps:Float,
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
@@ -121,12 +127,16 @@ interface CareCrafterInterfaces {
     fun getBMI(@Header("Authorization") authToken: String): Call<BMI>
 
     //For Step Tracker
+    @Headers("Accept: application/json")
+    @GET("getStepHistory")
+    fun getStepHistory(@Header("Authorization") authToken: String): Call<StepHistory>
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createStepHistory")
     fun createStepHistory(
         @Header("Authorization") authToken: String,
-        @Field("step_history") results:String,
+        @Field("daily_goal") dailyGoal:String,
+        @Field("current_steps") currentSteps:String,
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
@@ -136,6 +146,7 @@ interface CareCrafterInterfaces {
         @Header("Authorization") authToken: String,
         @Field("steps") results:String,
     ):retrofit2.Call<DefaultResponse>
+
 
     @Headers("Accept: application/json")
     @GET("showDailyStep")
