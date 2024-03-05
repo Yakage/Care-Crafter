@@ -23,6 +23,7 @@ import retrofit2.Response
 class ResultSleepTrackerFragment : Fragment() {
     private lateinit var binding: FragmentResultSleepTrackerBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private var progress = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,12 +37,40 @@ class ResultSleepTrackerFragment : Fragment() {
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_resultSleepTrackerFragment_to_homeSleepTrackerFragment)
         }
-//        val input = binding.tvTimeGoal.text.toString().toInt()
-//        val scoreDivide = (input * 60) * 60
-//        val rate = ( / scoreDivide) * 100
-//        val hours = timerSeconds / 3600
-//        val minutes = (timerSeconds % 3600) / 60
-//        val seconds = timerSeconds % 60
+
+        val seconds = binding.tvTimerSeconds.text.toString().toInt()
+        val input = binding.tvTimeGoal.text.toString().toInt()
+        val scoreDivide = (input * 60) * 60
+        val minute = seconds / 60
+        val hour = minute / 60
+        val score = (seconds / scoreDivide)*100
+
+        binding.tvTotalTime.text = "$hour.$minute.$seconds\n Total Sleep Time"
+
+        binding.progressBar.progress = score
+
+        if (score == 100) {
+            binding.tvComplete.visibility = View.VISIBLE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 75..99) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.VISIBLE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 50..74) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.VISIBLE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 1..49) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.VISIBLE
+        }
+
         return binding.root
     }
     private fun getAlarmInfo(authToken: String) {
@@ -99,5 +128,8 @@ class ResultSleepTrackerFragment : Fragment() {
         if (scoreData != null) {
             binding.tvTimerSeconds.text = scoreData.total_time
         }
+    }
+    private fun updateProgressBar() {
+        binding.progressBar.progress = progress
     }
 }
