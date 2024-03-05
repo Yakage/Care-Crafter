@@ -11,32 +11,8 @@
         android:label="sleep_tracker_home"
         tools:layout="@layout/sleep_tracker_home" >
         <action
-            android:id="@+id/action_homeSleepTrackerFragment_to_statisticSleepTrackerFragment"
-            app:destination="@id/statisticSleepTrackerFragment" />
-        <action
-            android:id="@+id/action_homeSleepTrackerFragment_to_settingsSleepTrackerFragment"
-            app:destination="@id/settingsSleepTrackerFragment" />
-        <action
             android:id="@+id/action_homeSleepTrackerFragment_to_goalSetSleepTrackerFragment"
             app:destination="@id/goalSetSleepTrackerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingsSleepTrackerFragment"
-        android:name="com.carecrafter.body.features.sleep_tracker.SettingsSleepTrackerFragment"
-        android:label="sleep_tracker_setting"
-        tools:layout="@layout/sleep_tracker_setting" >
-        <action
-            android:id="@+id/action_settingsSleepTrackerFragment_to_homeSleepTrackerFragment"
-            app:destination="@id/homeSleepTrackerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/statisticSleepTrackerFragment"
-        android:name="com.carecrafter.body.features.sleep_tracker.StatisticSleepTrackerFragment"
-        android:label="sleep_tracker_statistics"
-        tools:layout="@layout/sleep_tracker_statistics" >
-        <action
-            android:id="@+id/action_statisticSleepTrackerFragment_to_homeSleepTrackerFragment"
-            app:destination="@id/homeSleepTrackerFragment" />
     </fragment>
     <activity
         android:id="@+id/sleepTrackerActivity"
