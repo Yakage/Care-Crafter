@@ -1,6 +1,8 @@
 package com.carecrafter.body.features.water_intake
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +43,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
         middleDrinkButton = findViewById(R.id.button_middle_drink)
         resetButton = findViewById(R.id.button_reset)
         intervalSpinner = findViewById(R.id.interval_spinner)
-        saveHistoryButton = findViewById(R.id.button_save_history)
+//        saveHistoryButton = findViewById(R.id.button_save_history)
         dailyGoalIndicatorTextView = findViewById(R.id.text_daily_goal_indicator)
         selectNotificationIntervalButton = findViewById(R.id.button_select_notification_interval)
         notificationIntervalLayout = findViewById(R.id.notification_interval_layout)
@@ -68,6 +70,19 @@ class WaterIntakeBActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        goalEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrEmpty()) {
+                    goalAmount = s.toString().toInt()
+                    updateProgress()
+                }
+            }
+        })
 
         // Populate spinner with cup sizes and labels
         val cupSizesWithLabels = arrayOf("100 ml - Small cup", "200 ml - Medium cup", "300 ml - Large cup")
