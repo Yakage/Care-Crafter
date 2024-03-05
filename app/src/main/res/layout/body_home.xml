@@ -92,6 +92,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
+                        android:id="@+id/stepFT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_white"
@@ -99,7 +100,8 @@
                         android:layout_marginBottom="0dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -148,7 +150,6 @@
                                 android:layout_height="wrap_content"
                                 android:text="Goal: 10k"
                                 android:layout_weight="1"
-                                android:drawableRight="@drawable/dot"
                                 android:textColor="@color/grey"
                                 android:layout_marginLeft="10dp"/>
 
@@ -168,6 +169,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/bmiFT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_white"
@@ -175,7 +177,8 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -209,6 +212,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/waterFT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -216,7 +220,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/background_white"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -252,14 +257,15 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/sleepFT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/background_white"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="match_parent"
