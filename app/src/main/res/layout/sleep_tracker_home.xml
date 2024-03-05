@@ -123,6 +123,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_total_sleep"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="20.1hrs"
@@ -139,6 +140,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_total_sleep_inBed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="20.1hrs"
@@ -232,13 +234,6 @@
                 android:text="20.1hrs"
                 android:textSize="15sp" />
 
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:max="100"
-                android:progress="90"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -264,10 +259,12 @@
 
         <Button
             android:id="@+id/setGoalBtn"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Get Started Trackin"
-            android:layout_marginTop="20dp"/>
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

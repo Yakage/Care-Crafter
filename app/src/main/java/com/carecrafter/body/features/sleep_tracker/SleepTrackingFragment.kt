@@ -71,13 +71,12 @@ class SleepTrackingFragment : Fragment() {
             resetTimer()
         }
         binding.endBtn.setOnClickListener {
-            //calculator()
+            calculator()
             //calculator(authToken.toString())
             findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
         }
+
         binding.enddBtn.setOnClickListener {
-            //calculator()
-            //calculator(authToken.toString())
             findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
         }
 

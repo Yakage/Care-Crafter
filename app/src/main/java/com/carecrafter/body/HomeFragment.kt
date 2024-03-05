@@ -1,16 +1,10 @@
 package com.carecrafter.body
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.carecrafter.R
-import com.carecrafter.body.features.SleepTrackerActivity
-import com.carecrafter.body.features.StepTrackerActivity
-import com.carecrafter.body.features.WaterIntakeActivity
-import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
+import androidx.fragment.app.Fragment
 import com.carecrafter.databinding.BodyHomeBinding
 
 class HomeFragment : Fragment() {
@@ -22,18 +16,18 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
-        binding.sleepFT.setOnClickListener {
-            val intent = Intent(activity, SleepTrackerActivity::class.java)
-            startActivity(intent)
-        }
-        binding.stepFT.setOnClickListener {
-            val intent = Intent(activity, StepTrackerActivity::class.java)
-            startActivity(intent)
-        }
-        binding.waterFT.setOnClickListener {
-            val intent = Intent(activity, WaterIntakeBActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.sleepFT.setOnClickListener {
+//            val intent = Intent(activity, SleepTrackerActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.stepFT.setOnClickListener {
+//            val intent = Intent(activity, StepTrackerActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.waterFT.setOnClickListener {
+//            val intent = Intent(activity, WaterIntakeBActivity::class.java)
+//            startActivity(intent)
+//        }
 
         return binding.root
     }
