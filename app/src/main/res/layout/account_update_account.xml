@@ -1,43 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".body.profile.UpdateAccount"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:fillViewport="true"
     android:background="@color/white"
-    android:gravity="center">
+    android:scrollbars="none"
+    android:padding="16dp"
+    tools:context=".body.profile.UpdateAccount">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back"
-            />
-
-        <TextView
-            android:id="@+id/tv_update_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Update Account"
-            android:textSize="25sp"
-            android:textColor="@color/introButtonColor"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/tv_update_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Update Account"
+                android:textSize="25sp"
+                android:textColor="@color/main" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/boy"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circle_background"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp" />
+
+            <Button
+                android:id="@+id/changeProfilePicButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Profile Pic"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/main" />
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_full_name"
@@ -126,10 +153,11 @@
             android:text="Update"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:background="@color/introButtonColor"
+            android:background="@color/main"
             android:textSize="20sp"
+            android:layout_marginBottom="70dp"
             android:layout_marginTop="25dp" />
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

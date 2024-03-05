@@ -31,8 +31,23 @@
         android:gravity="center">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/loginvec"
+                android:layout_marginBottom="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="420dp"
+            android:layout_height="320dp"
             android:orientation="vertical"
             android:background="@drawable/border_black"
             android:padding="20dp"
