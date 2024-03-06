@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.body.features.BmiCalcuActivity
 import com.carecrafter.body.features.DietSuggestionsActivity
 import com.carecrafter.body.features.ExerciseSuggestionsActivity
@@ -51,8 +52,7 @@ class FeaturesFragment : Fragment() {
         }
         binding.cvBmiCalculator.setOnClickListener{
             // Open the FeatureActivity
-            val intent = Intent(activity, BmiCalcuActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(FeaturesFragmentDirections.actionFeaturesFragmentToBmiCalcuHome2())
         }
 
 //        binding.cvExerciseSuggestion.setOnClickListener {

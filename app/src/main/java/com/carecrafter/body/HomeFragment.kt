@@ -21,6 +21,7 @@ import com.carecrafter.body.features.StepTrackerActivity
 import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyHomeBinding
 import com.carecrafter.models.Alarm
+import com.carecrafter.models.BMI
 import com.carecrafter.models.SleepsApi
 import com.carecrafter.models.StepHistory
 import com.carecrafter.models.User
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
         authToken.toString().let { getUserInfo(it) }
         authToken?.let { getSleepTime(it) }
         authToken?.let { getStepHistory(it) }
+        authToken?.let { getBMI(it) }
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
         binding.sleepFT.setOnClickListener {
@@ -148,16 +150,45 @@ class HomeFragment : Fragment() {
     }
 
     fun updateStep(stepData: StepHistory){
+        val blue = ContextCompat.getColor(requireContext(), R.color.blue)
+        val currentSteps = stepData.current_steps ?: "0" // Safe access to current_steps
+        val dailyGoal = stepData.daily_goal ?: "0"
         if (stepData != null) {
-            val blue = ContextCompat.getColor(requireContext(), R.color.blue)
             binding.tvStepGoal.text = "Goal: " + stepData.current_steps + " / " + stepData.daily_goal
             binding.circularProgressBar.apply {
-                progressMax = stepData.daily_goal.toFloat()
-                setProgressWithAnimation(stepData.current_steps.toFloat(), 1000)
+                progressMax = dailyGoal.toFloat()
+                setProgressWithAnimation(currentSteps.toFloat(), 1000)
                 progressBarWidth = 5f
                 backgroundProgressBarWidth = 5f
                 progressBarColor = blue
             }
         }
+    }
+
+    private fun getBMI(authToken: String) {
+        ApiClient.instance.getBMI("Bearer $authToken").enqueue(object : Callback<BMI> {
+            override fun onResponse(call: Call<BMI>, response: Response<BMI>) {
+                if (response.isSuccessful) {
+                    val bmiData = response.body()
+                    if (bmiData != null) {
+                        updateBMI(bmiData)
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<BMI>, t: Throwable) {
+                Log.e("SleepTracker", "Failed to get user info", t)
+                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateBMI(bmiData: BMI){
+        binding.tvBmi.text = bmiData.bmi
     }
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.BmiHomeBinding
@@ -44,20 +45,6 @@ class BmiCalcuHome : Fragment() {
             calculatedBMI(authToken.toString())
         }
 
-        binding.maleIcon.setOnClickListener{
-            val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
-            binding.femaleIcon.imageTintList = (colorStateList)
-            binding.maleIcon.setImageTintList(null);
-
-        }
-
-        binding.femaleIcon.setOnClickListener{
-            val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
-            binding.maleIcon.imageTintList = (colorStateList)
-            binding.femaleIcon.setImageTintList(null);
-            var gender = "male"
-        }
-
         binding.ivBack.setOnClickListener {
             val intent = Intent(requireActivity(), BodyActivity::class.java)
             startActivity(intent)
@@ -81,9 +68,9 @@ class BmiCalcuHome : Fragment() {
                 bmi < 30 -> "Over Weight"
                 else -> "Obese"
             }
-            val results = "BMI: $bmiResult\nCategory: $bmiCategory"
-            binding.tvCalcuResult.text = results
-            createBMIData(authToken,results)
+            binding.tvCalcuResult.text = "$bmiResult \n $bmiCategory"
+            createBMIData(authToken,bmiResult, bmiCategory)
+            findNavController().navigate(BmiCalcuHomeDirections.actionBmiCalcuHome2ToBmiResult())
 
         } else {
             binding.tvCalcuResult.text = "Invalid Input"
@@ -116,12 +103,22 @@ class BmiCalcuHome : Fragment() {
         if (userData != null) {
             binding.etWeightCalcu.text = Editable.Factory.getInstance().newEditable(userData.weight)
             binding.etHeightCalcu.text = Editable.Factory.getInstance().newEditable(userData.height)
+            if (userData.gender == "male"){
+                val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
+                binding.femaleIcon.imageTintList = (colorStateList)
+                binding.maleIcon.setImageTintList(null);
+            }
+            else if (userData.gender == "female"){
+                val colorStateList = ContextCompat.getColorStateList(requireContext(),  R.color.grey)
+                binding.maleIcon.imageTintList = (colorStateList)
+                binding.femaleIcon.setImageTintList(null);
+            }
         }
     }
 
-    private fun createBMIData(authToken: String, results: String){
+    private fun createBMIData(authToken: String, bmi: String, category: String){
         val createBMIDataJson =
-            "{\"authToken\":\"$authToken\",\"results\":\"$results\"}"
+            "{\"authToken\":\"$authToken\",\"bmi\":\"$bmi\",\"category\":\"$category\"}"
 
         //correct malformed data
         try {
@@ -131,7 +128,8 @@ class BmiCalcuHome : Fragment() {
             reader.close()
             ApiClient.instance.createBMI(
                 "Bearer $authToken",
-                results,
+                bmi,
+                category
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
@@ -144,11 +142,6 @@ class BmiCalcuHome : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()

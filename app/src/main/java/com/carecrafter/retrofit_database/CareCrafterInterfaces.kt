@@ -119,7 +119,8 @@ interface CareCrafterInterfaces {
     @POST("createBMI")
     fun createBMI(
         @Header("Authorization") authToken: String,
-        @Field("results") results:String,
+        @Field("bmi") bmi:String,
+        @Field("category") category:String,
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")

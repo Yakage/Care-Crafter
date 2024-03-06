@@ -24,13 +24,7 @@
             android:name=".body.features.water_intake.WaterIntakeBActivity"
             android:exported="false" />
         <activity
-            android:name=".body.features.WaterIntakeAltActivity"
-            android:exported="false" />
-        <activity
             android:name=".body.features.BmiCalcuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".body.features.step_tracker.StepTrackerV2"
             android:exported="false" />
         <activity
             android:name=".userInputs.UserInputs"
@@ -51,34 +45,10 @@
             android:name=".body.features.SleepTrackerActivity"
             android:exported="false" />
         <activity
-            android:name=".body.features.water_intake.SleepRimenderActivity"
-            android:exported="false" />
-        <activity
             android:name=".body.features.WaterIntakeActivity"
             android:exported="false" />
         <activity
-            android:name=".body.features.FeaturesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".body.DashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".body.BodyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".body.Features"
-            android:exported="false" />
-        <activity
-            android:name=".body.Dashboard"
-            android:exported="false" />
-        <activity
-            android:name=".body.Profile"
-            android:exported="false" />
-        <activity
-            android:name=".body.Home"
-            android:exported="false" />
-        <activity
-            android:name=".introduction.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".registration.SignUp"
@@ -96,9 +66,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
     </application>
 
 </manifest>

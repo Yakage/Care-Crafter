@@ -54,6 +54,12 @@
         <action
             android:id="@+id/action_featuresFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_featuresFragment_to_bmiCalcuHome2"
+            app:destination="@id/bmiCalcuHome2" />
+        <action
+            android:id="@+id/action_featuresFragment_self"
+            app:destination="@id/featuresFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -101,4 +107,22 @@
         android:id="@+id/leaderboardsFragment"
         android:name="com.carecrafter.body.LeaderboardsFragment"
         android:label="LeaderboardsFragment" />
+    <fragment
+        android:id="@+id/bmiCalcuHome2"
+        android:name="com.carecrafter.body.features.Calcu.BmiCalcuHome"
+        android:label="bmi_home"
+        tools:layout="@layout/bmi_home" >
+        <action
+            android:id="@+id/action_bmiCalcuHome2_to_bmiResult"
+            app:destination="@id/bmiResult" />
+    </fragment>
+    <fragment
+        android:id="@+id/bmiResult"
+        android:name="com.carecrafter.body.features.Calcu.BmiResult"
+        android:label="bmi_result"
+        tools:layout="@layout/bmi_result" >
+        <action
+            android:id="@+id/action_bmiResult_to_bmiCalcuHome2"
+            app:destination="@id/bmiCalcuHome2" />
+    </fragment>
 </navigation>
