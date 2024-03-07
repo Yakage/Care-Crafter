@@ -35,14 +35,12 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.setGoalBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_goalSetSleepTrackerFragment)
         }
-
-        val totalSleep = binding.tvTotalSleep.text.toString().toInt()
-        val score = binding.tvScore.text.toString().toInt()
-
-        binding.scorePercent.text = "$score%"
-
-        binding.qualityBar.progress = (progress + score)
-        updateProgressBar()
+//        val totalSleep = binding.tvTotalSleep.text.toString().toInt()
+//        val score = binding.tvScore.text.toString().toInt()
+//
+//        binding.scorePercent.text = "$score%"
+//
+//        binding.qualityBar.progress = (progress + score)
 
         return binding.root
     }
@@ -71,8 +69,5 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
-    }
-    private fun updateProgressBar() {
-        binding.qualityBar.progress = progress
     }
 }

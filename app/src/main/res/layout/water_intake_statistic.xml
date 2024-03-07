@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".body.features.water_intake.StatisticFragment">
+    tools:context=".body.features.water_intake.StatisticFragment"
+    android:background="@drawable/border_blue">
 
     <ImageView
         android:id="@+id/iv_back"
