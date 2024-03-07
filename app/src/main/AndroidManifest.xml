@@ -9,9 +9,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name="CareCrafter"
+        android:name=".CareCrafter"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CareCrafter"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".body.features.water_intake.StatisticsWaterIntakeActivity"
+            android:exported="false" />
         <activity
             android:name=".body.features.water_intake.WaterIntakeBActivity"
             android:exported="false" />
@@ -66,7 +69,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

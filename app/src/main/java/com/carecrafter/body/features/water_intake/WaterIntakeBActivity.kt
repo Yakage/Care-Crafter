@@ -1,6 +1,7 @@
 package com.carecrafter.body.features.water_intake
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -14,6 +15,8 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.carecrafter.R
+import com.carecrafter.body.features.SleepTrackerActivity
+import com.carecrafter.databinding.ActivityStatisticsWaterIntakeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
@@ -32,7 +35,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
     private lateinit var middleDrinkButton: ImageButton
     private lateinit var resetButton: Button
     private lateinit var intervalSpinner: Spinner
-    private lateinit var saveHistoryButton: Button
+    private lateinit var statisticButton: Button
     private lateinit var dailyGoalIndicatorTextView: TextView
     private lateinit var cupSizeSpinner: Spinner
     private lateinit var selectNotificationIntervalButton: Button
@@ -48,11 +51,11 @@ class WaterIntakeBActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_water_intake_bactivity)
 
+        statisticButton = findViewById(R.id.bt_statistics)
         goalEditText = findViewById(R.id.edit_text_goal)
         cupSizeSpinner = findViewById(R.id.spinner_cup_size)
         progressIndicator = findViewById(R.id.progress_indicator)
         totalWaterDrankTextView = findViewById(R.id.text_total_water_drank)
-        historyTextView = findViewById(R.id.text_history)
         middleDrinkButton = findViewById(R.id.button_middle_drink)
         resetButton = findViewById(R.id.button_reset)
         intervalSpinner = findViewById(R.id.interval_spinner)
@@ -72,7 +75,10 @@ class WaterIntakeBActivity : AppCompatActivity() {
         middleDrinkButton.setOnClickListener { indicateDrink(authToken.toString()) }
 
         resetButton.setOnClickListener { resetProgress(authToken.toString()) }
-
+        statisticButton.setOnClickListener {
+            val intent = Intent(this, StatisticsWaterIntakeActivity::class.java)
+            startActivity(intent)
+        }
         val intervals = arrayOf("30 minutes", "1 hour", "2 hours", "3 hours")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, intervals)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -122,6 +128,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
 
         val percentText = String.format(Locale.getDefault(), "%.1f%%", progress)
         progressIndicator.contentDescription = percentText
+        createWater(authToken, totalWaterDrank.toString())
 
     }
 
@@ -161,8 +168,6 @@ class WaterIntakeBActivity : AppCompatActivity() {
         for (drink in drinkHistory) {
             historyText += " - ${drink.first} ml at ${drink.second}\n"
         }
-        historyTextView.text = historyText
-
         createWaterHistoryData(authToken, goalAmount.toString(), totalWaterDrank.toString(), historyText)
     }
 

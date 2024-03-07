@@ -1,24 +1,24 @@
 package com.carecrafter.body.features.water_intake
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragmentDirections
-import com.carecrafter.databinding.StepTrackerStatisticsBinding
+import com.carecrafter.databinding.ActivityStatisticsWaterIntakeBinding
 import com.carecrafter.databinding.WaterIntakeStatisticBinding
-import com.carecrafter.models.StepsDailyStatsApi
-import com.carecrafter.models.StepsMonthlyStatsApi
-import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.models.WaterDailyStatsApi
 import com.carecrafter.models.WaterMonthlyStatsApi
 import com.carecrafter.models.WaterWeeklyStatsApi
@@ -33,26 +33,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StatisticFragment : Fragment() {
-    private lateinit var binding: WaterIntakeStatisticBinding
+class StatisticsWaterIntakeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityStatisticsWaterIntakeBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var barChart: BarChart
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = WaterIntakeStatisticBinding.inflate(inflater, container, false)
-        sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityStatisticsWaterIntakeBinding.inflate(layoutInflater)
+        sharedPreferences = this.getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         setupViews(authToken.toString())
 
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
+            val intent = Intent(this, WaterIntakeBActivity::class.java)
+            startActivity(intent)
         }
-        return binding.root
+        setContentView(binding.root)
+
     }
+
     private fun setupViews(authToken: String) {
         barChart = binding.barChart
 
@@ -64,7 +63,7 @@ class StatisticFragment : Fragment() {
 
     private fun setupSpinner(authToken: String) {
         val spinnerItems = listOf("Daily", "Weekly", "Monthly")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTimeFrame.adapter = adapter
 
@@ -96,7 +95,7 @@ class StatisticFragment : Fragment() {
 
     private fun setData(entries: List<BarEntry>, labels: List<String>) {
         val dataSet = BarDataSet(entries, "Steps")
-        dataSet.color = requireContext().getColor(R.color.blue)
+        dataSet.color = this.getColor(R.color.blue)
 
         val data = BarData(dataSet)
         data.barWidth = 0.5f
@@ -107,7 +106,8 @@ class StatisticFragment : Fragment() {
     }
 
     private fun showDailyData(authToken: String) {
-        ApiClient.instance.getDailyWater("Bearer $authToken").enqueue(object : Callback<List<WaterDailyStatsApi>> {
+        ApiClient.instance.getDailyWater("Bearer $authToken").enqueue(object :
+            Callback<List<WaterDailyStatsApi>> {
             override fun onResponse(call: Call<List<WaterDailyStatsApi>>, response: Response<List<WaterDailyStatsApi>>) {
                 if (response.isSuccessful) {
                     val entries = mutableListOf<BarEntry>()
@@ -145,20 +145,21 @@ class StatisticFragment : Fragment() {
 
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get daily water data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get daily water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterDailyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get daily water data", t)
-                Toast.makeText(requireContext(), "Failed to get daily water data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get daily water data", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
 
     private fun showWeeklyData(authToken: String) {
-        ApiClient.instance.getWeeklyWater("Bearer $authToken").enqueue(object : Callback<List<WaterWeeklyStatsApi>> {
+        ApiClient.instance.getWeeklyWater("Bearer $authToken").enqueue(object :
+            Callback<List<WaterWeeklyStatsApi>> {
             override fun onResponse(call: Call<List<WaterWeeklyStatsApi>>, response: Response<List<WaterWeeklyStatsApi>>) {
                 if (response.isSuccessful) {
                     val entries = mutableListOf<BarEntry>()
@@ -171,19 +172,20 @@ class StatisticFragment : Fragment() {
                     }
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterWeeklyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get weekly water data", t)
-                Toast.makeText(requireContext(), "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun showMonthlyData(authToken: String) {
-        ApiClient.instance.getMonthlyWater("Bearer $authToken").enqueue(object : Callback<List<WaterMonthlyStatsApi>> {
+        ApiClient.instance.getMonthlyWater("Bearer $authToken").enqueue(object :
+            Callback<List<WaterMonthlyStatsApi>> {
             override fun onResponse(
                 call: Call<List<WaterMonthlyStatsApi>>,
                 response: Response<List<WaterMonthlyStatsApi>>
@@ -216,16 +218,14 @@ class StatisticFragment : Fragment() {
 
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterMonthlyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get monthly water data", t)
-                Toast.makeText(requireContext(), "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-
 }

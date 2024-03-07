@@ -13,7 +13,10 @@ import com.carecrafter.models.StepsMonthlyStatsApi
 import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.models.User
 import com.carecrafter.models.WaterApi
+import com.carecrafter.models.WaterDailyStatsApi
 import com.carecrafter.models.WaterHistory
+import com.carecrafter.models.WaterMonthlyStatsApi
+import com.carecrafter.models.WaterWeeklyStatsApi
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -154,7 +157,7 @@ interface CareCrafterInterfaces {
         @Field("steps") results:String,
     ):retrofit2.Call<DefaultResponse>
 
-
+    //For Leaderboards
     @Headers("Accept: application/json")
     @GET("showDailyStep")
     fun showDailySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
@@ -167,6 +170,7 @@ interface CareCrafterInterfaces {
     @GET("showMonthlyStep")
     fun showMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
 
+    //For Statistics
     @Headers("Accept: application/json")
     @GET("getDailyStep")
     fun getDailySteps(@Header("Authorization") authToken: String): Call<List<StepsDailyStatsApi>>
@@ -188,6 +192,7 @@ interface CareCrafterInterfaces {
         @Field("water") water:String,
     ):retrofit2.Call<DefaultResponse>
 
+    // For Leaderboards
     @Headers("Accept: application/json")
     @GET("showDailyWater")
     fun showDailyWater(@Header("Authorization") authToken: String): Call<List<WaterApi>>
@@ -212,4 +217,17 @@ interface CareCrafterInterfaces {
         @Field("current_water") currentWater:String,
         @Field("history") history:String,
     ):retrofit2.Call<DefaultResponse>
+
+    //For Statistics
+    @Headers("Accept: application/json")
+    @GET("getDailyWater")
+    fun getDailyWater(@Header("Authorization") authToken: String): Call<List<WaterDailyStatsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("getWeeklyWater")
+    fun getWeeklyWater(@Header("Authorization") authToken: String): Call<List<WaterWeeklyStatsApi>>
+
+    @Headers("Accept: application/json")
+    @GET("getMonthlyWater")
+    fun getMonthlyWater(@Header("Authorization") authToken: String): Call<List<WaterMonthlyStatsApi>>
 }
