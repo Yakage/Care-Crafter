@@ -15,11 +15,18 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.carecrafter.R
+import com.carecrafter.body.adapters.StepHistoryAdapter
+import com.carecrafter.body.adapters.WaterHistoryAdapter
 import com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragmentDirections
 import com.carecrafter.databinding.ActivityStatisticsWaterIntakeBinding
 import com.carecrafter.databinding.WaterIntakeStatisticBinding
+import com.carecrafter.models.StepHistory
+import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.models.WaterDailyStatsApi
+import com.carecrafter.models.WaterHistory
+import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.models.WaterMonthlyStatsApi
 import com.carecrafter.models.WaterWeeklyStatsApi
 import com.carecrafter.retrofit_database.ApiClient
@@ -33,10 +40,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class StatisticsWaterIntakeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStatisticsWaterIntakeBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var barChart: BarChart
+    private lateinit var waterHistoryAdapter: WaterHistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStatisticsWaterIntakeBinding.inflate(layoutInflater)
@@ -44,6 +53,10 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
         val authToken = sharedPreferences.getString("authToken", "")
         setupViews(authToken.toString())
 
+        waterHistoryAdapter = WaterHistoryAdapter(emptyList())
+        binding.recyclerView.layoutManager = LinearLayoutManager(this@StatisticsWaterIntakeActivity)
+        binding.recyclerView.adapter = waterHistoryAdapter
+        getWaterHistory(authToken.toString())
         binding.ivBack.setOnClickListener {
             val intent = Intent(this, WaterIntakeBActivity::class.java)
             startActivity(intent)
@@ -225,6 +238,32 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<WaterMonthlyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get monthly water data", t)
                 Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getWaterHistory(authToken: String) {
+        ApiClient.instance.getWaterHistory2("Bearer $authToken").enqueue(object : Callback<List<WaterHistoryApi>> {
+            override fun onResponse(call: Call<List<WaterHistoryApi>>, response: Response<List<WaterHistoryApi>>) {
+                if (response.isSuccessful) {
+                    val waterHistoryApi = response.body() ?: emptyList()
+                    val entries = waterHistoryApi.map { waterHistoryApi ->
+                        WaterHistory(
+                            created_at = waterHistoryApi.date,
+                            daily_goal = waterHistoryApi.daily_goal,
+                            current_water = waterHistoryApi.currentWater,
+                            history = waterHistoryApi.history,
+                        )
+                    }
+                    waterHistoryAdapter.updateData(entries)
+                } else {
+                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get water history", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<WaterHistoryApi>>, t: Throwable) {
+                Log.e("AccountFragment", "Failed to get step history", t)
+                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get water history", Toast.LENGTH_SHORT).show()
             }
         })
     }

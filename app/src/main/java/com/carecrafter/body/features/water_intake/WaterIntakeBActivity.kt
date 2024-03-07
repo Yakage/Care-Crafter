@@ -15,6 +15,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.carecrafter.R
+import com.carecrafter.body.BodyActivity
 import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.databinding.ActivityStatisticsWaterIntakeBinding
 import com.carecrafter.models.DefaultResponse
@@ -40,6 +41,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
     private lateinit var cupSizeSpinner: Spinner
     private lateinit var selectNotificationIntervalButton: Button
     private lateinit var notificationIntervalLayout: LinearLayout
+    private lateinit var backButton: ImageView
 
     private var totalWaterDrank: Int = 0
     private var goalAmount: Int = 1000
@@ -51,6 +53,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_water_intake_bactivity)
 
+        backButton = findViewById(R.id.backButton)
         statisticButton = findViewById(R.id.bt_statistics)
         goalEditText = findViewById(R.id.edit_text_goal)
         cupSizeSpinner = findViewById(R.id.spinner_cup_size)
@@ -73,7 +76,10 @@ class WaterIntakeBActivity : AppCompatActivity() {
         }
 
         middleDrinkButton.setOnClickListener { indicateDrink(authToken.toString()) }
-
+        backButton.setOnClickListener{
+            val intent = Intent(this, BodyActivity::class.java)
+            startActivity(intent)
+        }
         resetButton.setOnClickListener { resetProgress(authToken.toString()) }
         statisticButton.setOnClickListener {
             val intent = Intent(this, StatisticsWaterIntakeActivity::class.java)

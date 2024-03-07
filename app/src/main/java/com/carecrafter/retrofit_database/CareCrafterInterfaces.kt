@@ -4,9 +4,9 @@ import com.carecrafter.models.Alarm
 import com.carecrafter.models.BMI
 import com.carecrafter.models.StepsApi
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.SleepHistoryApi
 import com.carecrafter.models.SleepScoreLogs
 import com.carecrafter.models.SleepsApi
-import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.models.StepsDailyStatsApi
 import com.carecrafter.models.StepsMonthlyStatsApi
@@ -14,7 +14,7 @@ import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.models.User
 import com.carecrafter.models.WaterApi
 import com.carecrafter.models.WaterDailyStatsApi
-import com.carecrafter.models.WaterHistory
+import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.models.WaterMonthlyStatsApi
 import com.carecrafter.models.WaterWeeklyStatsApi
 import retrofit2.Call
@@ -96,6 +96,10 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @GET("getSleepTime")
     fun getSleepTime(@Header("Authorization") authToken: String): Call<SleepsApi>
+
+    @Headers("Accept: application/json")
+    @GET("getSleepHistory")
+    fun getSleepHistory(@Header("Authorization") authToken: String): Call<List<SleepHistoryApi>>
 
     @FormUrlEncoded
     @Headers("Accept: application/json")
@@ -207,7 +211,11 @@ interface CareCrafterInterfaces {
 
     @Headers("Accept: application/json")
     @GET("getWaterHistory")
-    fun getWaterHistory(@Header("Authorization") authToken: String): Call<WaterHistory>
+    fun getWaterHistory(@Header("Authorization") authToken: String): Call<WaterHistoryApi>
+
+    @Headers("Accept: application/json")
+    @GET("getWaterHistory2")
+    fun getWaterHistory2(@Header("Authorization") authToken: String): Call<List<WaterHistoryApi>>
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createWaterHistory")

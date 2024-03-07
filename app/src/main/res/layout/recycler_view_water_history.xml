@@ -18,11 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_sleep_logs"
+        android:id="@+id/tv_water_logs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Slept for 00:10:23 at 10:20pm"
+        android:text="10000 steps / 100000Goal:  "
         android:textSize="20sp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toEndOf="@id/tv_created_at"

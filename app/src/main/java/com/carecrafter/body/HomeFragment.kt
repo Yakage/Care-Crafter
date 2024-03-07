@@ -3,7 +3,6 @@ package com.carecrafter.body
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -20,13 +19,11 @@ import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.body.features.StepTrackerActivity
 import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyHomeBinding
-import com.carecrafter.models.Alarm
 import com.carecrafter.models.BMI
 import com.carecrafter.models.SleepsApi
-import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.models.User
-import com.carecrafter.models.WaterHistory
+import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,7 +63,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.btnVisitWebsite.setOnClickListener {
-            val url = "https://example.com" //put the fuckining website here
+            val url = "https://carecrafter-e36f7bd1d791.herokuapp.com/" //put the fuckining website here
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
@@ -114,12 +111,12 @@ class HomeFragment : Fragment() {
 
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to get sleep info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<SleepsApi>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get logs info", t)
-                Toast.makeText(requireContext(), "Failed to get logs info", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to get sleep info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -142,12 +139,12 @@ class HomeFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to get step info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<StepHistoryApi>, t: Throwable) {
-                Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                Log.e("SleepTracker", "Failed to get step info", t)
+                Toast.makeText(requireContext(), "Failed to get step info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -181,12 +178,12 @@ class HomeFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to get bmi info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<BMI>, t: Throwable) {
-                Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                Log.e("SleepTracker", "Failed to get bmi info", t)
+                Toast.makeText(requireContext(), "Failed to get bmi info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -196,8 +193,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun getWaterHistory(authToken: String) {
-        ApiClient.instance.getWaterHistory("Bearer $authToken").enqueue(object : Callback<WaterHistory> {
-            override fun onResponse(call: Call<WaterHistory>, response: Response<WaterHistory>) {
+        ApiClient.instance.getWaterHistory("Bearer $authToken").enqueue(object : Callback<WaterHistoryApi> {
+            override fun onResponse(call: Call<WaterHistoryApi>, response: Response<WaterHistoryApi>) {
                 if (response.isSuccessful) {
                     val waterData = response.body()
                     if (waterData != null) {
@@ -208,17 +205,17 @@ class HomeFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onFailure(call: Call<WaterHistory>, t: Throwable) {
+            override fun onFailure(call: Call<WaterHistoryApi>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    fun updateWater(waterData: WaterHistory){
+    fun updateWater(waterData: WaterHistoryApi){
         binding.tvWaterTotal.text = waterData.totalWater
     }
 }

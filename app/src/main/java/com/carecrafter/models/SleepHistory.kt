@@ -1,9 +1,10 @@
 package com.carecrafter.models
-
 import com.google.gson.annotations.SerializedName
 
-data class SleepsApi(
-    val name: String,
+data class SleepHistory(
     val score: String,
-    val totalSleeps: String
+    val sleeps: String,
+    val date: String,
 )
+
+
