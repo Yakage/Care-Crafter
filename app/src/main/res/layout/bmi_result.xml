@@ -118,6 +118,7 @@
                 android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/tv_category"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -127,7 +128,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Healthy BMI range: 18.5 kg/m2 - 25 kg/m2\nHealthy weight for the height: 47.4 kgs - 64.0kg\nPonderal Index 12.2kg/m3"

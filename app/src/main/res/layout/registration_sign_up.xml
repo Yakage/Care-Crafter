@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
-                    android:hint="Enter your birthday" />
+                    android:hint="Enter your birthday (YYYY/MM/DD)" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

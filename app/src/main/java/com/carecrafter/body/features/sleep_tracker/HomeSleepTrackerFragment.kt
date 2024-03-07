@@ -2,19 +2,16 @@ package com.carecrafter.body.features.sleep_tracker
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.databinding.SleepTrackerHomeBinding
-import com.carecrafter.models.SleepScoreLogs
 import com.carecrafter.models.SleepsApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
@@ -24,6 +21,7 @@ import retrofit2.Response
 class HomeSleepTrackerFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: SleepTrackerHomeBinding
+    private var progress = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +35,14 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.setGoalBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_goalSetSleepTrackerFragment)
         }
+
+        val totalSleep = binding.tvTotalSleep.text.toString().toInt()
+        val score = binding.tvScore.text.toString().toInt()
+
+        binding.scorePercent.text = "$score%"
+
+        binding.qualityBar.progress = (progress + score)
+        updateProgressBar()
 
         return binding.root
     }
@@ -65,5 +71,8 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
+    }
+    private fun updateProgressBar() {
+        binding.qualityBar.progress = progress
     }
 }
