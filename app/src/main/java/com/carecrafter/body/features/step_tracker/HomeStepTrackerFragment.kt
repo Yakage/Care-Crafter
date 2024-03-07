@@ -18,11 +18,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.StepHistory
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,7 +55,6 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         stepHistoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
-        binding.listViewStepHistory.adapter = stepHistoryAdapter
         resetSteps()
 
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -188,6 +190,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         // Call your API to save steps to your online database here
         // Example: YourApiService.saveStepToDatabase(steps)
         createStepHistoryData(authToken, "$goal", "$steps")
+        createStep(authToken, "$steps")
 
     }
 
@@ -249,4 +252,85 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
             e.printStackTrace()
         }
     }
+
+    private fun createStep(authToken: String, steps: String){
+        val createStepDataJson =
+            "{\"authToken\":\"$authToken\",\"steps\":\"$steps\"}"
+
+        //correct malformed data
+        try {
+            val reader = JsonReader(StringReader(createStepDataJson))
+            reader.isLenient = true
+            reader.beginObject()
+            reader.close()
+            ApiClient.instance.createStep(
+                "Bearer $authToken",
+                steps
+            )
+                .enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(
+                                requireContext(),
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string()
+                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(
+                                requireContext(),
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Log.e("API_RESPONSE", errorMessage)
+                        }
+                    }
+                })
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
+        }
+    }
+
+//    private fun getStepHistory(authToken: String) {
+//        ApiClient.instance.getStepHistory("Bearer $authToken").enqueue(object : Callback<StepHistory> {
+//            override fun onResponse(call: Call<StepHistory>, response: Response<StepHistory>) {
+//                if (response.isSuccessful) {
+//                    val stepData = response.body()
+//                    if (stepData != null) {
+//                        updateStep(stepData)
+//                    }
+//
+//                    val responseBody = response.body().toString()
+//                    Log.d("Response", responseBody)
+//                } else {
+//                    // Handle unsuccessful response
+//                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            override fun onFailure(call: Call<StepHistory>, t: Throwable) {
+//                Log.e("SleepTracker", "Failed to get user info", t)
+//                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//    }
+//
+//    fun updateStep(stepData: StepHistory){
+//        binding.tvStepGoal.text = "Goal: " + stepData.current_steps + " / " + stepData.daily_goal
+//    }
 }

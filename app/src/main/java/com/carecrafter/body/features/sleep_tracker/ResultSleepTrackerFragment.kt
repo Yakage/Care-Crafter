@@ -45,6 +45,44 @@ class ResultSleepTrackerFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun updateProgressBar() {
+        binding.progressBar.progress = progress
+    }
+
+    private fun testing(authToken: String){
+        val seconds = binding.tvTimerSeconds.text.toString().toInt()
+        val input = binding.tvTimeGoal.text.toString().toInt()
+        val scoreDivide = (input * 60) * 60
+        val minute = seconds / 60
+        val hour = minute / 60
+        val score = (seconds / scoreDivide)*100
+        binding.tvTotalTime.text = "$hour.$minute hrs"
+
+        binding.progressBar.progress = score
+        createSleep(authToken, score.toString(), seconds)
+        if (score == 100) {
+            binding.tvComplete.visibility = View.VISIBLE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 75..99) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.VISIBLE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 50..74) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.VISIBLE
+            binding.tvBarely.visibility = View.GONE
+        } else if (score in 0..49) {
+            binding.tvComplete.visibility = View.GONE
+            binding.tvAlmost.visibility = View.GONE
+            binding.tvHalf.visibility = View.GONE
+            binding.tvBarely.visibility = View.VISIBLE
+        }
+    }
     private fun getAlarmInfo(authToken: String) {
         ApiClient.instance.getAlarm("Bearer $authToken").enqueue(object : Callback<Alarm> {
             override fun onResponse(call: Call<Alarm>, response: Response<Alarm>) {
@@ -98,46 +136,7 @@ class ResultSleepTrackerFragment : Fragment() {
         binding.tvTimerSeconds.text = scoreData.total_time
     }
 
-    private fun updateProgressBar() {
-        binding.progressBar.progress = progress
-    }
-
-    private fun testing(authToken: String){
-        val seconds = binding.tvTimerSeconds.text.toString().toInt()
-        val input = binding.tvTimeGoal.text.toString().toInt()
-        val scoreDivide = (input * 60) * 60
-        val minute = seconds / 60
-        val hour = minute / 60
-        val score = (seconds / scoreDivide)*100
-        val sleeps = "$hour.$minute"
-        binding.tvTotalTime.text = "$hour.$minute hrs"
-
-        binding.progressBar.progress = score
-        createSleep(authToken,score.toString(), sleeps.toFloat())
-        if (score == 100) {
-            binding.tvComplete.visibility = View.VISIBLE
-            binding.tvAlmost.visibility = View.GONE
-            binding.tvHalf.visibility = View.GONE
-            binding.tvBarely.visibility = View.GONE
-        } else if (score in 75..99) {
-            binding.tvComplete.visibility = View.GONE
-            binding.tvAlmost.visibility = View.VISIBLE
-            binding.tvHalf.visibility = View.GONE
-            binding.tvBarely.visibility = View.GONE
-        } else if (score in 50..74) {
-            binding.tvComplete.visibility = View.GONE
-            binding.tvAlmost.visibility = View.GONE
-            binding.tvHalf.visibility = View.VISIBLE
-            binding.tvBarely.visibility = View.GONE
-        } else if (score in 0..49) {
-            binding.tvComplete.visibility = View.GONE
-            binding.tvAlmost.visibility = View.GONE
-            binding.tvHalf.visibility = View.GONE
-            binding.tvBarely.visibility = View.VISIBLE
-        }
-    }
-
-    private fun createSleep(authToken: String, score: String, sleeps: Float){
+    private fun createSleep(authToken: String, score: String, sleeps: Int){
         val createSleepDataJson =
             "{\"authToken\":\"$authToken\",\"score\":\"$score\",\"sleeps\":\"$sleeps\"}"
 

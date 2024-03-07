@@ -30,7 +30,7 @@ class LeaderboardAdapter(private var entries: List<LeaderboardForStepTracker>) :
         val entry = entries[position]
         holder.rank.text = (position + 1).toString()
         holder.name.text = entry.name
-        holder.steps.text = entry.steps
+        holder.steps.text = entry.steps + " Steps "
     }
 
     override fun getItemCount(): Int {

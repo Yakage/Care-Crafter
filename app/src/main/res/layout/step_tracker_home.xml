@@ -274,38 +274,16 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/border_black"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Step History"
-                    android:textColor="@color/main"
-                    android:textSize="20sp" />
-
-                <ListView
-                    android:id="@+id/listViewStepHistory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp" />
-
-            </LinearLayout>
-
             <Button
                 android:id="@+id/bt_statistics"
-                android:layout_width="match_parent"
+                android:layout_width="330dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="100dp"
                 android:text="Check Statistics"
-                android:layout_marginBottom="100dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 

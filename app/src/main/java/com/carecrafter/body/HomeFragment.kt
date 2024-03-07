@@ -24,7 +24,9 @@ import com.carecrafter.models.Alarm
 import com.carecrafter.models.BMI
 import com.carecrafter.models.SleepsApi
 import com.carecrafter.models.StepHistory
+import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.models.User
+import com.carecrafter.models.WaterHistory
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,6 +46,7 @@ class HomeFragment : Fragment() {
         authToken?.let { getSleepTime(it) }
         authToken?.let { getStepHistory(it) }
         authToken?.let { getBMI(it) }
+        authToken?.let { getWaterHistory(it) }
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
         binding.sleepFT.setOnClickListener {
@@ -127,8 +130,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun getStepHistory(authToken: String) {
-        ApiClient.instance.getStepHistory("Bearer $authToken").enqueue(object : Callback<StepHistory> {
-            override fun onResponse(call: Call<StepHistory>, response: Response<StepHistory>) {
+        ApiClient.instance.getStepHistory("Bearer $authToken").enqueue(object : Callback<StepHistoryApi> {
+            override fun onResponse(call: Call<StepHistoryApi>, response: Response<StepHistoryApi>) {
                 if (response.isSuccessful) {
                     val stepData = response.body()
                     if (stepData != null) {
@@ -142,14 +145,14 @@ class HomeFragment : Fragment() {
                     Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onFailure(call: Call<StepHistory>, t: Throwable) {
+            override fun onFailure(call: Call<StepHistoryApi>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get user info", t)
                 Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    fun updateStep(stepData: StepHistory){
+    fun updateStep(stepData: StepHistoryApi){
         val blue = ContextCompat.getColor(requireContext(), R.color.blue)
         val currentSteps = stepData.current_steps ?: "0" // Safe access to current_steps
         val dailyGoal = stepData.daily_goal ?: "0"
@@ -190,5 +193,32 @@ class HomeFragment : Fragment() {
 
     fun updateBMI(bmiData: BMI){
         binding.tvBmi.text = bmiData.bmi
+    }
+
+    private fun getWaterHistory(authToken: String) {
+        ApiClient.instance.getWaterHistory("Bearer $authToken").enqueue(object : Callback<WaterHistory> {
+            override fun onResponse(call: Call<WaterHistory>, response: Response<WaterHistory>) {
+                if (response.isSuccessful) {
+                    val waterData = response.body()
+                    if (waterData != null) {
+                        updateWater(waterData)
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<WaterHistory>, t: Throwable) {
+                Log.e("SleepTracker", "Failed to get user info", t)
+                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateWater(waterData: WaterHistory){
+        binding.tvWaterTotal.text = waterData.totalWater
     }
 }

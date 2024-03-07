@@ -1,14 +1,25 @@
 package com.carecrafter.body.features.water_intake
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.JsonReader
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.carecrafter.R
+import com.carecrafter.models.DefaultResponse
+import com.carecrafter.retrofit_database.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.StringReader
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,6 +42,8 @@ class WaterIntakeBActivity : AppCompatActivity() {
     private var goalAmount: Int = 1000
     private val drinkHistory = mutableListOf<Pair<Int, String>>()
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_water_intake_bactivity)
@@ -48,14 +61,17 @@ class WaterIntakeBActivity : AppCompatActivity() {
         selectNotificationIntervalButton = findViewById(R.id.button_select_notification_interval)
         notificationIntervalLayout = findViewById(R.id.notification_interval_layout)
 
+        sharedPreferences = this.getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = sharedPreferences.getString("authToken", "")
+
         val backButton: ImageView = findViewById(R.id.backButton)
         backButton.setOnClickListener {
             onBackPressed()
         }
 
-        middleDrinkButton.setOnClickListener { indicateDrink() }
+        middleDrinkButton.setOnClickListener { indicateDrink(authToken.toString()) }
 
-        resetButton.setOnClickListener { resetProgress() }
+        resetButton.setOnClickListener { resetProgress(authToken.toString()) }
 
         val intervals = arrayOf("30 minutes", "1 hour", "2 hours", "3 hours")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, intervals)
@@ -79,7 +95,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 if (!s.isNullOrEmpty()) {
                     goalAmount = s.toString().toInt()
-                    updateProgress()
+                    updateProgress(authToken.toString())
                 }
             }
         })
@@ -99,16 +115,17 @@ class WaterIntakeBActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateProgress() {
+    private fun updateProgress(authToken: String) {
         val progress = (totalWaterDrank.toFloat() / goalAmount.toFloat()) * 100
         progressIndicator.progress = progress.toInt()
         totalWaterDrankTextView.text = "Total Water Drank: $totalWaterDrank ml"
 
         val percentText = String.format(Locale.getDefault(), "%.1f%%", progress)
         progressIndicator.contentDescription = percentText
+
     }
 
-    private fun indicateDrink() {
+    private fun indicateDrink(authToken: String) {
         val selectedCupSizeString = cupSizeSpinner.selectedItem.toString()
         val cupSize = selectedCupSizeString.split(" ")[0].toIntOrNull()
 
@@ -117,8 +134,8 @@ class WaterIntakeBActivity : AppCompatActivity() {
             val timeString = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(currentTime)
             drinkHistory.add(Pair(cupSize, timeString))
             totalWaterDrank += cupSize
-            updateProgress()
-            updateHistory()
+            updateProgress(authToken)
+            updateHistory(authToken)
 
             if (totalWaterDrank > goalAmount) {
                 showExceededGoalSnackbar()
@@ -139,19 +156,131 @@ class WaterIntakeBActivity : AppCompatActivity() {
         snackbar.show()
     }
 
-    private fun updateHistory() {
+    private fun updateHistory(authToken: String) {
         var historyText = "Cup Size and Time:\n"
         for (drink in drinkHistory) {
             historyText += " - ${drink.first} ml at ${drink.second}\n"
         }
         historyTextView.text = historyText
+
+        createWaterHistoryData(authToken, goalAmount.toString(), totalWaterDrank.toString(), historyText)
     }
 
-    private fun resetProgress() {
+    private fun resetProgress(authToken: String) {
         totalWaterDrank = 0
         drinkHistory.clear()
-        updateProgress()
-        updateHistory()
+        updateProgress(authToken)
+        updateHistory(authToken)
         dailyGoalIndicatorTextView.visibility = View.GONE
+    }
+
+    private fun createWater(authToken: String, water: String){
+        val createWaterDataJson =
+            "{\"authToken\":\"$authToken\",\"water\":\"$water\"}"
+
+        //correct malformed data
+        try {
+            val reader = JsonReader(StringReader(createWaterDataJson))
+            reader.isLenient = true
+            reader.beginObject()
+            reader.close()
+            ApiClient.instance.createWater(
+                "Bearer $authToken",
+                water
+            )
+                .enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(this@WaterIntakeBActivity, t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(
+                                this@WaterIntakeBActivity,
+                                "Drank Water",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string()
+                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(
+                                this@WaterIntakeBActivity,
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Log.e("API_RESPONSE", errorMessage)
+                        }
+                    }
+                })
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
+        }
+    }
+
+    private fun createWaterHistoryData(authToken: String, daily_goal: String, current_water: String, history: String){
+        val createWaterHistoryDataJson =
+            "{\"authToken\":\"$authToken\",\"daily_goal\":\"$daily_goal\",\"current_water\":\"$current_water\",\"history\":\"$history\"}"
+
+        //correct malformed data
+        try {
+            val reader = JsonReader(StringReader(createWaterHistoryDataJson))
+            reader.isLenient = true
+            reader.beginObject()
+            reader.close()
+            ApiClient.instance.createWaterHistory(
+                "Bearer $authToken",
+                daily_goal,
+                current_water,
+                history
+            )
+                .enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(this@WaterIntakeBActivity, t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(
+                                this@WaterIntakeBActivity,
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string()
+                                    ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(
+                                this@WaterIntakeBActivity,
+                                errorMessage,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Log.e("API_RESPONSE", errorMessage)
+                        }
+                    }
+                })
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
+        }
     }
 }

@@ -13,9 +13,16 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
+import com.carecrafter.body.adapters.LeaderboardAdapter
+import com.carecrafter.body.adapters.StepHistoryAdapter
 import com.carecrafter.databinding.StepTrackerStatisticsBinding
+import com.carecrafter.models.LeaderboardForStepTracker
+import com.carecrafter.models.StepHistory
+import com.carecrafter.models.StepHistoryApi
+import com.carecrafter.models.StepsApi
 import com.carecrafter.models.StepsDailyStatsApi
 import com.carecrafter.models.StepsMonthlyStatsApi
 import com.carecrafter.models.StepsWeeklyStatsApi
@@ -35,6 +42,7 @@ class StatisticStepTrackerFragment : Fragment() {
     private lateinit var binding: StepTrackerStatisticsBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var barChart: BarChart
+    private lateinit var stepHistoryAdapter: StepHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +53,10 @@ class StatisticStepTrackerFragment : Fragment() {
         val authToken = sharedPreferences.getString("authToken", "")
         setupViews(authToken.toString())
 
+        stepHistoryAdapter = StepHistoryAdapter(emptyList())
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = stepHistoryAdapter
+        getStepHistory(authToken.toString())
         binding.ivBack.setOnClickListener {
             findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
         }
@@ -232,5 +244,32 @@ class StatisticStepTrackerFragment : Fragment() {
         barChart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
         barChart.invalidate()
     }
+
+
+    private fun getStepHistory(authToken: String) {
+        ApiClient.instance.getStepHistory2("Bearer $authToken").enqueue(object : Callback<List<StepHistoryApi>> {
+            override fun onResponse(call: Call<List<StepHistoryApi>>, response: Response<List<StepHistoryApi>>) {
+                if (response.isSuccessful) {
+                    val stepHistoryApis = response.body() ?: emptyList()
+                    val entries = stepHistoryApis.map { stepHistoryApi ->
+                        StepHistory(
+                            created_at = stepHistoryApi.date,
+                            current_steps = stepHistoryApi.current_steps,
+                            daily_goal = stepHistoryApi.daily_goal
+                        )
+                    }
+                    stepHistoryAdapter.updateData(entries)
+                } else {
+                    Toast.makeText(requireContext(), "Failed to get step history", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<StepHistoryApi>>, t: Throwable) {
+                Log.e("AccountFragment", "Failed to get step history", t)
+                Toast.makeText(requireContext(), "Failed to get step history", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 
 }
