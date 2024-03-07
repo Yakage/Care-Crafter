@@ -59,7 +59,7 @@ class ResultSleepTrackerFragment : Fragment() {
         val score = (seconds / scoreDivide)*100
         binding.tvTotalTime.text = "$hour.$minute hrs"
 
-        binding.progressBar.progress = score
+        binding.progressBar.progress = (progress + score)
         createSleep(authToken, score.toString(), seconds)
         if (score == 100) {
             binding.tvComplete.visibility = View.VISIBLE
@@ -82,6 +82,7 @@ class ResultSleepTrackerFragment : Fragment() {
             binding.tvHalf.visibility = View.GONE
             binding.tvBarely.visibility = View.VISIBLE
         }
+        updateProgressBar()
     }
     private fun getAlarmInfo(authToken: String) {
         ApiClient.instance.getAlarm("Bearer $authToken").enqueue(object : Callback<Alarm> {
