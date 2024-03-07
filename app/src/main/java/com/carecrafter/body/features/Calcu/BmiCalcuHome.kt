@@ -70,7 +70,7 @@ class BmiCalcuHome : Fragment() {
             }
             binding.tvCalcuResult.text = "$bmiResult \n $bmiCategory"
             createBMIData(authToken,bmiResult, bmiCategory)
-            findNavController().navigate(BmiCalcuHomeDirections.actionBmiCalcuHome2ToBmiResult())
+//            findNavController().navigate(BmiCalcuHomeDirections.actionBmiCalcuHome2ToBmiResult())
 
         } else {
             binding.tvCalcuResult.text = "Invalid Input"
