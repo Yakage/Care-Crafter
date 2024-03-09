@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".body.profile.Achievements"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/blue">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_back"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Back"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Achievements"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Do a flip"
+                    android:textSize="25dp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_marginTop="10dp"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:max="100"
+                    android:progress="0" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1 out of 12"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginBottom="20dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_top"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Water Intake Achievements"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/achievement_water_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_daily_drinker"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_water_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_morning_hydrator"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_water_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_weekend_hydrator"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_water_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_hydration_streak"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Step Tracker Achievements"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/achievement_step_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_early_bird_walker"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_step_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_sunset_stroller"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_step_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_weekend_warrior"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_step_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_step_streak"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sleep Tracker Achievements"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/achievement_sleep_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_early_riser"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_sleep_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_sweet_dreams"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_sleep_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_sleeping_beauty"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/achievement_sleep_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/achievement_sunrise_enthusiast"
+                        app:tint="@color/grey"
+                        android:elevation="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

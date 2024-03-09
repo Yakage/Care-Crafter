@@ -4,22 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.service.autofill.UserData
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.databinding.BodyAccountBinding
 import com.carecrafter.models.SharedPrefsViewModel
 import com.carecrafter.models.User
-import com.carecrafter.models.UserViewModel
 import com.carecrafter.registration.SignIn
 import com.carecrafter.retrofit_database.ApiClient
-import com.carecrafter.sqlitedatabase.CareCrafterDatabaseHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +38,9 @@ class AccountFragment : Fragment() {
 
         binding.editProfileButton.setOnClickListener {
             findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToUpdateAccount())
+        }
+        binding.layoutAchievement.setOnClickListener {
+            findNavController().navigate(AccountFragmentDirections.actionAccountFragmentToAchievements())
         }
         binding.layoutLogout.setOnClickListener {
             val editor = sharedPreferences.edit()

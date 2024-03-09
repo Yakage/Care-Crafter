@@ -78,6 +78,9 @@
         <action
             android:id="@+id/action_accountFragment_to_updateAccount"
             app:destination="@id/updateAccount" />
+        <action
+            android:id="@+id/action_accountFragment_to_achievements"
+            app:destination="@id/achievements" />
     </fragment>
     <fragment
         android:id="@+id/updateAccount"
@@ -124,5 +127,14 @@
         <action
             android:id="@+id/action_bmiResult_to_bmiCalcuHome2"
             app:destination="@id/bmiCalcuHome2" />
+    </fragment>
+    <fragment
+        android:id="@+id/achievements"
+        android:name="com.carecrafter.body.profile.Achievements"
+        android:label="achievements_home"
+        tools:layout="@layout/achievements_home" >
+        <action
+            android:id="@+id/action_achievements_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
 </navigation>
