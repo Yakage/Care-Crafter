@@ -2,17 +2,13 @@ package com.carecrafter.body
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.carecrafter.body.features.BmiCalcuActivity
-import com.carecrafter.body.features.DietSuggestionsActivity
-import com.carecrafter.body.features.ExerciseSuggestionsActivity
 import com.carecrafter.body.features.SleepTrackerActivity
 import com.carecrafter.body.features.StepTrackerActivity
-import com.carecrafter.body.features.WaterIntakeActivity
 import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyFeaturesBinding
 
@@ -52,7 +48,8 @@ class FeaturesFragment : Fragment() {
         }
         binding.cvBmiCalculator.setOnClickListener{
             // Open the FeatureActivity
-            findNavController().navigate(FeaturesFragmentDirections.actionFeaturesFragmentToBmiCalcuHome2())
+            val intent = Intent(activity, BmiCalcuActivity::class.java)
+            startActivity(intent)
         }
 
 //        binding.cvExerciseSuggestion.setOnClickListener {

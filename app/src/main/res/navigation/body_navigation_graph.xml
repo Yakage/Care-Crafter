@@ -6,28 +6,10 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.carecrafter.body.DashboardFragment"
-        android:label="body_dashboard"
-        tools:layout="@layout/body_dashboard" >
-        <action
-            android:id="@+id/action_dashboardFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_featuresFragment"
-            app:destination="@id/featuresFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.carecrafter.body.HomeFragment"
         android:label="body_home"
         tools:layout="@layout/body_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
         <action
             android:id="@+id/action_homeFragment_to_featuresFragment"
             app:destination="@id/featuresFragment" />
@@ -49,9 +31,6 @@
             android:id="@+id/action_featuresFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_featuresFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-        <action
             android:id="@+id/action_featuresFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
         <action
@@ -72,9 +51,6 @@
         <action
             android:id="@+id/action_accountFragment_to_featuresFragment"
             app:destination="@id/featuresFragment" />
-        <action
-            android:id="@+id/action_accountFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
         <action
             android:id="@+id/action_accountFragment_to_updateAccount"
             app:destination="@id/updateAccount" />

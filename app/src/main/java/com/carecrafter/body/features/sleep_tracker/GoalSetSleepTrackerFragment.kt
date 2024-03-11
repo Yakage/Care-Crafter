@@ -40,7 +40,6 @@ class GoalSetSleepTrackerFragment : Fragment() {
             val intent = Intent(requireActivity(), BodyActivity::class.java)
             startActivity(intent)
         }
-
         return binding.root
     }
     private fun createAlarm(authToken: String){

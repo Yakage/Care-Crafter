@@ -1,8 +1,12 @@
 package com.carecrafter.body.features.sleep_tracker
 
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +16,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
@@ -34,6 +40,8 @@ class SleepTrackingFragment : Fragment() {
     private lateinit var binding: SleepTrackingBinding
     private var isRunning = false
     private var timerSeconds = 0
+    private val channelId = "notification_channel"
+    private var notificationId = 0
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var sharedPreferences: SharedPreferences
@@ -62,7 +70,10 @@ class SleepTrackingFragment : Fragment() {
         val authToken = sharedPreferences.getString("authToken", "")
         authToken?.let { getAlarmInfo(it) }
 
+        createNotificationChannel()
+
         binding.startBtn.setOnClickListener{
+            handler.postDelayed({ sendNotification() }, 1*1000)
             startTimer()
         }
         binding.stopBtn.setOnClickListener{
@@ -263,6 +274,33 @@ class SleepTrackingFragment : Fragment() {
     fun updateInfo(alarmData: Alarm){
         if (alarmData != null) {
             binding.tvIdk.text = alarmData.daily_goal
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Channel"
+            val descriptionText = "Channel for Notification"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun sendNotification() {
+        val builder = NotificationCompat.Builder(requireContext(), channelId)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Notification")
+            .setContentText("This is a notification message.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            notify(notificationId++, builder.build())
         }
     }
 }

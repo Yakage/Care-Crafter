@@ -1,31 +1,46 @@
 package com.carecrafter.body.features.water_intake
 
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.JsonReader
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.android.material.snackbar.Snackbar
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
-import com.carecrafter.body.features.SleepTrackerActivity
-import com.carecrafter.databinding.ActivityStatisticsWaterIntakeBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class WaterIntakeBActivity : AppCompatActivity() {
 
@@ -42,6 +57,13 @@ class WaterIntakeBActivity : AppCompatActivity() {
     private lateinit var selectNotificationIntervalButton: Button
     private lateinit var notificationIntervalLayout: LinearLayout
     private lateinit var backButton: ImageView
+    private lateinit var watergoal: EditText
+    private lateinit var capacity: LinearLayout
+    private val channelId = "notification_channel"
+    private var notificationId = 0
+    private val handler = Handler(Looper.getMainLooper())
+
+
 
     private var totalWaterDrank: Int = 0
     private var goalAmount: Int = 1000
@@ -53,7 +75,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_water_intake_bactivity)
 
-        backButton = findViewById(R.id.backButton)
+        backButton = findViewById(R.id.ivBack)
         statisticButton = findViewById(R.id.bt_statistics)
         goalEditText = findViewById(R.id.edit_text_goal)
         cupSizeSpinner = findViewById(R.id.spinner_cup_size)
@@ -61,6 +83,8 @@ class WaterIntakeBActivity : AppCompatActivity() {
         totalWaterDrankTextView = findViewById(R.id.text_total_water_drank)
         middleDrinkButton = findViewById(R.id.button_middle_drink)
         resetButton = findViewById(R.id.button_reset)
+        watergoal = findViewById(R.id.edit_text_goal)
+        capacity = findViewById(R.id.cup_capacity)
         intervalSpinner = findViewById(R.id.interval_spinner)
 //        saveHistoryButton = findViewById(R.id.button_save_history)
         dailyGoalIndicatorTextView = findViewById(R.id.text_daily_goal_indicator)
@@ -70,7 +94,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
 
-        val backButton: ImageView = findViewById(R.id.backButton)
+        val backButton: ImageView = findViewById(R.id.ivBack)
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -79,8 +103,15 @@ class WaterIntakeBActivity : AppCompatActivity() {
         backButton.setOnClickListener{
             val intent = Intent(this, BodyActivity::class.java)
             startActivity(intent)
+            watergoal.visibility = View.GONE
+            capacity.visibility = View.GONE
+            handler.postDelayed({ sendNotification() }, 1*1000)
         }
-        resetButton.setOnClickListener { resetProgress(authToken.toString()) }
+        resetButton.setOnClickListener {
+            resetProgress(authToken.toString())
+            watergoal.visibility = View.VISIBLE
+            capacity.visibility = View.VISIBLE
+        }
         statisticButton.setOnClickListener {
             val intent = Intent(this, StatisticsWaterIntakeActivity::class.java)
             startActivity(intent)
@@ -292,6 +323,32 @@ class WaterIntakeBActivity : AppCompatActivity() {
             Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT)
                 .show()
             e.printStackTrace()
+        }
+    }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Channel"
+            val descriptionText = "Channel for Notification"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun sendNotification() {
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Notification")
+            .setContentText("This is a notification message.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId++, builder.build())
         }
     }
 }

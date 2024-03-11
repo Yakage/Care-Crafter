@@ -36,29 +36,29 @@ class BmiResult : Fragment() {
             startActivity(intent)
         }
 
-        val bmi = binding.tvBmi.text.toString().toInt().toDouble()
-
-        if (bmi < 5 ) {
-            binding.levelRed.visibility = View.VISIBLE
-            binding.levelYellow.visibility = View.GONE
-            binding.levelGreen.visibility = View.GONE
-        } else if (bmi in 6.0..18.4) {
-            binding.levelRed.visibility = View.GONE
-            binding.levelYellow.visibility = View.VISIBLE
-            binding.levelGreen.visibility = View.GONE
-        } else if (bmi in 18.5..24.0) {
-            binding.levelRed.visibility = View.GONE
-            binding.levelYellow.visibility = View.GONE
-            binding.levelGreen.visibility = View.VISIBLE
-        } else if (bmi in 25.0 .. 29.0){
-            binding.levelRed.visibility = View.GONE
-            binding.levelYellow.visibility = View.VISIBLE
-            binding.levelGreen.visibility = View.GONE
-        } else {
-            binding.levelRed.visibility = View.VISIBLE
-            binding.levelYellow.visibility = View.GONE
-            binding.levelGreen.visibility = View.GONE
-        }
+//        val bmi = binding.tvBmi.text.toString().toInt().toDouble()
+//
+//        if (bmi < 5 ) {
+//            binding.levelRed.visibility = View.VISIBLE
+//            binding.levelYellow.visibility = View.GONE
+//            binding.levelGreen.visibility = View.GONE
+//        } else if (bmi in 6.0..18.4) {
+//            binding.levelRed.visibility = View.GONE
+//            binding.levelYellow.visibility = View.VISIBLE
+//            binding.levelGreen.visibility = View.GONE
+//        } else if (bmi in 18.5..24.0) {
+//            binding.levelRed.visibility = View.GONE
+//            binding.levelYellow.visibility = View.GONE
+//            binding.levelGreen.visibility = View.VISIBLE
+//        } else if (bmi in 25.0 .. 29.0){
+//            binding.levelRed.visibility = View.GONE
+//            binding.levelYellow.visibility = View.VISIBLE
+//            binding.levelGreen.visibility = View.GONE
+//        } else {
+//            binding.levelRed.visibility = View.VISIBLE
+//            binding.levelYellow.visibility = View.GONE
+//            binding.levelGreen.visibility = View.GONE
+//        }
 
         return binding.root
     }

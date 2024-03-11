@@ -80,16 +80,16 @@ class Achievements : Fragment() {
 
         //Descriptions Sleep Tracker
         binding.achievementSleep1.setOnClickListener{
-            binding.description.text = "Sleep for a total of 1 min"
-        }
-        binding.achievementSleep2.setOnClickListener{
             binding.description.text = "Sleep for a total of 1 hr"
         }
+        binding.achievementSleep2.setOnClickListener{
+            binding.description.text = "Sleep for a total of 8 hr"
+        }
         binding.achievementSleep3.setOnClickListener{
-            binding.description.text = "Sleep for a total of x8 hrs"
+            binding.description.text = "Sleep for a total of 24 hrs"
         }
         binding.achievementSleep4.setOnClickListener{
-            binding.description.text = "Sleep for a total of 24 hrs"
+            binding.description.text = "Sleep for a total of 168 hrs"
         }
 
         return binding.root
