@@ -9,10 +9,23 @@
         android:id="@+id/bmiCalcuHome"
         android:name="com.carecrafter.body.features.Calcu.BmiCalcuHome"
         android:label="fragment_bmi_calcu_home"
-        tools:layout="@layout/bmi_home" />
+        tools:layout="@layout/bmi_home" >
+        <action
+            android:id="@+id/action_bmiCalcuHome_to_bmiResult3"
+            app:destination="@id/bmiResult3" />
+    </fragment>
     <activity
         android:id="@+id/bmiCalcuActivity"
         android:name="com.carecrafter.body.features.BmiCalcuActivity"
         android:label="activity_bmi_calcu"
         tools:layout="@layout/activity_bmi_calcu" />
+    <fragment
+        android:id="@+id/bmiResult3"
+        android:name="com.carecrafter.body.features.Calcu.BmiResult"
+        android:label="bmi_result"
+        tools:layout="@layout/bmi_result" >
+        <action
+            android:id="@+id/action_bmiResult3_to_bmiCalcuHome"
+            app:destination="@id/bmiCalcuHome" />
+    </fragment>
 </navigation>
