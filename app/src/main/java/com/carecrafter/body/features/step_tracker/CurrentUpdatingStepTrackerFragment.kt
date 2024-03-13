@@ -159,8 +159,8 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
 
         // Call your API to save steps to your online database here
         // Example: YourApiService.saveStepToDatabase(steps)
-        updateStepHistoryData(authToken, "$goal", "$steps")
-        updateStep(authToken, "$steps")
+        updateStepHistoryData(authToken,  "$steps")
+        updateStep(authToken, steps)
 
     }
 
@@ -168,9 +168,9 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
         // We do not have to write anything in this function for this app
     }
 
-    private fun updateStepHistoryData(authToken: String, daily_goal: String, current_steps: String){
+    private fun updateStepHistoryData(authToken: String,current_steps: String){
         val updateStepHistoryDataJson =
-            "{\"authToken\":\"$authToken\",\"daily_goal\":\"$daily_goal\",\"current_steps\":\"$current_steps\"}"
+            "{\"authToken\":\"$authToken\",\"current_steps\":\"$current_steps\"}"
 
         //correct malformed data
         try {
@@ -222,7 +222,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
         }
     }
 
-    private fun updateStep(authToken: String, steps: String){
+    private fun updateStep(authToken: String, steps: Int){
         val updateStepDataJson =
             "{\"authToken\":\"$authToken\",\"steps\":\"$steps\"}"
 
@@ -293,7 +293,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                 }
             }
             override fun onFailure(call: Call<StepHistoryApi>, t: Throwable) {
-                Log.e("SleepTracker", "Failed to get user info", t)
+                Log.e("StepTracker", "Failed to get user info", t)
                 Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
