@@ -10,7 +10,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.text.Editable
 import android.util.JsonReader
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,15 +17,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerCurrentUpdatingBinding
-import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
-import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
@@ -61,6 +56,9 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
 
         sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        previousTotalSteps = sharedPref.getFloat("previousTotalSteps", 0f)
+
         // Register BroadcastReceiver for date change
         val filter = IntentFilter(Intent.ACTION_DATE_CHANGED)
         requireContext().registerReceiver(dateChangeReceiver, filter)
@@ -70,15 +68,34 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
         }
 
         binding.btStart.setOnClickListener {
-            startStepCounting()
+            binding.btStart.isEnabled = false
+            binding.btStop.isEnabled = true
+            binding.btReset.isEnabled = false
+            running = true
+            val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+
+            if (stepSensor == null) {
+                binding.tvCount.text = "No step counter sensor!"
+            } else {
+                sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
+            }
         }
 
         binding.btStop.setOnClickListener {
             stopStepCounting(authToken.toString())
+            running = false
+            sensorManager?.unregisterListener(this)
         }
 
         binding.btReset.setOnClickListener {
             resetStepCount()
+            previousTotalSteps = totalSteps
+            binding.tvCount.text = "0"
+            binding.btStart.text = "Start"
+            with (sharedPref.edit()) {
+                putFloat("previousTotalSteps", previousTotalSteps)
+                apply()
+            }
         }
 
         binding.btStatistics.setOnClickListener {
@@ -92,46 +109,20 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
             resetStepCount()
         }
     }
-
-    private fun startStepCounting() {
-        totalSteps = 0f
-        previousTotalSteps = 0f
-        binding.btStart.isEnabled = false
-        binding.btStop.isEnabled = true
-        binding.btReset.isEnabled = false
-
-        running = true
-        val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-
-        if (stepSensor == null) {
-            Toast.makeText(requireContext(), "No sensor detected on this device", Toast.LENGTH_SHORT).show()
-        } else {
-            sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
-        }
-        // Reset initial total steps value
-    }
-
     private fun stopStepCounting(authToken: String) {
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false
         binding.btReset.isEnabled = true
-
-        running = false
-        sensorManager?.unregisterListener(this)
         // Save total steps to history when stop button is clicked
         saveStepToHistory(authToken, totalSteps.toInt())
     }
 
     private fun resetStepCount() {
         binding.setButtonsLayout.visibility = View.GONE
-
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false
         binding.btReset.isEnabled = false
 
-        previousTotalSteps = totalSteps
-        binding.tvTotal.text = "Total Steps"
-        binding.tvCount.text = "0"
         stepHistoryAdapter.clear()
         Toast.makeText(requireContext(), "Step count reset", Toast.LENGTH_SHORT).show()
     }
