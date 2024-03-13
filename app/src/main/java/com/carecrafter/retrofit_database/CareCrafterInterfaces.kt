@@ -17,6 +17,7 @@ import com.carecrafter.models.WaterDailyStatsApi
 import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.models.WaterMonthlyStatsApi
 import com.carecrafter.models.WaterWeeklyStatsApi
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -111,6 +112,9 @@ interface CareCrafterInterfaces {
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
+    @GET("totalSleeps")
+    fun totalSleeps(@Header("Authorization") authToken: String): Call<SleepsApi>
+    @Headers("Accept: application/json")
     @GET("showDailySleep")
     fun showDailySleep(@Header("Authorization") authToken: String): Call<List<SleepsApi>>
 
@@ -173,12 +177,12 @@ interface CareCrafterInterfaces {
     @PUT("updateStep")
     fun updateStep(
         @Header("Authorization") authToken: String,
-        @Field("steps") results:String,
+        @Field("steps") results:Int,
     ):retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")
-    @GET("getLatestSteps")
-    fun getLatestSteps(@Header("Authorization") authToken: String): Call<StepsApi>
+    @GET("totalSteps")
+    fun totalSteps(@Header("Authorization") authToken: String): Call<StepsApi>
 
     //For Leaderboards
     @Headers("Accept: application/json")
@@ -215,6 +219,10 @@ interface CareCrafterInterfaces {
         @Header("Authorization") authToken: String,
         @Field("water") water:String,
     ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("totalWater")
+    fun totalWater(@Header("Authorization") authToken: String): Call<WaterApi>
 
     // For Leaderboards
     @Headers("Accept: application/json")

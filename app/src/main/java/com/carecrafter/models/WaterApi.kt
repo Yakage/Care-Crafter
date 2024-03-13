@@ -5,7 +5,9 @@ data class WaterApi(
     @SerializedName("name")
     val name: String,
     @SerializedName("total_water")
-    val totalWater: String
+    val totalWater: String,
+    @SerializedName("water")
+    val water: Int
 )
 
 

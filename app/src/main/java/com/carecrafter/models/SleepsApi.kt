@@ -8,5 +8,7 @@ data class SleepsApi(
     @SerializedName("score")
     val score: String,
     @SerializedName("total_sleeps")
-    val totalSleeps: Int
+    val totalSleeps: Int,
+    @SerializedName("sleeps")
+    val sleep: Int
 )
