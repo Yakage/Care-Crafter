@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.features.BmiCalcuActivity
 import com.carecrafter.body.features.SleepTrackerActivity
@@ -51,8 +52,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.stepFT.setOnClickListener {
-            val intent = Intent(activity, StepTrackerActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingStepTrackerFragment())
         }
         binding.waterFT.setOnClickListener {
             val intent = Intent(activity, WaterIntakeBActivity::class.java)

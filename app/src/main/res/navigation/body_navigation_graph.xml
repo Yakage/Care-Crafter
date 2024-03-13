@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_currentUpdatingStepTrackerFragment"
+            app:destination="@id/currentUpdatingStepTrackerFragment" />
     </fragment>
     <activity
         android:id="@+id/bodyActivity"
@@ -112,5 +115,26 @@
         <action
             android:id="@+id/action_achievements_to_accountFragment"
             app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentUpdatingStepTrackerFragment"
+        android:name="com.carecrafter.body.features.step_tracker.CurrentUpdatingStepTrackerFragment"
+        android:label="step_tracker_current_updating"
+        tools:layout="@layout/step_tracker_current_updating" >
+        <action
+            android:id="@+id/action_currentUpdatingStepTrackerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_currentUpdatingStepTrackerFragment_to_statisticStepTrackerFragment2"
+            app:destination="@id/statisticStepTrackerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticStepTrackerFragment2"
+        android:name="com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragment"
+        android:label="step_tracker_statistics"
+        tools:layout="@layout/step_tracker_statistics" >
+        <action
+            android:id="@+id/action_statisticStepTrackerFragment2_to_currentUpdatingStepTrackerFragment"
+            app:destination="@id/currentUpdatingStepTrackerFragment" />
     </fragment>
 </navigation>

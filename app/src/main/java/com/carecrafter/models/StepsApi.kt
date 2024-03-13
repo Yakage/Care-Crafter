@@ -6,6 +6,8 @@ data class StepsApi(
     val name: String,
     @SerializedName("total_steps")
     val totalSteps: String,
+    @SerializedName("steps")
+    val steps: String,
 )
 
 

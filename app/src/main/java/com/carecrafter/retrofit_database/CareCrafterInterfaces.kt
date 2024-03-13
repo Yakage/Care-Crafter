@@ -153,6 +153,13 @@ interface CareCrafterInterfaces {
         @Field("current_steps") currentSteps:String,
     ):retrofit2.Call<DefaultResponse>
 
+    @Headers("Accept: application/json")
+    @POST("updateStepHistory")
+    fun updateStepHistory(
+        @Header("Authorization") authToken: String,
+        @Field("current_steps") currentSteps:String,
+    ):retrofit2.Call<DefaultResponse>
+
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @POST("createStep")
@@ -161,10 +168,23 @@ interface CareCrafterInterfaces {
         @Field("steps") results:String,
     ):retrofit2.Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @PUT("updateStep")
+    fun updateStep(
+        @Header("Authorization") authToken: String,
+        @Field("steps") results:String,
+    ):retrofit2.Call<DefaultResponse>
+
+    @Headers("Accept: application/json")
+    @GET("getLatestSteps")
+    fun getLatestSteps(@Header("Authorization") authToken: String): Call<StepsApi>
+
     //For Leaderboards
     @Headers("Accept: application/json")
     @GET("showDailyStep")
     fun showDailySteps(@Header("Authorization") authToken: String): Call<List<StepsApi>>
+
 
     @Headers("Accept: application/json")
     @GET("showWeeklyStep")
