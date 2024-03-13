@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.carecrafter.databinding.RegistrationSignUpBinding
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,109 +62,92 @@ class SignUp : AppCompatActivity() {
             val selectedGender = genderSpinner.selectedItem.toString()
             val name = binding.FullNameET.text.toString().trim()
             val email = binding.EmailET.text.toString().trim()
-            val age = binding.AgeET.text.toString().trim()
+            val birthday = binding.BirthdayET.text.toString().trim()
             val height = binding.HeightET.text.toString().trim()
             val weight = binding.WeightET.text.toString().trim()
-            //val gender = binding.GenderET.text.toString().trim()
-            var gender = ""
             val password = binding.PasswordET.text.toString().trim()
             val confirmPassword = binding.ConfirmPasswordET.text.toString().trim()
-
-            when (selectedGender){
+            var gender = ""
+            when (selectedGender) {
                 "Male" -> gender = "male"
                 "Female" -> gender = "female"
             }
 
-            //json data
-            val signupDataJson =
-                "{\"name\":\"$name\",\"email\":\"$email\",\"age\":\"$age\",\"height\":\"$height\",\"weight\":\"$weight\",\"gender\":\"$gender\",\"password\":\"$password\",\"confirm_password\":\"$confirmPassword\"}"
-
-            //validation
+            // Validation
             if (name.isEmpty()) {
-                binding.FullNameET.error = "Full Name required"
+                binding.FullNameET.error = "Full Name is required"
                 binding.FullNameET.requestFocus()
+                return@setOnClickListener
             }
 
             if (email.isEmpty()) {
-                binding.EmailET.error = "Email required"
+                binding.EmailET.error = "Email is required"
                 binding.EmailET.requestFocus()
+                return@setOnClickListener
             }
 
-            if (age.toString().isEmpty()) {
-                binding.AgeET.error = "Age required"
-                binding.AgeET.requestFocus()
+            if (birthday.isEmpty()) {
+                binding.BirthdayET.error = "Age is required"
+                binding.BirthdayET.requestFocus()
+                return@setOnClickListener
             }
 
             if (height.isEmpty()) {
-                binding.HeightET.error = "Height required"
+                binding.HeightET.error = "Height is required"
                 binding.HeightET.requestFocus()
+                return@setOnClickListener
             }
 
             if (weight.isEmpty()) {
-                binding.WeightET.error = "Weight required"
+                binding.WeightET.error = "Weight is required"
                 binding.WeightET.requestFocus()
+                return@setOnClickListener
             }
 
             if (password.isEmpty()) {
-                binding.PasswordET.error = "Email required"
+                binding.PasswordET.error = "Password is required"
                 binding.PasswordET.requestFocus()
+                return@setOnClickListener
             }
+
             if (confirmPassword.isEmpty()) {
-                binding.ConfirmPasswordET.error = "Email required"
+                binding.ConfirmPasswordET.error = "Confirm Password is required"
                 binding.ConfirmPasswordET.requestFocus()
+                return@setOnClickListener
             }
 
-            //correct malformed data
-            try {
-                val reader = JsonReader(StringReader(signupDataJson))
-                reader.isLenient = true
-                reader.beginObject()
-                reader.close()
-                ApiClient.instance.createUser(
-                    name,
-                    email,
-                    age,
-                    height,
-                    weight,
-                    gender,
-                    password,
-                    confirmPassword,
-                )
-                    .enqueue(object : Callback<DefaultResponse> {
-                        override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                        }
+            // Make API call
+            ApiClient.instance.createUser(
+                name,
+                email,
+                birthday,
+                height,
+                weight,
+                gender,
+                password,
+                confirmPassword
+            ).enqueue(object : Callback<DefaultResponse> {
+                override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message ?: "Failed to make request", Toast.LENGTH_LONG).show()
+                }
 
-                        override fun onResponse(
-                            call: Call<DefaultResponse>,
-                            response: Response<DefaultResponse>
-                        ) {
-                            if (response.isSuccessful && response.body() != null) {
-                                Toast.makeText(
-                                    applicationContext,
-                                    response.body()!!.message,
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent = Intent(this@SignUp, SignIn::class.java)
-                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                            } else {
-                                val errorMessage: String = try {
-                                    response.errorBody()?.string()
-                                        ?: "Failed to get a valid response. Response code: ${response.code()}"
-                                } catch (e: Exception) {
-                                    "Failed to get a valid response. Response code: ${response.code()}"
-                                }
-                                Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG)
-                                    .show()
-                                Log.e("API_RESPONSE", errorMessage)
-                            }
-                        }
-                    })
-            } catch (e: Exception) {
-                Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
-                e.printStackTrace()
-            }
+                override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@SignUp, SignIn::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    } else {
+                        var errorMessage = response.errorBody()?.string() ?: "Failed to get a valid response"
+                        // Extract message part from the error JSON
+                        val messageRegex = """"message":"([^"]+)""".toRegex()
+                        val matchResult = messageRegex.find(errorMessage)
+                        val message = matchResult?.groupValues?.getOrNull(1)?.trim() ?: "Unknown error"
+                        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+                        Log.e("API_RESPONSE", errorMessage)
+                    }
+                }
+            })
         }
     }
 

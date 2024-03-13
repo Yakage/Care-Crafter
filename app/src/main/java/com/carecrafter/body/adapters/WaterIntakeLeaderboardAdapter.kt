@@ -31,7 +31,7 @@ class WaterIntakeLeaderboardAdapter(private var entries: List<LeaderboardForWate
         val entry = entries[position]
         holder.rank.text = (position + 1).toString()
         holder.name.text = entry.name
-        holder.water.text = entry.water + " Water Drank"
+        holder.water.text = entry.water.toString() + " Water Drank"
     }
 
     override fun getItemCount(): Int {

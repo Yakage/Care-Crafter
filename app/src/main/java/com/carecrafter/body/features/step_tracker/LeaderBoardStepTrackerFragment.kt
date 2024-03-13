@@ -86,7 +86,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { dailyStepsApi ->
                         LeaderboardForStepTracker(
                             name = dailyStepsApi.name,
-                            steps = dailyStepsApi.totalSteps
+                            steps = dailyStepsApi.totalSteps.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -111,7 +111,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { dailyStepsApi ->
                         LeaderboardForStepTracker(
                             name = dailyStepsApi.name,
-                            steps = dailyStepsApi.totalSteps
+                            steps = dailyStepsApi.totalSteps.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -136,7 +136,7 @@ class LeaderBoardStepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { dailyStepsApi ->
                         LeaderboardForStepTracker(
                             name = dailyStepsApi.name,
-                            steps = dailyStepsApi.totalSteps
+                            steps = dailyStepsApi.totalSteps.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)

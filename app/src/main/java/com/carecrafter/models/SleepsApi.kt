@@ -3,7 +3,10 @@ package com.carecrafter.models
 import com.google.gson.annotations.SerializedName
 
 data class SleepsApi(
+    @SerializedName("name")
     val name: String,
+    @SerializedName("score")
     val score: String,
-    val totalSleeps: String
+    @SerializedName("total_sleeps")
+    val totalSleeps: Int
 )

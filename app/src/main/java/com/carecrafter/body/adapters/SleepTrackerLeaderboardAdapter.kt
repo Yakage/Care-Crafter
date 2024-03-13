@@ -31,7 +31,7 @@ class SleepTrackerLeaderboardAdapter(private var entries: List<LeaderboardForSle
         val entry = entries[position]
         holder.rank.text = (position + 1).toString()
         holder.name.text = entry.name
-        holder.sleeps.text = entry.sleeps
+        holder.sleeps.text = entry.sleeps.toString()
     }
 
     override fun getItemCount(): Int {

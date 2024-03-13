@@ -90,7 +90,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         }
 
         binding.btStatistics.setOnClickListener {
-            findNavController().navigate(HomeStepTrackerFragmentDirections.actionHomeStepTrackerFragmentToStatisticStepTrackerFragment())
+//            findNavController().navigate(HomeStepTrackerFragmentDirections.actionHomeStepTrackerFragmentToStatisticStepTrackerFragment())
         }
     }
 

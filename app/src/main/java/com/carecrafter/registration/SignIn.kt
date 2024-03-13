@@ -82,7 +82,7 @@ class SignIn : AppCompatActivity() {
                                 } catch (e: Exception) {
                                     "Failed to get a valid response. Response code: ${response.code()}"
                                 }
-                                Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG)
+                                Toast.makeText(applicationContext, "Invalid Credentials", Toast.LENGTH_LONG)
                                     .show()
                                 Log.e("API_RESPONSE", errorMessage)
                             }

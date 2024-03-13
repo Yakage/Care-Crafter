@@ -58,7 +58,7 @@ class StatisticStepTrackerFragment : Fragment() {
         binding.recyclerView.adapter = stepHistoryAdapter
         getStepHistory(authToken.toString())
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
+//            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
         }
 
         return binding.root

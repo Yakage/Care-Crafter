@@ -13,12 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
-import com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragmentDirections
-import com.carecrafter.databinding.StepTrackerStatisticsBinding
 import com.carecrafter.databinding.WaterIntakeStatisticBinding
-import com.carecrafter.models.StepsDailyStatsApi
-import com.carecrafter.models.StepsMonthlyStatsApi
-import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.models.WaterDailyStatsApi
 import com.carecrafter.models.WaterMonthlyStatsApi
 import com.carecrafter.models.WaterWeeklyStatsApi
@@ -49,7 +44,7 @@ class StatisticFragment : Fragment() {
         setupViews(authToken.toString())
 
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
+//            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragment2ToHomeStepTrackerFragment2())
         }
         return binding.root
     }

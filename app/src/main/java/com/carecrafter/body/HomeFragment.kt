@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepsApi){
-        binding.tvTotalSleep.text = scoreData.totalSleeps
+        binding.tvTotalSleep.text = scoreData.totalSleeps.toString()
         binding.tvScore.text = scoreData.score
     }
 

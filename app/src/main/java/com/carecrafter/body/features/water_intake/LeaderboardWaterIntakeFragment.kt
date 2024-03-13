@@ -82,7 +82,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val entries = response.body()?.map { waterApi ->
                         LeaderboardForWaterIntake(
                             name = waterApi.name,
-                            water = waterApi.totalWater
+                            water = waterApi.totalWater.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -108,7 +108,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val entries = response.body()?.map { waterApi ->
                         LeaderboardForWaterIntake(
                             name = waterApi.name,
-                            water = waterApi.totalWater
+                            water = waterApi.totalWater.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -134,7 +134,7 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val entries = response.body()?.map { waterApi ->
                         LeaderboardForWaterIntake(
                             name = waterApi.name,
-                            water = waterApi.totalWater
+                            water = waterApi.totalWater.toInt()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
