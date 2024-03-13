@@ -73,7 +73,7 @@ class SleepTrackingFragment : Fragment() {
         createNotificationChannel()
 
         binding.startBtn.setOnClickListener{
-            handler.postDelayed({ sendNotification() }, 1*1000)
+            handler.postDelayed({ sendNotification() }, 5*1000)
             startTimer()
         }
         binding.stopBtn.setOnClickListener{
@@ -113,7 +113,7 @@ class SleepTrackingFragment : Fragment() {
 
             binding.startBtn.isEnabled = false
             binding.stopBtn.isEnabled = true
-            binding.endBtn.isEnabled = true
+            binding.endBtn.isEnabled = false
             binding.resetBtn.isEnabled = true
         }
     }
@@ -140,7 +140,7 @@ class SleepTrackingFragment : Fragment() {
         binding.stopBtn.isEnabled = false
         binding.startBtn.text = "Start"
         binding.resetBtn.isEnabled = false
-        binding.endBtn.isEnabled = true
+        binding.endBtn.isEnabled = false
     }
 
     //private fun calculator(authToken: String)

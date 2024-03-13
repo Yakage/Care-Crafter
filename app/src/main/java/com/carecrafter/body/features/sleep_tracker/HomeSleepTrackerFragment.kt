@@ -15,14 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.body.adapters.SleepHistoryAdapter
-import com.carecrafter.body.adapters.WaterHistoryAdapter
-import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.SleepTrackerHomeBinding
 import com.carecrafter.models.SleepHistory
 import com.carecrafter.models.SleepHistoryApi
 import com.carecrafter.models.SleepsApi
-import com.carecrafter.models.WaterHistory
-import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,8 +27,12 @@ import retrofit2.Response
 class HomeSleepTrackerFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: SleepTrackerHomeBinding
-    private var progress = 0
     private lateinit var sleepHistoryAdapter: SleepHistoryAdapter
+
+    // TODO: Use private var intead of textview to use the data
+    private var test = ""
+
+    private var progress = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,6 +92,8 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps.toString()
         binding.tvScore.text = scoreData.score
+        // TODO: Use private var intead of textview to use the data
+        test = scoreData.score
     }
 
     private fun getSleepHistory(authToken: String) {

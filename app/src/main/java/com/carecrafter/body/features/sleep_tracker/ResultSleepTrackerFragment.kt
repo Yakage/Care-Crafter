@@ -26,8 +26,6 @@ import java.io.StringReader
 class ResultSleepTrackerFragment : Fragment() {
     private lateinit var binding: SleepTrackerResultBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private var timerSeconds = 0
-    private var dailyGoal = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,21 +39,24 @@ class ResultSleepTrackerFragment : Fragment() {
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_resultSleepTrackerFragment_to_homeSleepTrackerFragment)
         }
-        testing(authToken.toString())
+
         return binding.root
     }
 
     private fun testing(authToken: String){
-        val seconds = timerSeconds
-        val input = dailyGoal
-        val scoreDivide = (input * 60) * 60
-        val minute = seconds / 60
-        val hour = minute / 60
-        val score = (seconds / input)*100
-        binding.tvTotalTime.text = "$hour.$minute hrs"
+        val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
+        val goal = 10
+
+        //@Todo Time Goal NEED FIXING
+        //val input = binding.tvTimeGoal.text.toString().toDouble()
+        //val scoreDivide = (input * 1)
+        val minute = (seconds / 60).toInt()
+        val hour = (minute / 60).toInt()
+        val score = (seconds / 10 * 100).toInt()
+        binding.tvTotalTime.text = "$hour.$minute.$seconds hrs $score"
 
         binding.progressBar.progress = score
-        createSleep(authToken, score.toString(), seconds)
+        createSleep(authToken, score.toString(), seconds.toInt())
         if (score == 100) {
             binding.tvComplete.visibility = View.VISIBLE
             binding.tvAlmost.visibility = View.GONE
@@ -86,7 +87,6 @@ class ResultSleepTrackerFragment : Fragment() {
                     if (alarmData != null) {
                         updateInfo(alarmData)
                     }
-
                     val responseBody = response.body().toString()
                     Log.d("Response", responseBody)
                 } else {
@@ -103,7 +103,7 @@ class ResultSleepTrackerFragment : Fragment() {
 
     fun updateInfo(alarmData: Alarm){
         if (alarmData != null) {
-            dailyGoal = alarmData.daily_goal.toInt()
+            binding.tvTimeGoal.text = alarmData.daily_goal
         }
     }
     private fun getScore(authToken: String) {
@@ -114,7 +114,7 @@ class ResultSleepTrackerFragment : Fragment() {
                     if (scoreData != null) {
                         updateScore(scoreData)
                     }
-
+                    testing(authToken)
                 } else {
                     // Handle unsuccessful response
                     Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
@@ -128,9 +128,7 @@ class ResultSleepTrackerFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepScoreLogs){
-        if (scoreData != null) {
-            timerSeconds = scoreData.total_time.toInt()
-        }
+        binding.tvTimerSeconds.text = scoreData.total_time
     }
 
     private fun createSleep(authToken: String, score: String, sleeps: Int){
