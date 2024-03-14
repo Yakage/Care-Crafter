@@ -44,17 +44,17 @@ class Achievements : Fragment() {
 
         //Descriptions Water Intake
         binding.achievementWater1.setOnClickListener {
-            binding.description.text = "Drink at least one time"
+            binding.description.text = "Drink at least 100ml"
         }
         binding.achievementWater2.setOnClickListener {
-            binding.description.text = "Drink at least 10,000ml"
+            binding.description.text = "Drink at least 1,000ml"
         }
         binding.achievementWater3.setOnClickListener{
-            binding.description.text = "Drink at least 100,000ml"
+            binding.description.text = "Drink at least 10,000ml"
 
         }
         binding.achievementWater4.setOnClickListener{
-            binding.description.text = "Drink at least 1,000,000ml"
+            binding.description.text = "Drink at least 100,000ml"
         }
 
         //Descriptions Step Tracker

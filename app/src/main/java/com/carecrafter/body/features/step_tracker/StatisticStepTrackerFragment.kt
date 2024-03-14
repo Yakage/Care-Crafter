@@ -1,7 +1,6 @@
 package com.carecrafter.body.features.step_tracker
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -15,15 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.carecrafter.R
-import com.carecrafter.body.BodyActivity
-import com.carecrafter.body.adapters.LeaderboardAdapter
 import com.carecrafter.body.adapters.StepHistoryAdapter
 import com.carecrafter.databinding.StepTrackerStatisticsBinding
-import com.carecrafter.models.LeaderboardForStepTracker
 import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepHistoryApi
-import com.carecrafter.models.StepsApi
-import com.carecrafter.models.StepsDailyStatsApi
 import com.carecrafter.models.StepsMonthlyStatsApi
 import com.carecrafter.models.StepsWeeklyStatsApi
 import com.carecrafter.retrofit_database.ApiClient
@@ -58,7 +52,7 @@ class StatisticStepTrackerFragment : Fragment() {
         binding.recyclerView.adapter = stepHistoryAdapter
         getStepHistory(authToken.toString())
         binding.ivBack.setOnClickListener {
-//            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragmentToHomeStepTrackerFragment())
+            findNavController().navigate(R.id.action_statisticStepTrackerFragment_to_homeStepTrackerFragment)
         }
 
         return binding.root

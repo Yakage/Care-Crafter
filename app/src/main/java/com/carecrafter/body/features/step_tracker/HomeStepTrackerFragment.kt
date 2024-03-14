@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerHomeBinding
 import com.carecrafter.models.DefaultResponse
@@ -109,7 +110,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
         }
 
         binding.btStatistics.setOnClickListener {
-//            findNavController().navigate(HomeStepTrackerFragmentDirections.actionHomeStepTrackerFragmentToStatisticStepTrackerFragment())
+           findNavController().navigate(HomeStepTrackerFragmentDirections.actionHomeStepTrackerFragmentToStatisticStepTrackerFragment())
         }
     }
 
