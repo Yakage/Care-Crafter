@@ -125,16 +125,16 @@
             android:id="@+id/action_currentUpdatingStepTrackerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_currentUpdatingStepTrackerFragment_to_statisticStepTrackerFragment2"
-            app:destination="@id/statisticStepTrackerFragment2" />
+            android:id="@+id/action_currentUpdatingStepTrackerFragment_to_currentStatisticStepTrackerFragment"
+            app:destination="@id/currentStatisticStepTrackerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/statisticStepTrackerFragment2"
-        android:name="com.carecrafter.body.features.step_tracker.StatisticStepTrackerFragment"
-        android:label="step_tracker_statistics"
-        tools:layout="@layout/step_tracker_statistics" >
+        android:id="@+id/currentStatisticStepTrackerFragment"
+        android:name="com.carecrafter.body.features.step_tracker.CurrentStatisticStepTrackerFragment"
+        android:label="step_tracker_current_statistic"
+        tools:layout="@layout/step_tracker_current_statistic" >
         <action
-            android:id="@+id/action_statisticStepTrackerFragment2_to_currentUpdatingStepTrackerFragment"
+            android:id="@+id/action_currentStatisticStepTrackerFragment_to_currentUpdatingStepTrackerFragment"
             app:destination="@id/currentUpdatingStepTrackerFragment" />
     </fragment>
 </navigation>

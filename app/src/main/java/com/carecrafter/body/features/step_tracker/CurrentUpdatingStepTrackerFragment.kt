@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.StepTrackerCurrentUpdatingBinding
 import com.carecrafter.models.DefaultResponse
@@ -99,7 +100,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
         }
 
         binding.btStatistics.setOnClickListener {
-            findNavController().navigate(CurrentUpdatingStepTrackerFragmentDirections.actionCurrentUpdatingStepTrackerFragmentToStatisticStepTrackerFragment2())
+            findNavController().navigate(R.id.action_currentUpdatingStepTrackerFragment_to_currentStatisticStepTrackerFragment)
         }
     }
 
@@ -118,7 +119,6 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     private fun resetStepCount() {
-        binding.setButtonsLayout.visibility = View.GONE
         binding.btStart.isEnabled = true
         binding.btStop.isEnabled = false
         binding.btReset.isEnabled = false

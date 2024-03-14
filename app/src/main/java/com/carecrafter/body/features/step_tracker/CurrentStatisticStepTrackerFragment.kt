@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.carecrafter.R
 import com.carecrafter.body.adapters.StepHistoryAdapter
-import com.carecrafter.databinding.StepTrackerStatisticsBinding
+import com.carecrafter.databinding.StepTrackerCurrentStatisticBinding
 import com.carecrafter.models.StepHistory
 import com.carecrafter.models.StepHistoryApi
 import com.carecrafter.models.StepsMonthlyStatsApi
@@ -31,9 +31,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class StatisticStepTrackerFragment : Fragment() {
-    private lateinit var binding: StepTrackerStatisticsBinding
+class CurrentStatisticStepTrackerFragment : Fragment() {
+    private lateinit var binding: StepTrackerCurrentStatisticBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var barChart: BarChart
     private lateinit var stepHistoryAdapter: StepHistoryAdapter
@@ -41,23 +40,21 @@ class StatisticStepTrackerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = StepTrackerStatisticsBinding.inflate(inflater, container, false)
+    ): View? {
+        binding = StepTrackerCurrentStatisticBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         setupViews(authToken.toString())
-
         stepHistoryAdapter = StepHistoryAdapter(emptyList())
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = stepHistoryAdapter
         getStepHistory(authToken.toString())
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(R.id.action_statisticStepTrackerFragment_to_homeStepTrackerFragment)
+            findNavController().navigate(R.id.action_currentStatisticStepTrackerFragment_to_currentUpdatingStepTrackerFragment)
         }
 
         return binding.root
     }
-
     private fun setupViews(authToken: String) {
         barChart = binding.barChart
 
@@ -179,7 +176,8 @@ class StatisticStepTrackerFragment : Fragment() {
 
 
     private fun getStepHistory(authToken: String) {
-        ApiClient.instance.getStepHistory2("Bearer $authToken").enqueue(object : Callback<List<StepHistoryApi>> {
+        ApiClient.instance.getStepHistory2("Bearer $authToken").enqueue(object :
+            Callback<List<StepHistoryApi>> {
             override fun onResponse(call: Call<List<StepHistoryApi>>, response: Response<List<StepHistoryApi>>) {
                 if (response.isSuccessful) {
                     val stepHistoryApis = response.body() ?: emptyList()
@@ -202,6 +200,4 @@ class StatisticStepTrackerFragment : Fragment() {
             }
         })
     }
-
-
 }
