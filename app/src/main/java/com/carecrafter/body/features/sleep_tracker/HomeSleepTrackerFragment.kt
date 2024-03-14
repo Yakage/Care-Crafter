@@ -30,9 +30,7 @@ class HomeSleepTrackerFragment : Fragment() {
     private lateinit var sleepHistoryAdapter: SleepHistoryAdapter
 
     // TODO: Use private var intead of textview to use the data
-    private var test = ""
-
-    private var progress = 0
+    var test = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +48,9 @@ class HomeSleepTrackerFragment : Fragment() {
         binding.setGoalBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeSleepTrackerFragment_to_goalSetSleepTrackerFragment)
         }
-//        val totalSleep = binding.tvTotalSleep.text.toString().toInt()
-//        val score = binding.tvScore.text.toString().toInt()
-//
-//        binding.scorePercent.text = "$score%"
-//
-//        binding.qualityBar.progress = (progress + score)
+
+        binding.qualityBar.progress = test
+        binding.scorePercent.text = "$test%"
 
         return binding.root
     }
@@ -92,8 +87,7 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
-        test = scoreData.score
-
+        test = scoreData.score.toInt()
     }
 
     private fun getSleepHistory(authToken: String) {

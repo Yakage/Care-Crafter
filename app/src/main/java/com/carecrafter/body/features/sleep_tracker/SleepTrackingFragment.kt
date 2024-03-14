@@ -42,6 +42,7 @@ class SleepTrackingFragment : Fragment() {
     private var timerSeconds = 0
     private val channelId = "notification_channel"
     private var notificationId = 0
+    var input = 0
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var sharedPreferences: SharedPreferences
@@ -73,7 +74,7 @@ class SleepTrackingFragment : Fragment() {
         createNotificationChannel()
 
         binding.startBtn.setOnClickListener{
-            handler.postDelayed({ sendNotification() }, 5*1000)
+            handler.postDelayed({ sendNotification() }, (input * 60 * 60 * 1000).toLong()) // Input = Hour
             startTimer()
         }
         binding.stopBtn.setOnClickListener{
@@ -274,6 +275,7 @@ class SleepTrackingFragment : Fragment() {
     fun updateInfo(alarmData: Alarm){
         if (alarmData != null) {
             binding.tvIdk.text = alarmData.daily_goal
+            input = alarmData.daily_goal.toInt()
         }
     }
 

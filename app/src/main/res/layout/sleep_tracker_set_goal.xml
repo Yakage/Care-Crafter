@@ -30,7 +30,7 @@
                 android:text="CareCrafter"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
-                android:textSize="20dp"/>
+                android:textSize="27dp" />
 
         </LinearLayout>
 
@@ -43,9 +43,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:layout_marginLeft="10dp"
-                android:text="Set Time Goal"
+                android:textSize="50sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Set Time Goal / Alarm"
                 android:textStyle="bold"
                 android:textColor="@color/blue"
                 />
@@ -53,10 +54,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
                 android:text="Set you appropriate time and will be the base for your score accourding to your goal"
                 />
 
@@ -123,7 +125,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_marginTop="20dp"
@@ -154,7 +157,8 @@
         android:orientation="horizontal"
         android:padding="20dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/background_white">
+        android:background="@drawable/background_white"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="86dp"
@@ -196,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Now Let's Begin Tracking"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="40dp"/>
 
     </LinearLayout>
 

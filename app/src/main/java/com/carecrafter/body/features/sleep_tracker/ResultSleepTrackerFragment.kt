@@ -21,12 +21,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
+import java.text.DateFormat
+import java.util.Calendar
 
 
 class ResultSleepTrackerFragment : Fragment() {
     private lateinit var binding: SleepTrackerResultBinding
     private lateinit var sharedPreferences: SharedPreferences
     var input = 0
+    var scorefinal = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,11 @@ class ResultSleepTrackerFragment : Fragment() {
             findNavController().navigate(R.id.action_resultSleepTrackerFragment_to_homeSleepTrackerFragment)
         }
 
+        // Date for the TextView
+        val calendar = Calendar.getInstance().time
+        val dateFormat = DateFormat.getDateInstance(DateFormat.FULL).format(calendar)
+        binding.tvTime.text = "$dateFormat"
+
         return binding.root
     }
 
@@ -48,15 +56,21 @@ class ResultSleepTrackerFragment : Fragment() {
         val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
 
 
-        val input = input
-//        val scoreDivide = (input * 1)
+        val input = input.toDouble()
+        val scoreDivide = (input * 60 * 60).toInt()
         val minute = (seconds / 60).toInt()
         val hour = (minute / 60).toInt()
-        val score = (seconds / 10 * 100).toInt()
-        binding.tvTotalTime.text = "$hour.$minute.$seconds hrs $score $input"
+        //val score = ((seconds / input) * 100).toInt() // this line is to test if it works
+        val score = ((seconds / 1) * 100).toInt()
+        if (score >= 100) {
+            scorefinal = 100
+        } else {
+            scorefinal = score
+        }
+        binding.tvTotalTime.text = "$hour.$minute hrs\n$scorefinal/100"
 
         binding.progressBar.progress = score
-        createSleep(authToken, score.toString(), seconds.toInt())
+        createSleep(authToken, scorefinal.toString(), seconds.toInt())
         if (score == 100) {
             binding.tvComplete.visibility = View.VISIBLE
             binding.tvAlmost.visibility = View.GONE

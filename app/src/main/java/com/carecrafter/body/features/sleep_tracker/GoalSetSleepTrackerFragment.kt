@@ -44,9 +44,7 @@ class GoalSetSleepTrackerFragment : Fragment() {
     }
     private fun createAlarm(authToken: String){
         val dailyGoal = binding.etTimeGoal.text.toString().trim()
-        val hour: Int = binding.alarmPicker.currentHour
-        val minute: Int = binding.alarmPicker.currentMinute
-        val time = "$hour:$minute"
+        val time = "0:0"
         val createAlarmDataJson =
             "{\"authToken\":\"$authToken\",\"dailyGoal\":\"$dailyGoal\",\"time\":\"$time\"}"
 
@@ -87,7 +85,7 @@ class GoalSetSleepTrackerFragment : Fragment() {
                             }
                             Toast.makeText(
                                 requireContext(),
-                                errorMessage,
+                                "Please Input Goal",
                                 Toast.LENGTH_LONG
                             )
                                 .show()

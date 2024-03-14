@@ -32,6 +32,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Monday, April 1, 2024"
@@ -69,6 +70,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/progressBar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
