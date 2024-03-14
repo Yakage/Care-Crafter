@@ -261,8 +261,6 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                     }
                 })
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
             e.printStackTrace()
         }
     }
