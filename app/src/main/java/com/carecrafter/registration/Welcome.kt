@@ -18,20 +18,17 @@ class Welcome : AppCompatActivity() {
 
         welcomeLogin = findViewById(R.id.welcomeLogin)
         welcomeSignup = findViewById(R.id.welcomeSignup)
-        val backButton = findViewById<ImageView>(R.id.backButton)
 
         welcomeLogin.setOnClickListener {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
+            finish()
         }
 
         welcomeSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
-        }
-
-        backButton.setOnClickListener {
-            onBackPressed()
+            finish()
         }
     }
 }

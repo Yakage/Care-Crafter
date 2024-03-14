@@ -2,5 +2,6 @@ package com.carecrafter.models
 
 data class LeaderboardForStepTracker(
     val name: String,
-    val steps: Int
+    val steps: Int,
+    val avatar: Int
 )

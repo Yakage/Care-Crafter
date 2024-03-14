@@ -34,10 +34,12 @@ class SignUp : AppCompatActivity() {
         binding.tvSignIn.setOnClickListener {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.backButton.setOnClickListener {
             onBackPressed()
+            finish()
         }
         val genderSpinner : Spinner = binding.spinnerGender
         val genderIdentities = arrayOf(
@@ -137,6 +139,7 @@ class SignUp : AppCompatActivity() {
                         val intent = Intent(this@SignUp, SignIn::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
+                        finish()
                     } else {
                         var errorMessage = response.errorBody()?.string() ?: "Failed to get a valid response"
                         // Extract message part from the error JSON

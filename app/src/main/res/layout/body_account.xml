@@ -205,13 +205,7 @@
                     android:textColor="@android:color/black"
                     android:layout_marginStart="8dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sign out of your account"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_marginStart="8dp"/>
+
             </LinearLayout>
         </LinearLayout>
 

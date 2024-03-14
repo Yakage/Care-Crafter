@@ -40,6 +40,7 @@ class Intro : AppCompatActivity() {
         skipBtn.setOnClickListener {
             val intent = Intent(this@Intro, Welcome::class.java)
             startActivity(intent)
+            finish()
         }
 
         sliderList = ArrayList()

@@ -97,6 +97,19 @@ class HomeFragment : Fragment() {
     fun updateInfo(userData: User){
         if (userData != null) {
             binding.tvFullName.text = Editable.Factory.getInstance().newEditable(userData.name)
+            when (userData.avatar) {
+                1 -> binding.profilePicture.setImageResource(R.drawable.avatarone)
+                2 -> binding.profilePicture.setImageResource(R.drawable.avatartwo)
+                3 -> binding.profilePicture.setImageResource(R.drawable.avatarthree)
+                4 -> binding.profilePicture.setImageResource(R.drawable.avatarfour)
+                5 -> binding.profilePicture.setImageResource(R.drawable.avatarfive)
+                6 -> binding.profilePicture.setImageResource(R.drawable.avatarsix)
+                7 -> binding.profilePicture.setImageResource(R.drawable.avatarseven)
+                8 -> binding.profilePicture.setImageResource(R.drawable.avataeight)
+                else -> {
+                    binding.profilePicture.setImageResource(R.drawable.boy_unpressed)
+                }
+            }
         }
     }
 

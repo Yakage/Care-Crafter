@@ -7,6 +7,7 @@ data class User(
     var gender: String,
     var height: String,
     var weight: String,
+    var avatar: Int,
  )
 
 

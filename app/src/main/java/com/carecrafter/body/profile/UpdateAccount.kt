@@ -29,6 +29,7 @@ import java.io.StringReader
 class UpdateAccount : Fragment() {
     private lateinit var binding: AccountUpdateAccountBinding
     private lateinit var sharedPreferences: SharedPreferences
+    var avatar: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,6 @@ class UpdateAccount : Fragment() {
         binding.backButton.setOnClickListener {
             findNavController().navigate(UpdateAccountDirections.actionUpdateAccountToAccountFragment())
         }
-
         setupProfilePictureSpinner()
 
         binding.btUpdate.setOnClickListener {
@@ -51,7 +51,6 @@ class UpdateAccount : Fragment() {
 
         return binding.root
     }
-
     private fun setupProfilePictureSpinner() {
         val profilePictureSpinner = binding.profilePictureSpinner
         val imageList = listOf(
@@ -80,7 +79,8 @@ class UpdateAccount : Fragment() {
         profilePictureSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // Change the profile picture based on the selected item
-                binding.profilePictureAvatar.setImageResource(imageList[position])
+                binding.profilePicture.setImageResource(imageList[position])
+                avatar = position + 1
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -121,6 +121,20 @@ class UpdateAccount : Fragment() {
             binding.GenderET.text = Editable.Factory.getInstance().newEditable(userData.gender)
             binding.HeightET.text = Editable.Factory.getInstance().newEditable(userData.height)
             binding.WeightET.text = Editable.Factory.getInstance().newEditable(userData.weight)
+            when (userData.avatar) {
+                1 -> binding.profilePicture.setImageResource(R.drawable.avatarone)
+                2 -> binding.profilePicture.setImageResource(R.drawable.avatartwo)
+                3 -> binding.profilePicture.setImageResource(R.drawable.avatarthree)
+                4 -> binding.profilePicture.setImageResource(R.drawable.avatarfour)
+                5 -> binding.profilePicture.setImageResource(R.drawable.avatarfive)
+                6 -> binding.profilePicture.setImageResource(R.drawable.avatarsix)
+                7 -> binding.profilePicture.setImageResource(R.drawable.avatarseven)
+                8 -> binding.profilePicture.setImageResource(R.drawable.avataeight)
+                else -> {
+                    binding.profilePicture.setImageResource(R.drawable.boy_unpressed)
+                }
+            }
+
         }
     }
 
@@ -130,9 +144,11 @@ class UpdateAccount : Fragment() {
         val height = binding.HeightET.text.toString().trim()
         val weight = binding.WeightET.text.toString().trim()
         val gender = binding.GenderET.text.toString().toLowerCase().trim()
+        val avatar = avatar
+
 
         val updateUserDataJson =
-            "{\"authToken\":\"$authToken\",\"name\":\"$name\",\"birthday\":\"$birthday\",\"gender\":\"$gender\",\"height\":\"$height\",\"weight\":\"$weight\"}"
+            "{\"authToken\":\"$authToken\",\"name\":\"$name\",\"birthday\":\"$birthday\",\"gender\":\"$gender\",\"height\":\"$height\",\"weight\":\"$weight\",\"avatar\":\"$avatar\"}"
 
         //validation
         if (name.isEmpty()) {
@@ -173,6 +189,7 @@ class UpdateAccount : Fragment() {
                 gender,
                 height,
                 weight,
+                avatar,
             ).enqueue(object : Callback<DefaultResponse> {
                 override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                     Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()

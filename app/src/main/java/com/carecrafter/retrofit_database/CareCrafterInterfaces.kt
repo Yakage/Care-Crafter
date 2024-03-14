@@ -50,6 +50,12 @@ interface CareCrafterInterfaces {
         @Field("email") email:String,
         @Field("password") password:String,
     ):retrofit2.Call<DefaultResponse>
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("logout")
+    fun logoutUser(
+        @Header("Authorization") authToken: String,
+    ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
     @Headers("Accept: application/json")
@@ -61,6 +67,7 @@ interface CareCrafterInterfaces {
         @Field("gender") gender:String,
         @Field("height") height:String,
         @Field("weight") weight:String,
+        @Field("avatar") avatar:Int,
     ): retrofit2.Call<DefaultResponse>
 
     @Headers("Accept: application/json")

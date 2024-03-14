@@ -74,6 +74,7 @@ class SignIn : AppCompatActivity() {
                                 startActivity(
                                     Intent(this@SignIn, BodyActivity::class.java)
                                 )
+                                finish()
 
                             } else {
                                 val errorMessage: String = try {
@@ -103,9 +104,6 @@ class SignIn : AppCompatActivity() {
             startActivity(
                 Intent(this@SignIn, BodyActivity::class.java)
             )
-        }
-        binding.backButton.setOnClickListener {
-            onBackPressed()
         }
     }
 
