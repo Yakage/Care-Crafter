@@ -2,5 +2,5 @@ package com.carecrafter.models
 
 data class LeaderboardForSleepTracker(
     val name: String,
-    val sleeps: Int
+    val sleeps: String
 )

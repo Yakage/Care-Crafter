@@ -82,7 +82,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { sleepsApi ->
                         LeaderboardForSleepTracker(
                             name = sleepsApi.name,
-                            sleeps = sleepsApi.totalSleeps
+                            sleeps = sleepsApi.totalSleeps.toString()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -108,7 +108,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { sleepsApi ->
                         LeaderboardForSleepTracker(
                             name = sleepsApi.name,
-                            sleeps = sleepsApi.totalSleeps
+                            sleeps = sleepsApi.totalSleeps.toString()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)
@@ -134,7 +134,7 @@ class LeaderboardSleepTrackerFragment : Fragment() {
                     val entries = response.body()?.map { sleepsApi ->
                         LeaderboardForSleepTracker(
                             name = sleepsApi.name,
-                            sleeps = sleepsApi.totalSleeps
+                            sleeps = sleepsApi.totalSleeps.toString()
                         )
                     } ?: emptyList()
                     leaderboardAdapter.updateData(entries)

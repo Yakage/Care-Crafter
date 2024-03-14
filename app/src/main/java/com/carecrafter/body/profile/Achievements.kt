@@ -227,25 +227,25 @@ class Achievements : Fragment() {
 
     private fun updateSleepInfo(sleepData: SleepsApi) {
         if (sleepData != null) {
-            if (sleepData.totalSleeps >= 100){
+            if (sleepData.totalSleeps.toInt() >= 100){
                 binding.achievementSleep1.setImageTintList(null)
                 progress += 10
                 updatebar()
             }
-            if (sleepData.totalSleeps >= 1000){
+            if (sleepData.totalSleeps.toInt() >= 1000){
                 binding.achievementSleep1.setImageTintList(null)
                 binding.achievementSleep2.setImageTintList(null)
                 progress += 10
                 updatebar()
             }
-            if (sleepData.totalSleeps >= 10000){
+            if (sleepData.totalSleeps.toInt() >= 10000){
                 binding.achievementSleep1.setImageTintList(null)
                 binding.achievementSleep2.setImageTintList(null)
                 binding.achievementSleep3.setImageTintList(null)
                 progress += 10
                 updatebar()
             }
-            if (sleepData.totalSleeps >= 100000){
+            if (sleepData.totalSleeps.toInt() >= 100000){
                 binding.achievementSleep1.setImageTintList(null)
                 binding.achievementSleep2.setImageTintList(null)
                 binding.achievementSleep3.setImageTintList(null)
