@@ -163,9 +163,9 @@ interface CareCrafterInterfaces {
         @Field("daily_goal") dailyGoal:String,
         @Field("current_steps") currentSteps:String,
     ):retrofit2.Call<DefaultResponse>
-
+    @FormUrlEncoded
     @Headers("Accept: application/json")
-    @POST("updateStepHistory")
+    @PUT("updateStepHistory")
     fun updateStepHistory(
         @Header("Authorization") authToken: String,
         @Field("current_steps") currentSteps:String,
@@ -178,7 +178,6 @@ interface CareCrafterInterfaces {
         @Header("Authorization") authToken: String,
         @Field("steps") results:String,
     ):retrofit2.Call<DefaultResponse>
-
     @FormUrlEncoded
     @Headers("Accept: application/json")
     @PUT("updateStep")
