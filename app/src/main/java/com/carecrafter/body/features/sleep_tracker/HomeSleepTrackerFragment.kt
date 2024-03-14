@@ -90,10 +90,10 @@ class HomeSleepTrackerFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepsApi){
-        binding.tvTotalSleep.text = scoreData.totalSleeps.toString()
+        binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
-        // TODO: Use private var intead of textview to use the data
         test = scoreData.score
+
     }
 
     private fun getSleepHistory(authToken: String) {
