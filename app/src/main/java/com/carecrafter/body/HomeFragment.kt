@@ -122,8 +122,14 @@ class HomeFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepsApi){
-        binding.tvTotalSleep.text = scoreData.totalSleeps.toString()
-        binding.tvScore.text = scoreData.score
+        if (scoreData != null){
+            binding.tvTotalSleep.text = scoreData.totalSleeps
+            binding.tvScore.text = scoreData.score
+        }else{
+            binding.tvTotalSleep.text = "0"
+            binding.tvScore.text = "0"
+        }
+
     }
 
     private fun getStepHistory(authToken: String) {
