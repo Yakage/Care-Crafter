@@ -200,16 +200,12 @@ interface CareCrafterInterfaces {
 
     //For Statistics
     @Headers("Accept: application/json")
-    @GET("getDailyStep")
-    fun getDailySteps(@Header("Authorization") authToken: String): Call<List<StepsDailyStatsApi>>
+    @GET("chartDataStepsWeekly")
+    fun chartDataStepsWeekly(@Header("Authorization") authToken: String): Call<List<StepsWeeklyStatsApi>>
 
     @Headers("Accept: application/json")
-    @GET("getWeeklyStep")
-    fun getWeeklySteps(@Header("Authorization") authToken: String): Call<List<StepsWeeklyStatsApi>>
-
-    @Headers("Accept: application/json")
-    @GET("getMonthlyStep")
-    fun getMonthlySteps(@Header("Authorization") authToken: String): Call<List<StepsMonthlyStatsApi>>
+    @GET("chartDataStepsMonthly")
+    fun chartDataStepsMonthly(@Header("Authorization") authToken: String): Call<List<StepsMonthlyStatsApi>>
 
     //For Water Intake ============================================================================
     @FormUrlEncoded
@@ -256,14 +252,10 @@ interface CareCrafterInterfaces {
 
     //For Statistics
     @Headers("Accept: application/json")
-    @GET("getDailyWater")
-    fun getDailyWater(@Header("Authorization") authToken: String): Call<List<WaterDailyStatsApi>>
+    @GET("chartDataWaterWeekly")
+    fun chartDataWaterWeekly(@Header("Authorization") authToken: String): Call<List<WaterWeeklyStatsApi>>
 
     @Headers("Accept: application/json")
-    @GET("getWeeklyWater")
-    fun getWeeklyWater(@Header("Authorization") authToken: String): Call<List<WaterWeeklyStatsApi>>
-
-    @Headers("Accept: application/json")
-    @GET("getMonthlyWater")
-    fun getMonthlyWater(@Header("Authorization") authToken: String): Call<List<WaterMonthlyStatsApi>>
+    @GET("chartDataWaterMonthly")
+    fun chartDataWaterMonthly(@Header("Authorization") authToken: String): Call<List<WaterMonthlyStatsApi>>
 }

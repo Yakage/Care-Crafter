@@ -66,7 +66,7 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
     }
 
     private fun setupSpinner(authToken: String) {
-        val spinnerItems = listOf("Daily", "Weekly", "Monthly")
+        val spinnerItems = listOf("Weekly", "Monthly")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTimeFrame.adapter = adapter
@@ -74,9 +74,8 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
         binding.spinnerTimeFrame.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
-                    0 -> showDailyData(authToken)
-                    1 -> showWeeklyData(authToken)
-                    2 -> showMonthlyData(authToken)
+                    0 -> showWeeklyData(authToken)
+                    1 -> showMonthlyData(authToken)
                 }
             }
 
@@ -109,60 +108,8 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
         barChart.invalidate()
     }
 
-    private fun showDailyData(authToken: String) {
-        ApiClient.instance.getDailyWater("Bearer $authToken").enqueue(object :
-            Callback<List<WaterDailyStatsApi>> {
-            override fun onResponse(call: Call<List<WaterDailyStatsApi>>, response: Response<List<WaterDailyStatsApi>>) {
-                if (response.isSuccessful) {
-                    val entries = mutableListOf<BarEntry>()
-                    val labels = mutableListOf<String>()
-
-                    // Initialize water intake map for each day of the week with zero intake
-                    val waterByDay = mutableMapOf<Int, Float>().apply {
-                        for (i in 0..6) {
-                            put(i, 0f)
-                        }
-                    }
-
-                    // Update water intake for each day based on the response data
-                    response.body()?.forEach { waterApi ->
-                        val dayOfWeek = waterApi.dayOfWeek
-                        val totalWater = waterApi.totalWater.toFloat()
-                        waterByDay[dayOfWeek] = totalWater
-                    }
-
-                    // Populate entries and labels with water intake for each day
-                    for (i in 0..6) {
-                        val dayLabel = when (i) {
-                            0 -> "Sun"
-                            1 -> "Mon"
-                            2 -> "Tue"
-                            3 -> "Wed"
-                            4 -> "Thu"
-                            5 -> "Fri"
-                            6 -> "Sat"
-                            else -> ""
-                        }
-                        labels.add(dayLabel)
-                        entries.add(BarEntry(i.toFloat(), waterByDay[i] ?: 0f))
-                    }
-
-                    setData(entries, labels)
-                } else {
-                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get daily water data", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<WaterDailyStatsApi>>, t: Throwable) {
-                Log.e("StatisticWaterIntakeFragment", "Failed to get daily water data", t)
-                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get daily water data", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-
     private fun showWeeklyData(authToken: String) {
-        ApiClient.instance.getWeeklyWater("Bearer $authToken").enqueue(object :
+        ApiClient.instance.chartDataWaterWeekly("Bearer $authToken").enqueue(object :
             Callback<List<WaterWeeklyStatsApi>> {
             override fun onResponse(call: Call<List<WaterWeeklyStatsApi>>, response: Response<List<WaterWeeklyStatsApi>>) {
                 if (response.isSuccessful) {
@@ -171,8 +118,10 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
                     val data = response.body()
 
                     data?.forEach { waterApi ->
-                        entries.add(BarEntry(entries.size.toFloat(), waterApi.totalWater.toFloat()))
-                        labels.add(waterApi.weekStartDate) // Use week start date as label
+                        entries.add(BarEntry(entries.size.toFloat(), waterApi.value.toFloat()))
+                        // Use the first three letters of the day name as label
+                        val dayName = waterApi.label.substring(0, 3)
+                        labels.add(dayName)
                     }
                     setData(entries, labels)
                 } else {
@@ -187,8 +136,9 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
         })
     }
 
+
     private fun showMonthlyData(authToken: String) {
-        ApiClient.instance.getMonthlyWater("Bearer $authToken").enqueue(object :
+        ApiClient.instance.chartDataWaterMonthly("Bearer $authToken").enqueue(object :
             Callback<List<WaterMonthlyStatsApi>> {
             override fun onResponse(
                 call: Call<List<WaterMonthlyStatsApi>>,
@@ -197,27 +147,12 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val entries = mutableListOf<BarEntry>()
                     val labels = mutableListOf<String>()
+                    val data = response.body()
 
-                    // Initialize water intake map for each month with zero intake
-                    val waterByMonth = mutableMapOf<Int, Float>().apply {
-                        for (i in 0..11) {
-                            put(i, 0f)
-                        }
-                    }
-
-                    // Update water intake for each month based on the response data
-                    response.body()?.forEach { waterApi ->
-                        val monthNumber = waterApi.monthNumber
-                        val totalWater = waterApi.totalWater.toFloat()
-                        waterByMonth[monthNumber] = totalWater
-                    }
-
-                    // Populate entries and labels with water intake for each month
-                    val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-                    for (i in 0..11) {
-                        val monthLabel = months[i]
-                        labels.add(monthLabel)
-                        entries.add(BarEntry(i.toFloat(), waterByMonth[i] ?: 0f))
+                    data?.forEachIndexed { index, waterApi ->
+                        entries.add(BarEntry(index.toFloat(), waterApi.water.toFloat()))
+                        // Use the first three letters of the week name as label
+                        labels.add(waterApi.week.substring(0, 3))
                     }
 
                     setData(entries, labels)
@@ -232,6 +167,8 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
             }
         })
     }
+
+
 
     private fun getWaterHistory(authToken: String) {
         ApiClient.instance.getWaterHistory2("Bearer $authToken").enqueue(object : Callback<List<WaterHistoryApi>> {

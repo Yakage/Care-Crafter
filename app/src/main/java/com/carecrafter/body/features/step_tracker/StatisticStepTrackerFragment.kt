@@ -74,7 +74,7 @@ class StatisticStepTrackerFragment : Fragment() {
     }
 
     private fun setupSpinner(authToken: String) {
-        val spinnerItems = listOf("Daily", "Weekly", "Monthly")
+        val spinnerItems = listOf("Weekly", "Monthly")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTimeFrame.adapter = adapter
@@ -82,9 +82,8 @@ class StatisticStepTrackerFragment : Fragment() {
         binding.spinnerTimeFrame.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (position) {
-                    0 -> showDailyData(authToken)
-                    1 -> showWeeklyData(authToken)
-                    2 -> showMonthlyData(authToken)
+                    0 -> showWeeklyData(authToken)
+                    1 -> showMonthlyData(authToken)
                 }
             }
 
@@ -105,59 +104,8 @@ class StatisticStepTrackerFragment : Fragment() {
         xAxis.setDrawAxisLine(false)
     }
 
-    private fun showDailyData(authToken: String) {
-        ApiClient.instance.getDailySteps("Bearer $authToken").enqueue(object :
-            Callback<List<StepsDailyStatsApi>> {
-            override fun onResponse(call: Call<List<StepsDailyStatsApi>>, response: Response<List<StepsDailyStatsApi>>) {
-                if (response.isSuccessful) {
-                    val entries = mutableListOf<BarEntry>()
-                    val labels = mutableListOf<String>()
-
-                    // Initialize steps map for each day of the week with zero steps
-                    val stepsByDay = mutableMapOf<Int, Float>().apply {
-                        for (i in 0..6) {
-                            put(i, 0f)
-                        }
-                    }
-
-                    // Update steps count for each day based on the response data
-                    response.body()?.forEach { stepsApi ->
-                        val dayOfWeek = stepsApi.dayOfWeek
-                        val totalSteps = stepsApi.totalSteps.toFloat()
-                        stepsByDay[dayOfWeek] = totalSteps
-                    }
-
-                    // Populate entries and labels with steps count for each day
-                    for (i in 0..6) {
-                        val dayLabel = when (i) {
-                            0 -> "Sun"
-                            1 -> "Mon"
-                            2 -> "Tue"
-                            3 -> "Wed"
-                            4 -> "Thu"
-                            5 -> "Fri"
-                            6 -> "Sat"
-                            else -> ""
-                        }
-                        labels.add(dayLabel)
-                        entries.add(BarEntry(i.toFloat(), stepsByDay[i] ?: 0f))
-                    }
-
-                    setData(entries, labels)
-                } else {
-                    Toast.makeText(requireContext(), "Failed to get daily steps data", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<StepsDailyStatsApi>>, t: Throwable) {
-                Log.e("StatisticStepTrackerFragment", "Failed to get daily steps data", t)
-                Toast.makeText(requireContext(), "Failed to get daily steps data", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
     private fun showWeeklyData(authToken: String) {
-        ApiClient.instance.getWeeklySteps("Bearer $authToken").enqueue(object :
+        ApiClient.instance.chartDataStepsWeekly("Bearer $authToken").enqueue(object :
             Callback<List<StepsWeeklyStatsApi>> {
             override fun onResponse(
                 call: Call<List<StepsWeeklyStatsApi>>,
@@ -168,9 +116,11 @@ class StatisticStepTrackerFragment : Fragment() {
                     val labels = mutableListOf<String>()
                     val data = response.body()
 
-                    data?.forEach { stepsApi ->
-                        entries.add(BarEntry(entries.size.toFloat(), stepsApi.totalSteps.toFloat()))
-                        labels.add(stepsApi.weekStartDate) // Use week start date as label
+                    data?.forEachIndexed { index, stepsApi ->
+                        // Add the total steps for each week as BarEntry
+                        entries.add(BarEntry(index.toFloat(), stepsApi.value.toFloat()))
+                        // Use the first three letters of the day name as label
+                        labels.add(stepsApi.label.substring(0, 3))
                     }
                     setData(entries, labels)
                 } else {
@@ -184,8 +134,10 @@ class StatisticStepTrackerFragment : Fragment() {
             }
         })
     }
+
+
     private fun showMonthlyData(authToken: String) {
-        ApiClient.instance.getMonthlySteps("Bearer $authToken").enqueue(object :
+        ApiClient.instance.chartDataStepsMonthly("Bearer $authToken").enqueue(object :
             Callback<List<StepsMonthlyStatsApi>> {
             override fun onResponse(
                 call: Call<List<StepsMonthlyStatsApi>>,
@@ -195,26 +147,11 @@ class StatisticStepTrackerFragment : Fragment() {
                     val entries = mutableListOf<BarEntry>()
                     val labels = mutableListOf<String>()
 
-                    // Initialize steps map for each month with zero steps
-                    val stepsByMonth = mutableMapOf<Int, Float>().apply {
-                        for (i in 0..11) {
-                            put(i, 0f)
-                        }
-                    }
-
-                    // Update steps count for each month based on the response data
-                    response.body()?.forEach { stepsApi ->
-                        val monthNumber = stepsApi.monthNumber
-                        val totalSteps = stepsApi.totalSteps.toFloat()
-                        stepsByMonth[monthNumber] = totalSteps
-                    }
-
-                    // Populate entries and labels with steps count for each month
-                    val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-                    for (i in 0..11) {
-                        val monthLabel = months[i]
-                        labels.add(monthLabel)
-                        entries.add(BarEntry(i.toFloat(), stepsByMonth[i] ?: 0f))
+                    response.body()?.forEachIndexed { index, stepsApi ->
+                        // Add the total steps for each week as BarEntry
+                        entries.add(BarEntry(index.toFloat(), stepsApi.steps.toFloat()))
+                        // Use the "week" field as label
+                        labels.add(stepsApi.week)
                     }
 
                     setData(entries, labels)
@@ -229,6 +166,7 @@ class StatisticStepTrackerFragment : Fragment() {
             }
         })
     }
+
 
 
 

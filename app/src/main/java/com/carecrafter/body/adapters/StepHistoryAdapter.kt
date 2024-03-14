@@ -27,7 +27,7 @@ class StepHistoryAdapter (private var entries: List<StepHistory>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val entry = entries[position]
-        holder.date.text = "${entry.current_steps}: "
+        holder.date.text = "${entry.created_at}: "
         holder.stepLogs.text = "${entry.current_steps} / ${entry.daily_goal}"
     }
 
