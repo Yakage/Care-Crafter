@@ -291,8 +291,14 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
     }
 
     fun updateStep(stepData: StepHistoryApi){
-        binding.tvTotal.text = stepData.daily_goal
-        binding.tvCount.text = stepData.current_steps
-        totalSteps = stepData.current_steps.toFloat()
+        if (stepData.current_steps == null){
+            totalSteps = 0f
+            binding.tvTotal.text = "0"
+            binding.tvCount.text = "0"
+        } else {
+            totalSteps = stepData.current_steps.toFloat()
+            binding.tvTotal.text = stepData.daily_goal
+            binding.tvCount.text = stepData.current_steps
+        }
     }
 }

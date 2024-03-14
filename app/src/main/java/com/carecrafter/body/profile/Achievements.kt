@@ -3,19 +3,16 @@ package com.carecrafter.body.profile
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.ImageViewCompat.setImageTintList
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.databinding.AchievementsHomeBinding
 import com.carecrafter.models.SleepsApi
 import com.carecrafter.models.StepsApi
-import com.carecrafter.models.User
 import com.carecrafter.models.WaterApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
@@ -29,10 +26,6 @@ class Achievements : Fragment() {
     private var progress = 0
 
     //Increment Checker
-    var hasIncrementedWater1 = false
-    var hasIncrementedWater2 = false
-    var hasIncrementedWater3 = false
-    var hasIncrementedWater4 = false
 
 
     override fun onCreateView(
@@ -51,28 +44,17 @@ class Achievements : Fragment() {
 
         //Descriptions Water Intake
         binding.achievementWater1.setOnClickListener {
-            if (!hasIncrementedWater1) {
-                binding.description.text = "Drink at least one time"
-                hasIncrementedWater1 = true
-            }
+            binding.description.text = "Drink at least one time"
         }
         binding.achievementWater2.setOnClickListener {
-            if (!hasIncrementedWater2) { // Add this check
-                binding.description.text = "Drink at least 10,000ml"
-                hasIncrementedWater2 = true
-            }
+            binding.description.text = "Drink at least 10,000ml"
         }
         binding.achievementWater3.setOnClickListener{
-            if (!hasIncrementedWater3) { // Add this check
-                binding.description.text = "Drink at least 100,000ml"
-                hasIncrementedWater3 = true
-            }
+            binding.description.text = "Drink at least 100,000ml"
+
         }
         binding.achievementWater4.setOnClickListener{
-            if (!hasIncrementedWater4) { // Add this check
-                binding.description.text = "Drink at least 1,000,000ml"
-                hasIncrementedWater4 = true
-            }
+            binding.description.text = "Drink at least 1,000,000ml"
         }
 
         //Descriptions Step Tracker

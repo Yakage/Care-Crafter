@@ -127,9 +127,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_daily_drinker"
+                        android:src="@drawable/achievement_first_sip"
                         app:tint="@color/grey"
-                        android:elevation="10dp"/>
+                        android:elevation="10dp" />
 
                     <Space
                         android:layout_width="10dp"
@@ -140,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_morning_hydrator"
+                        android:src="@drawable/achievement_aqua_achiever"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_weekend_hydrator"
+                        android:src="@drawable/achievement_water_enyoyer"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_hydration_streak"
+                        android:src="@drawable/achievement_bo_oh_o_wa_er"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -199,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_early_bird_walker"
+                        android:src="@drawable/achievement_1_hour_nap"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -212,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_sunset_stroller"
+                        android:src="@drawable/achievement_dreamy_eight"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -225,7 +225,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_weekend_warrior"
+                        android:src="@drawable/achievement_full_day_snoozer"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -238,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_step_streak"
+                        android:src="@drawable/achievement_weekender"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_early_riser"
+                        android:src="@drawable/achievement_light_walk"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -284,7 +284,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_sweet_dreams"
+                        android:src="@drawable/achievement_steady_strider"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -297,7 +297,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_sleeping_beauty"
+                        android:src="@drawable/achievement_quick_runner"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 
@@ -310,7 +310,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/achievement_sunrise_enthusiast"
+                        android:src="@drawable/achievement_who_need_cars_i_got_legs"
                         app:tint="@color/grey"
                         android:elevation="10dp"/>
 

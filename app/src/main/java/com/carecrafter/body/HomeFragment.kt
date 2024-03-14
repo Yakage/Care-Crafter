@@ -17,7 +17,6 @@ import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.features.BmiCalcuActivity
 import com.carecrafter.body.features.SleepTrackerActivity
-import com.carecrafter.body.features.StepTrackerActivity
 import com.carecrafter.body.features.water_intake.WaterIntakeBActivity
 import com.carecrafter.databinding.BodyHomeBinding
 import com.carecrafter.models.BMI
