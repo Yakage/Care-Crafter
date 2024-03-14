@@ -292,11 +292,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                this@WaterIntakeBActivity,
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()

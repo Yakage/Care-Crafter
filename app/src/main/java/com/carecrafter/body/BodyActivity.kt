@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -24,6 +25,20 @@ class BodyActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.updateAccount) {
+                binding.bottomNavigation.visibility = View.GONE
+            }
+            if (destination.id == R.id.achievements) {
+                binding.bottomNavigation.visibility = View.GONE
+            }
+            if (destination.id == R.id.bmiCalcuHome) {
+            binding.bottomNavigation.visibility = View.GONE
+            }
+            else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+            }
+        }
 
         val sharedPreferences = getSharedPreferences("myPreference", MODE_PRIVATE)
         viewModel = ViewModelProvider(this@BodyActivity).get(SharedPrefsViewModel::class.java)

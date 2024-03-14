@@ -26,6 +26,7 @@ import java.io.StringReader
 class ResultSleepTrackerFragment : Fragment() {
     private lateinit var binding: SleepTrackerResultBinding
     private lateinit var sharedPreferences: SharedPreferences
+    var input = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,15 +46,14 @@ class ResultSleepTrackerFragment : Fragment() {
 
     private fun testing(authToken: String){
         val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
-        val goal = 10
 
-        //@Todo Time Goal NEED FIXING
-        //val input = binding.tvTimeGoal.text.toString().toDouble()
-        //val scoreDivide = (input * 1)
+
+        val input = input
+//        val scoreDivide = (input * 1)
         val minute = (seconds / 60).toInt()
         val hour = (minute / 60).toInt()
         val score = (seconds / 10 * 100).toInt()
-        binding.tvTotalTime.text = "$hour.$minute.$seconds hrs $score"
+        binding.tvTotalTime.text = "$hour.$minute.$seconds hrs $score $input"
 
         binding.progressBar.progress = score
         createSleep(authToken, score.toString(), seconds.toInt())
@@ -80,13 +80,14 @@ class ResultSleepTrackerFragment : Fragment() {
         }
     }
     private fun getAlarmInfo(authToken: String) {
-        ApiClient.instance.getAlarm("Bearer $authToken").enqueue(object : Callback<Alarm> {
+        ApiClient.instance.getAlarm("Bearer $authToken").enqueue(object : Callback<Alarm>{
             override fun onResponse(call: Call<Alarm>, response: Response<Alarm>) {
                 if (response.isSuccessful) {
                     val alarmData = response.body()
                     if (alarmData != null) {
                         updateInfo(alarmData)
                     }
+
                     val responseBody = response.body().toString()
                     Log.d("Response", responseBody)
                 } else {
@@ -103,7 +104,7 @@ class ResultSleepTrackerFragment : Fragment() {
 
     fun updateInfo(alarmData: Alarm){
         if (alarmData != null) {
-            binding.tvTimeGoal.text = alarmData.daily_goal
+            input = alarmData.daily_goal.toInt()
         }
     }
     private fun getScore(authToken: String) {

@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-    private const val BASE_URL = "https://carecrafter-e36f7bd1d791.herokuapp.com/api/"
-//    private const val BASE_URL = "http://192.168.1.93:8000/api/"
+//    private const val BASE_URL = "https://carecrafter-e36f7bd1d791.herokuapp.com/api/"
+    private const val BASE_URL = "http://192.168.1.93:8000/api/"
 
     private lateinit var sharedPreferences: SharedPreferences
 
