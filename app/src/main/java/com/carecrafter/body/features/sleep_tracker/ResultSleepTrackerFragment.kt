@@ -55,14 +55,12 @@ class ResultSleepTrackerFragment : Fragment() {
 
     private fun testing(authToken: String){
         val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
-
-
         val input = input.toDouble()
         val scoreDivide = (input * 60 * 60).toInt()
         val minute = (seconds / 60).toInt()
         val hour = (minute / 60).toInt()
-        //val score = ((seconds / input) * 100).toInt() // this line is to test if it works
-        val score = ((seconds / 1) * 100).toInt()
+        val score = ((seconds / input) * 100).toInt() // this line is to test if it works
+        //val score = ((seconds / scoreDivide) * 100).toInt()
         if (score >= 100) {
             scorefinal = 100
         } else {
@@ -72,22 +70,22 @@ class ResultSleepTrackerFragment : Fragment() {
 
         binding.progressBar.progress = score
         createSleep(authToken, scorefinal.toString(), seconds.toInt())
-        if (score == 100) {
+        if (scorefinal == 100) {
             binding.tvComplete.visibility = View.VISIBLE
             binding.tvAlmost.visibility = View.GONE
             binding.tvHalf.visibility = View.GONE
             binding.tvBarely.visibility = View.GONE
-        } else if (score in 75..99) {
+        } else if (scorefinal in 75..99) {
             binding.tvComplete.visibility = View.GONE
             binding.tvAlmost.visibility = View.VISIBLE
             binding.tvHalf.visibility = View.GONE
             binding.tvBarely.visibility = View.GONE
-        } else if (score in 50..74) {
+        } else if (scorefinal in 50..74) {
             binding.tvComplete.visibility = View.GONE
             binding.tvAlmost.visibility = View.GONE
             binding.tvHalf.visibility = View.VISIBLE
             binding.tvBarely.visibility = View.GONE
-        } else if (score in 0..49) {
+        } else if (scorefinal in 0..49) {
             binding.tvComplete.visibility = View.GONE
             binding.tvAlmost.visibility = View.GONE
             binding.tvHalf.visibility = View.GONE
