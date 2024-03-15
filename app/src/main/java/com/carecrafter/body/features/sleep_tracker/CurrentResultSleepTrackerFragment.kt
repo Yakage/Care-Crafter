@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
+import com.carecrafter.databinding.SleepTrackerCurrentResultBinding
 import com.carecrafter.databinding.SleepTrackerResultBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
@@ -25,8 +26,8 @@ import java.text.DateFormat
 import java.util.Calendar
 
 
-class ResultSleepTrackerFragment : Fragment() {
-    private lateinit var binding: SleepTrackerResultBinding
+class CurrentResultSleepTrackerFragment : Fragment() {
+    private lateinit var binding: SleepTrackerCurrentResultBinding
     private lateinit var sharedPreferences: SharedPreferences
     var input = 0
     var scorefinal = 0
@@ -35,14 +36,13 @@ class ResultSleepTrackerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SleepTrackerResultBinding.inflate(inflater, container, false)
+        binding = SleepTrackerCurrentResultBinding.inflate(inflater, container, false)
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         authToken?.let { getAlarmInfo(it) }
         authToken?.let { getScore(it) }
         binding.backBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_resultSleepTrackerFragment_to_homeSleepTrackerFragment)
-            requireActivity().finish()
+            findNavController().navigate(CurrentResultSleepTrackerFragmentDirections.actionCurrentResultSleepTrackerFragment2ToHomeFragment())
         }
 
         // Date for the TextView

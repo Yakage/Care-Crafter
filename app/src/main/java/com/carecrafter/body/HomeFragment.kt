@@ -47,8 +47,7 @@ class HomeFragment : Fragment() {
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
         binding.sleepFT.setOnClickListener {
-            val intent = Intent(activity, SleepTrackerActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingSleepTrackingFragment())
         }
         binding.stepFT.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingStepTrackerFragment())
@@ -141,7 +140,6 @@ class HomeFragment : Fragment() {
             binding.tvTotalSleep.text = "0"
             binding.tvScore.text = "0"
         }
-
     }
 
     private fun getStepHistory(authToken: String) {
@@ -169,10 +167,10 @@ class HomeFragment : Fragment() {
 
     fun updateStep(stepData: StepHistoryApi){
         val blue = ContextCompat.getColor(requireContext(), R.color.blue)
-        val currentSteps = stepData.current_steps ?: "0" // Safe access to current_steps
-        val dailyGoal = stepData.daily_goal ?: "0"
+        val currentSteps = stepData.current_steps?.toIntOrNull() ?: 0
+        val dailyGoal = stepData.daily_goal?.toIntOrNull() ?: 0
         if (stepData != null) {
-            binding.tvStepGoal.text = "Goal: " + stepData.current_steps + " / " + stepData.daily_goal
+            binding.tvStepGoal.text = "Goal: $currentSteps / $dailyGoal"
             binding.circularProgressBar.apply {
                 progressMax = dailyGoal.toFloat()
                 setProgressWithAnimation(currentSteps.toFloat(), 1000)
@@ -182,6 +180,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     private fun getBMI(authToken: String) {
         ApiClient.instance.getBMI("Bearer $authToken").enqueue(object : Callback<BMI> {

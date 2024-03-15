@@ -87,7 +87,8 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
-        test = scoreData.score.toInt()
+        test = scoreData.score?.toIntOrNull() ?: 0
+
     }
 
     private fun getSleepHistory(authToken: String) {

@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.carecrafter.R
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.SleepTrackingBinding
+import com.carecrafter.databinding.SleepTrackingCurrentUpdatingBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
 import com.carecrafter.retrofit_database.ApiClient
@@ -35,9 +36,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class SleepTrackingFragment : Fragment() {
+class CurrentUpdatingSleepTrackingFragment : Fragment() {
 
-    private lateinit var binding: SleepTrackingBinding
+    private lateinit var binding: SleepTrackingCurrentUpdatingBinding
     private var isRunning = false
     private var timerSeconds = 0
     private val channelId = "notification_channel"
@@ -65,7 +66,7 @@ class SleepTrackingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SleepTrackingBinding.inflate(inflater, container, false)
+        binding = SleepTrackingCurrentUpdatingBinding.inflate(inflater, container, false)
 
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
@@ -85,11 +86,10 @@ class SleepTrackingFragment : Fragment() {
         }
         binding.endBtn.setOnClickListener {
             calculator(authToken.toString())
-            findNavController().navigate(R.id.action_sleepTrackingFragment_to_resultSleepTrackerFragment)
+            findNavController().navigate(CurrentUpdatingSleepTrackingFragmentDirections.actionCurrentUpdatingSleepTrackingFragmentToCurrentResultSleepTrackerFragment2())
         }
         binding.ivBack.setOnClickListener {
-            val intent = Intent(requireActivity(), BodyActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(CurrentUpdatingSleepTrackingFragmentDirections.actionCurrentUpdatingSleepTrackingFragmentToHomeFragment())
         }
 
         // Date and Time for the TextView
