@@ -24,9 +24,11 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.carecrafter.body.BodyActivity
 import com.carecrafter.databinding.WaterIntakeHomeBinding
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.WaterHistoryApi
 import com.carecrafter.retrofit_database.ApiClient
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -51,6 +53,9 @@ class WaterIntakeHomeFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    var current_water = 0
+    var progress = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,18 +64,17 @@ class WaterIntakeHomeFragment : Fragment() {
 
         sharedPreferences = requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
+        authToken?.let { getWaterHistory(it) }
 
         createNotificationChannel()
 
         binding.buttonMiddleDrink.setOnClickListener {
             indicateDrink(authToken.toString())
             binding.editTextGoal.visibility = View.GONE
-            binding.cupCapacity.visibility = View.GONE
             handler.postDelayed({ sendNotification() }, 1*1000)
         }
         binding.ivBack.setOnClickListener {
-            val intent = Intent(activity, BodyActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(WaterIntakeHomeFragmentDirections.actionWaterIntakeHomeFragmentToHomeFragment())
         }
         binding.buttonReset.setOnClickListener {
             resetProgress(authToken.toString())
@@ -78,8 +82,7 @@ class WaterIntakeHomeFragment : Fragment() {
             binding.cupCapacity.visibility = View.VISIBLE
         }
         binding.btStatistics.setOnClickListener {
-            val intent = Intent(activity, StatisticsWaterIntakeActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(WaterIntakeHomeFragmentDirections.actionWaterIntakeHomeFragmentToStatisticFragment2())
         }
 
         val intervals = arrayOf("30 minutes", "1 hour", "2 hours", "3 hours")
@@ -126,9 +129,9 @@ class WaterIntakeHomeFragment : Fragment() {
     }
 
     private fun updateProgress(authToken: String) {
-        val progress = (totalWaterDrank.toFloat() / goalAmount.toFloat()) * 100
+        val progress = progress + ((totalWaterDrank.toFloat() / goalAmount.toFloat()) * 100)
         binding.progressIndicator.progress = progress.toInt()
-        binding.textTotalWaterDrank.text = "Total Water Drank: $totalWaterDrank ml"
+        binding.textTotalWaterDrank.text = "Total Water Drank: " + (current_water + totalWaterDrank) + "ml"
 
         val percentText = String.format(Locale.getDefault(), "%.1f%%", progress)
         binding.progressIndicator.contentDescription = percentText
@@ -264,11 +267,7 @@ class WaterIntakeHomeFragment : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -317,5 +316,35 @@ class WaterIntakeHomeFragment : Fragment() {
         with(NotificationManagerCompat.from(requireContext())) {
             notify(notificationId++, builder.build())
         }
+    }
+
+    private fun getWaterHistory(authToken: String) {
+        ApiClient.instance.getWaterHistory("Bearer $authToken").enqueue(object : Callback<WaterHistoryApi> {
+            override fun onResponse(call: Call<WaterHistoryApi>, response: Response<WaterHistoryApi>) {
+                if (response.isSuccessful) {
+                    val waterData = response.body()
+                    if (waterData != null) {
+                        updateWater(waterData)
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<WaterHistoryApi>, t: Throwable) {
+                Log.e("SleepTracker", "Failed to get user info", t)
+                Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateWater(waterData: WaterHistoryApi){
+        binding.textTotalWaterDrank.text = "Total Water Drank: ${waterData.totalWater} ml"
+        current_water = waterData.totalWater.toInt()
+        binding.progressIndicator.progress = waterData.totalWater.toInt()
+        progress = waterData.totalWater.toInt()
     }
 }

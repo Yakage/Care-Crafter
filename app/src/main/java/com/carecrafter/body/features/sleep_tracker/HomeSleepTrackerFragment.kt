@@ -80,8 +80,14 @@ class HomeSleepTrackerFragment : Fragment() {
     fun updateScore(scoreData: SleepsApi){
         binding.tvTotalSleep.text = scoreData.totalSleeps
         binding.tvScore.text = scoreData.score
-        binding.scorePercent.text = scoreData.score+"%"
-        binding.qualityBar.progress = scoreData.score.toInt()
+
+        if (scoreData.score == null){
+            binding.qualityBar.progress = 0
+            binding.scorePercent.text = "0 %"
+        }else{
+            binding.qualityBar.progress = scoreData.score.toInt()
+            binding.scorePercent.text = scoreData.score+"%"
+        }
     }
 
     private fun getSleepHistory(authToken: String) {

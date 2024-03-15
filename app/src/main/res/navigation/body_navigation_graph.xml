@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_currentUpdatingSleepTrackingFragment"
             app:destination="@id/currentUpdatingSleepTrackingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_waterIntakeHomeFragment"
+            app:destination="@id/waterIntakeHomeFragment" />
     </fragment>
     <activity
         android:id="@+id/bodyActivity"
@@ -158,5 +161,26 @@
         <action
             android:id="@+id/action_currentResultSleepTrackerFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticFragment2"
+        android:name="com.carecrafter.body.features.water_intake.StatisticFragment"
+        android:label="water_intake_statistic"
+        tools:layout="@layout/water_intake_statistic" >
+        <action
+            android:id="@+id/action_statisticFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waterIntakeHomeFragment"
+        android:name="com.carecrafter.body.features.water_intake.WaterIntakeHomeFragment"
+        android:label="water_intake_home"
+        tools:layout="@layout/water_intake_home" >
+        <action
+            android:id="@+id/action_waterIntakeHomeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_waterIntakeHomeFragment_to_statisticFragment2"
+            app:destination="@id/statisticFragment2" />
     </fragment>
 </navigation>

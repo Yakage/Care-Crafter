@@ -53,8 +53,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingStepTrackerFragment())
         }
         binding.waterFT.setOnClickListener {
-            val intent = Intent(activity, WaterIntakeBActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWaterIntakeHomeFragment())
         }
         binding.bmiFT.setOnClickListener {
             val intent = Intent(activity, BmiCalcuActivity::class.java)

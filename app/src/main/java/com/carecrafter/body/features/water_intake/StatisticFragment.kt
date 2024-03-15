@@ -44,7 +44,7 @@ class StatisticFragment : Fragment() {
         setupViews(authToken.toString())
 
         binding.ivBack.setOnClickListener {
-//            findNavController().navigate(StatisticStepTrackerFragmentDirections.actionStatisticStepTrackerFragment2ToHomeStepTrackerFragment2())
+            findNavController().navigate(StatisticFragmentDirections.actionStatisticFragment2ToHomeFragment())
         }
         return binding.root
     }

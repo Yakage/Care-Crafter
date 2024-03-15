@@ -33,6 +33,8 @@ class BodyActivity : AppCompatActivity() {
                 R.id.currentResultSleepTrackerFragment2,
                 R.id.currentUpdatingSleepTrackingFragment,
                 R.id.currentStatisticStepTrackerFragment,
+                R.id.waterIntakeHomeFragment,
+                R.id.statisticFragment2,
                 R.id.currentUpdatingStepTrackerFragment -> {
                     binding.bottomNavigation.visibility = View.GONE
                 }
