@@ -200,12 +200,12 @@ class UpdateAccount : Fragment() {
                         Toast.makeText(requireContext(), response.body()!!.message, Toast.LENGTH_LONG).show()
                         findNavController().navigate(UpdateAccountDirections.actionUpdateAccountToAccountFragment())
                     } else {
-                        val errorMessage: String = try {
-                            response.errorBody()?.string() ?: "Failed to get a valid response. Response code: ${response.code()}"
-                        } catch (e: Exception) {
-                            "Failed to get a valid response. Response code: ${response.code()}"
-                        }
-                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                        var errorMessage = response.errorBody()?.string() ?: "Failed to get a valid response"
+                        // Extract message part from the error JSON
+                        val messageRegex = """"message":"([^"]+)""".toRegex()
+                        val matchResult = messageRegex.find(errorMessage)
+                        val message = matchResult?.groupValues?.getOrNull(1)?.trim() ?: "Unknown error"
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
                         Log.e("API_RESPONSE", errorMessage)
                     }
                 }

@@ -26,17 +26,22 @@ class BodyActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.updateAccount) {
-                binding.bottomNavigation.visibility = View.GONE
-            }
-            if (destination.id == R.id.achievements) {
-                binding.bottomNavigation.visibility = View.GONE
-            }
-            if (destination.id == R.id.bmiCalcuHome) {
-            binding.bottomNavigation.visibility = View.GONE
-            }
-            else {
-                binding.bottomNavigation.visibility = View.VISIBLE
+            when (destination.id) {
+                R.id.updateAccount,
+                R.id.achievements,
+                R.id.bmiCalcuHome,
+                R.id.currentResultSleepTrackerFragment2,
+                R.id.currentUpdatingSleepTrackingFragment,
+                R.id.currentStatisticStepTrackerFragment,
+                R.id.currentUpdatingStepTrackerFragment -> {
+                    binding.bottomNavigation.visibility = View.GONE
+                }
+                R.id.homeFragment,
+                R.id.leaderboardsFragment,
+                R.id.featuresFragment,
+                R.id.accountFragment -> {
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                }
             }
         }
 
