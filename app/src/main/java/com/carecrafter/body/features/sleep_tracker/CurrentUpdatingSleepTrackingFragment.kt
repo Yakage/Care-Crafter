@@ -26,6 +26,8 @@ import com.carecrafter.databinding.SleepTrackingBinding
 import com.carecrafter.databinding.SleepTrackingCurrentUpdatingBinding
 import com.carecrafter.models.Alarm
 import com.carecrafter.models.DefaultResponse
+import com.carecrafter.models.SleepScoreLogs
+import com.carecrafter.models.SleepsApi
 import com.carecrafter.retrofit_database.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,7 +42,7 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
 
     private lateinit var binding: SleepTrackingCurrentUpdatingBinding
     private var isRunning = false
-    private var timerSeconds = 0
+    var timerSeconds = 0
     private val channelId = "notification_channel"
     private var notificationId = 0
     var input = 0
@@ -71,6 +73,8 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         val authToken = sharedPreferences.getString("authToken", "")
         authToken?.let { getAlarmInfo(it) }
+        authToken?.let { getScore(it) }
+        authToken?.let { getSleepTime(it) }
 
         createNotificationChannel()
 
@@ -173,7 +177,7 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
             val scoreData = "Score: $rate Time: $timeString"
             //createScore(authToken, scoreData)
             binding.scoreLogs.text = scoreHistory.toString()
-            createScore(authToken, scoreData, timerSeconds.toString() )
+            updateScore(authToken, scoreData, timerSeconds.toString() )
         }
 
         else {
@@ -188,23 +192,23 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
             val scoreData = "Score: $rate Time: $timeString"
             //createScore(authToken, scoreData)
             binding.scoreLogs.text = scoreHistory
-            createScore(authToken, scoreData, timerSeconds.toString() )
+            updateScore(authToken, scoreData, timerSeconds.toString() )
 
         }
     }
-    private fun createScore(authToken: String, score: String, totalTime: String){
+    private fun updateScore(authToken: String, score: String, totalTime: String){
 
-        val createScoreDataJson =
+        val updateScoreDataJson =
             "{\"authToken\":\"$authToken\",\"score\":\"$score\",\"totalTime\":\"$totalTime\"}"
 
 
         //correct malformed data
         try {
-            val reader = JsonReader(StringReader(createScoreDataJson))
+            val reader = JsonReader(StringReader(updateScoreDataJson))
             reader.isLenient = true
             reader.beginObject()
             reader.close()
-            ApiClient.instance.createScore(
+            ApiClient.instance.updateScore(
                 "Bearer $authToken",
                 score,
                 totalTime
@@ -308,6 +312,57 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
 
         with(NotificationManagerCompat.from(requireContext())) {
             notify(notificationId++, builder.build())
+        }
+    }
+
+    private fun getScore(authToken: String) {
+        ApiClient.instance.getScore("Bearer $authToken").enqueue(object : Callback<SleepScoreLogs> {
+            override fun onResponse(call: Call<SleepScoreLogs>, response: Response<SleepScoreLogs>) {
+                if (response.isSuccessful) {
+                    val scoreData = response.body()
+                    if (scoreData != null) {
+                        updateScore(scoreData)
+                    }
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<SleepScoreLogs>, t: Throwable) {
+                Log.e("SleepTracker", "Failed to get logs info", t)
+                Toast.makeText(requireContext(), "Failed to get logs info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateScore(scoreData: SleepScoreLogs){
+        timerSeconds = scoreData.total_time.toInt()
+    }
+
+    private fun getSleepTime(authToken: String) {
+        ApiClient.instance.getSleepTime("Bearer $authToken").enqueue(object : Callback<SleepsApi> {
+            override fun onResponse(call: Call<SleepsApi>, response: Response<SleepsApi>) {
+                if (response.isSuccessful) {
+                    val scoreData = response.body()
+                    if (scoreData != null) {
+                        updateScore2(scoreData)
+                    }
+
+                } else {
+                    // Handle unsuccessful response
+                    Toast.makeText(requireContext(), "Failed to get sleep info", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<SleepsApi>, t: Throwable) {
+                Log.e("SleepTracker", "Failed to get logs info", t)
+                Toast.makeText(requireContext(), "Failed to get sleep info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun updateScore2(scoreData: SleepsApi){
+        if (scoreData != null){
+            binding.timeTV.text = scoreData.totalSleeps
         }
     }
 }

@@ -169,16 +169,16 @@ class HomeFragment : Fragment() {
         val blue = ContextCompat.getColor(requireContext(), R.color.blue)
         val currentSteps = stepData.current_steps?.toIntOrNull() ?: 0
         val dailyGoal = stepData.daily_goal?.toIntOrNull() ?: 0
-        if (stepData != null) {
-            binding.tvStepGoal.text = "Goal: $currentSteps / $dailyGoal"
-            binding.circularProgressBar.apply {
-                progressMax = dailyGoal.toFloat()
-                setProgressWithAnimation(currentSteps.toFloat(), 1000)
-                progressBarWidth = 5f
-                backgroundProgressBarWidth = 5f
-                progressBarColor = blue
-            }
+
+        binding.tvStepGoal.text = "Goal: $currentSteps / $dailyGoal"
+        binding.circularProgressBar.apply {
+            progressMax = dailyGoal.toFloat()
+            setProgressWithAnimation(currentSteps.toFloat(), 1000)
+            progressBarWidth = 5f
+            backgroundProgressBarWidth = 5f
+            progressBarColor = blue
         }
+
     }
 
 

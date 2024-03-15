@@ -97,6 +97,15 @@ interface CareCrafterInterfaces {
         @Field("total_time") totalTime:String,
     ):retrofit2.Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @PUT("updateScore")
+    fun updateScore(
+        @Header("Authorization") authToken: String,
+        @Field("score_logs") score:String,
+        @Field("total_time") totalTime:String,
+    ):retrofit2.Call<DefaultResponse>
+
     @Headers("Accept: application/json")
     @GET("getScore")
     fun getScore(@Header("Authorization") authToken: String): Call<SleepScoreLogs>
@@ -113,6 +122,15 @@ interface CareCrafterInterfaces {
     @Headers("Accept: application/json")
     @POST("createSleep")
     fun createSleep(
+        @Header("Authorization") authToken: String,
+        @Field("score") score:String,
+        @Field("sleeps") sleeps:Int,
+    ):retrofit2.Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @PUT("updateSleep")
+    fun updateSleep(
         @Header("Authorization") authToken: String,
         @Field("score") score:String,
         @Field("sleeps") sleeps:Int,

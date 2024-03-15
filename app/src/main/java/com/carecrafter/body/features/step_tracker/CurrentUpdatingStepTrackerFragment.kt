@@ -184,11 +184,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()

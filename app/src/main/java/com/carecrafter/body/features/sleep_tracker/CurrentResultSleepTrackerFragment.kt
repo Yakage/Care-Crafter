@@ -71,7 +71,7 @@ class CurrentResultSleepTrackerFragment : Fragment() {
         binding.tvTotalTime.text = "$hour.$minute hrs\n$scorefinal/100"
 
         binding.progressBar.progress = score
-        createSleep(authToken, scorefinal.toString(), seconds.toInt())
+        updateSleep(authToken, scorefinal.toString(), seconds.toInt())
         if (score == 100) {
             binding.tvComplete.visibility = View.VISIBLE
             binding.tvAlmost.visibility = View.GONE
@@ -147,17 +147,17 @@ class CurrentResultSleepTrackerFragment : Fragment() {
         binding.tvTimerSeconds.text = scoreData.total_time
     }
 
-    private fun createSleep(authToken: String, score: String, sleeps: Int){
-        val createSleepDataJson =
+    private fun updateSleep(authToken: String, score: String, sleeps: Int){
+        val updateSleepDataJson =
             "{\"authToken\":\"$authToken\",\"score\":\"$score\",\"sleeps\":\"$sleeps\"}"
 
         //correct malformed data
         try {
-            val reader = JsonReader(StringReader(createSleepDataJson))
+            val reader = JsonReader(StringReader(updateSleepDataJson))
             reader.isLenient = true
             reader.beginObject()
             reader.close()
-            ApiClient.instance.createSleep(
+            ApiClient.instance.updateSleep(
                 "Bearer $authToken",
                 score,
                 sleeps
@@ -173,11 +173,6 @@ class CurrentResultSleepTrackerFragment : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
