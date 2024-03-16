@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
-                    android:hint="Enter a password"
+                    android:hint="Enter a password (Min: 8 characters)"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>

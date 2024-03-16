@@ -63,6 +63,8 @@ class WaterIntakeBActivity : AppCompatActivity() {
     private var notificationId = 0
     private val handler = Handler(Looper.getMainLooper())
 
+    private var isButtonClickable = true
+    private var isButtonClickable2 = true
 
 
     private var totalWaterDrank: Int = 0
@@ -100,17 +102,37 @@ class WaterIntakeBActivity : AppCompatActivity() {
         }
 
         middleDrinkButton.setOnClickListener {
-            indicateDrink(authToken.toString())
-            watergoal.visibility = View.GONE
-            handler.postDelayed({ sendNotification() }, 30*60*1000)
+            if (isButtonClickable) {
+                middleDrinkButton.isEnabled = false
+                isButtonClickable = false
+
+                indicateDrink(authToken.toString())
+                watergoal.visibility = View.GONE
+                handler.postDelayed({ sendNotification() }, 30*60*1000)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    middleDrinkButton.isEnabled = true
+                    isButtonClickable = true
+                }, 3*1000)
+            }
         }
         backButton.setOnClickListener{
             val intent = Intent(this, BodyActivity::class.java)
             startActivity(intent)
         }
         resetButton.setOnClickListener {
-            resetProgress(authToken.toString())
-            watergoal.visibility = View.VISIBLE
+            if (isButtonClickable2) {
+                middleDrinkButton.isEnabled = false
+                isButtonClickable2 = false
+
+                resetProgress(authToken.toString())
+                watergoal.visibility = View.VISIBLE
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    middleDrinkButton.isEnabled = true
+                    isButtonClickable2 = true
+                }, 3*1000)
+            }
         }
         statisticButton.setOnClickListener {
             val intent = Intent(this, StatisticsWaterIntakeActivity::class.java)
@@ -232,8 +254,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(this@WaterIntakeBActivity, t.message, Toast.LENGTH_LONG)
-                            .show()
+
                     }
 
                     override fun onResponse(
@@ -248,12 +269,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                this@WaterIntakeBActivity,
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
@@ -283,8 +299,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(this@WaterIntakeBActivity, t.message, Toast.LENGTH_LONG)
-                            .show()
+
                     }
 
                     override fun onResponse(
@@ -300,12 +315,6 @@ class WaterIntakeBActivity : AppCompatActivity() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                this@WaterIntakeBActivity,
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }

@@ -94,12 +94,11 @@ class BmiCalcuHome : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+
                 }
             }
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("AccountFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+
             }
         })
     }
@@ -153,12 +152,7 @@ class BmiCalcuHome : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }

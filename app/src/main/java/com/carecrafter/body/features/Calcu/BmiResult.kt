@@ -82,12 +82,11 @@ class BmiResult : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+
                 }
             }
             override fun onFailure(call: Call<BMI>, t: Throwable) {
                 Log.e("AccountFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }

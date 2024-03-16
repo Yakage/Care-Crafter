@@ -89,13 +89,11 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val responseBody = response.body().toString()
                     Log.d("Response", responseBody)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterApi>>, t: Throwable) {
                 Log.e("AccountFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -115,13 +113,11 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val responseBody = response.body().toString()
                     Log.d("Response", responseBody)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterApi>>, t: Throwable) {
                 Log.e("AccountFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -141,13 +137,11 @@ class LeaderboardWaterIntakeFragment : Fragment() {
                     val responseBody = response.body().toString()
                     Log.d("Response", responseBody)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterApi>>, t: Throwable) {
                 Log.e("AccountFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }

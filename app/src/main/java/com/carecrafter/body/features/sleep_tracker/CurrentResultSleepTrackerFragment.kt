@@ -31,6 +31,7 @@ class CurrentResultSleepTrackerFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     var input = 0
     var scorefinal = 0
+    var timersecond = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,13 +57,12 @@ class CurrentResultSleepTrackerFragment : Fragment() {
     private fun testing(authToken: String){
         val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
 
-
         val input = input.toDouble()
         val scoreDivide = (input * 60 * 60).toInt()
         val minute = (seconds / 60).toInt()
         val hour = (minute / 60).toInt()
         //val score = ((seconds / input) * 100).toInt() // this line is to test if it works
-        val score = ((seconds / 1) * 100).toInt()
+        val score = ((seconds / scoreDivide) * 100).toInt()
         if (score >= 100) {
             scorefinal = 100
         } else {
@@ -144,7 +144,12 @@ class CurrentResultSleepTrackerFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepScoreLogs){
-        binding.tvTimerSeconds.text = scoreData.total_time
+        if (scoreData.total_time == null) {
+            binding.tvTimerSeconds.text = "0"
+        }else{
+            binding.tvTimerSeconds.text = scoreData.total_time
+        }
+
     }
 
     private fun updateSleep(authToken: String, score: String, sleeps: Int){
@@ -164,8 +169,7 @@ class CurrentResultSleepTrackerFragment : Fragment() {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                            .show()
+
                     }
 
                     override fun onResponse(
@@ -180,19 +184,11 @@ class CurrentResultSleepTrackerFragment : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
                 })
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
             e.printStackTrace()
         }
     }

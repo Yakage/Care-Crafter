@@ -175,8 +175,6 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                            .show()
                     }
 
                     override fun onResponse(
@@ -192,19 +190,11 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
                 })
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
             e.printStackTrace()
         }
     }
@@ -234,11 +224,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -246,12 +232,7 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
@@ -274,12 +255,12 @@ class CurrentUpdatingStepTrackerFragment : Fragment(), SensorEventListener {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+
                 }
             }
             override fun onFailure(call: Call<StepHistoryApi>, t: Throwable) {
                 Log.e("StepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+
             }
         })
     }

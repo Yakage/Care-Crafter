@@ -61,8 +61,6 @@ class GoalSetSleepTrackerFragment : Fragment() {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                            .show()
                     }
 
                     override fun onResponse(
@@ -70,11 +68,6 @@ class GoalSetSleepTrackerFragment : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
                             findNavController().navigate(R.id.action_goalSetSleepTrackerFragment_to_sleepTrackingFragment)
                         } else {
                             val errorMessage: String = try {
@@ -83,12 +76,6 @@ class GoalSetSleepTrackerFragment : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                "Please Input Goal",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }

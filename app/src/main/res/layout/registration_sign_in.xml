@@ -112,14 +112,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgot Password"
-                android:textColor="@color/main"
-                android:layout_marginTop="20dp"/>
-
         </LinearLayout>
 
     </LinearLayout>

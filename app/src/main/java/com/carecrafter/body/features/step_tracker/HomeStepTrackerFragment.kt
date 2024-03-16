@@ -218,11 +218,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -230,12 +226,6 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
@@ -272,11 +262,7 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -284,12 +270,6 @@ class HomeStepTrackerFragment : Fragment(), SensorEventListener {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }

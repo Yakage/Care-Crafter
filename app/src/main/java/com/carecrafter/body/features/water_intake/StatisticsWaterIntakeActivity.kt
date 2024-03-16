@@ -125,13 +125,11 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
                     }
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterWeeklyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get weekly water data", t)
-                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -157,13 +155,11 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
 
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterMonthlyStatsApi>>, t: Throwable) {
                 Log.e("StatisticWaterIntakeFragment", "Failed to get monthly water data", t)
-                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -185,13 +181,11 @@ class StatisticsWaterIntakeActivity : AppCompatActivity() {
                     }
                     waterHistoryAdapter.updateData(entries)
                 } else {
-                    Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get water history", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WaterHistoryApi>>, t: Throwable) {
                 Log.e("AccountFragment", "Failed to get step history", t)
-                Toast.makeText(this@StatisticsWaterIntakeActivity, "Failed to get water history", Toast.LENGTH_SHORT).show()
             }
         })
     }

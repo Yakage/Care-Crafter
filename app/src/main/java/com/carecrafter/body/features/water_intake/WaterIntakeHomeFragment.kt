@@ -331,12 +331,10 @@ class WaterIntakeHomeFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<WaterHistoryApi>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get water info", Toast.LENGTH_SHORT).show()
             }
         })
     }

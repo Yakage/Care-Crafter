@@ -3,6 +3,7 @@ package com.carecrafter.body.features.sleep_tracker
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -211,8 +212,6 @@ class SleepTrackingFragment : Fragment() {
             )
                 .enqueue(object : Callback<DefaultResponse> {
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG)
-                            .show()
                     }
 
                     override fun onResponse(
@@ -220,11 +219,6 @@ class SleepTrackingFragment : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -232,19 +226,11 @@ class SleepTrackingFragment : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
                 })
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
             e.printStackTrace()
         }
     }
@@ -262,12 +248,10 @@ class SleepTrackingFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<Alarm>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }

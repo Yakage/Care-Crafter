@@ -118,13 +118,11 @@ class StatisticStepTrackerFragment : Fragment() {
                     }
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get weekly steps data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<StepsWeeklyStatsApi>>, t: Throwable) {
                 Log.e("StepsStatisticFragment", "Failed to get weekly steps data", t)
-                Toast.makeText(requireContext(), "Failed to get weekly steps data", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -150,13 +148,11 @@ class StatisticStepTrackerFragment : Fragment() {
 
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get monthly steps data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<StepsMonthlyStatsApi>>, t: Throwable) {
                 Log.e("StatisticStepTrackerFragment", "Failed to get monthly steps data", t)
-                Toast.makeText(requireContext(), "Failed to get monthly steps data", Toast.LENGTH_SHORT).show()
             }
         })
     }

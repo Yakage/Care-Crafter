@@ -37,6 +37,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.concurrent.timer
 
 class CurrentUpdatingSleepTrackingFragment : Fragment() {
 
@@ -224,11 +225,7 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
                         response: Response<DefaultResponse>
                     ) {
                         if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(
-                                requireContext(),
-                                response.body()!!.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+
                         } else {
                             val errorMessage: String = try {
                                 response.errorBody()?.string()
@@ -236,12 +233,6 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
@@ -336,7 +327,11 @@ class CurrentUpdatingSleepTrackingFragment : Fragment() {
     }
 
     fun updateScore(scoreData: SleepScoreLogs){
-        timerSeconds = scoreData.total_time.toInt()
+        if (scoreData.total_time == null){
+            timerSeconds = 0
+        } else {
+            timerSeconds = scoreData.total_time.toInt()
+        }
     }
 
     private fun getSleepTime(authToken: String) {

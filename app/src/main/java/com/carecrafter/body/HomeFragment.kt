@@ -46,19 +46,19 @@ class HomeFragment : Fragment() {
         authToken?.let { getWaterHistory(it) }
         binding = BodyHomeBinding.inflate(inflater, container, false)
 
-        binding.sleepFT.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingSleepTrackingFragment())
-        }
-        binding.stepFT.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingStepTrackerFragment())
-        }
-        binding.waterFT.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWaterIntakeHomeFragment())
-        }
-        binding.bmiFT.setOnClickListener {
-            val intent = Intent(activity, BmiCalcuActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.sleepFT.setOnClickListener {
+//            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingSleepTrackingFragment())
+//        }
+//        binding.stepFT.setOnClickListener {
+//            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCurrentUpdatingStepTrackerFragment())
+//        }
+//        binding.waterFT.setOnClickListener {
+//            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToWaterIntakeHomeFragment())
+//        }
+//        binding.bmiFT.setOnClickListener {
+//            val intent = Intent(activity, BmiCalcuActivity::class.java)
+//            startActivity(intent)
+//        }
         binding.btnVisitWebsite.setOnClickListener {
             val url = "https://carecrafter-e36f7bd1d791.herokuapp.com/" //put the fuckining website here
             val intent = Intent(Intent.ACTION_VIEW)
@@ -135,9 +135,9 @@ class HomeFragment : Fragment() {
         if (scoreData != null){
             binding.tvTotalSleep.text = scoreData.totalSleeps
             binding.tvScore.text = scoreData.score
+            binding.sleepFT.isClickable = true
         }else{
-            binding.tvTotalSleep.text = "0"
-            binding.tvScore.text = "0"
+            binding.sleepFT.isClickable = false
         }
     }
 
@@ -165,17 +165,22 @@ class HomeFragment : Fragment() {
     }
 
     fun updateStep(stepData: StepHistoryApi){
-        val blue = ContextCompat.getColor(requireContext(), R.color.blue)
-        val currentSteps = stepData.current_steps?.toIntOrNull() ?: 0
-        val dailyGoal = stepData.daily_goal?.toIntOrNull() ?: 0
+        if (stepData == null){
+            binding.stepFT.isClickable = false
+        } else {
+            val blue = ContextCompat.getColor(requireContext(), R.color.blue)
+            val currentSteps = stepData.current_steps?.toIntOrNull() ?: 0
+            val dailyGoal = stepData.daily_goal?.toIntOrNull() ?: 0
 
-        binding.tvStepGoal.text = "Goal: $currentSteps / $dailyGoal"
-        binding.circularProgressBar.apply {
-            progressMax = dailyGoal.toFloat()
-            setProgressWithAnimation(currentSteps.toFloat(), 1000)
-            progressBarWidth = 5f
-            backgroundProgressBarWidth = 5f
-            progressBarColor = blue
+            binding.tvStepGoal.text = "Goal: $currentSteps / $dailyGoal"
+            binding.circularProgressBar.apply {
+                progressMax = dailyGoal.toFloat()
+                setProgressWithAnimation(currentSteps.toFloat(), 1000)
+                progressBarWidth = 5f
+                backgroundProgressBarWidth = 5f
+                progressBarColor = blue
+            }
+            binding.stepFT.isClickable = true
         }
 
     }
@@ -205,7 +210,12 @@ class HomeFragment : Fragment() {
     }
 
     fun updateBMI(bmiData: BMI){
-        binding.tvBmi.text = bmiData.bmi
+        if (bmiData == null) {
+            binding.bmiFT.isClickable = false
+        } else {
+            binding.tvBmi.text = bmiData.bmi
+            binding.bmiFT.isClickable = true
+        }
     }
 
     private fun getWaterHistory(authToken: String) {
@@ -232,6 +242,11 @@ class HomeFragment : Fragment() {
     }
 
     fun updateWater(waterData: WaterHistoryApi){
-        binding.tvWaterTotal.text = waterData.totalWater
+        if (waterData == null) {
+            binding.waterFT.isClickable = false
+        } else {
+            binding.tvWaterTotal.text = waterData.totalWater
+            binding.waterFT.isClickable = true
+        }
     }
 }

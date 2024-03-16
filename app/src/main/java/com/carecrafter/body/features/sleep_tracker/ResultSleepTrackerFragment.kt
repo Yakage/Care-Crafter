@@ -23,6 +23,7 @@ import retrofit2.Response
 import java.io.StringReader
 import java.text.DateFormat
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 
 class ResultSleepTrackerFragment : Fragment() {
@@ -56,11 +57,11 @@ class ResultSleepTrackerFragment : Fragment() {
     private fun testing(authToken: String){
         val seconds = binding.tvTimerSeconds.text.toString().toInt().toDouble()
         val input = input.toDouble()
-        val scoreDivide = (input * 60 * 60).toInt()
+        val scoreDivide = (input * 60 * 60)
         val minute = (seconds / 60).toInt()
         val hour = (minute / 60).toInt()
-        val score = ((seconds / input) * 100).toInt() // this line is to test if it works
-        //val score = ((seconds / scoreDivide) * 100).toInt()
+        val score = ((seconds / scoreDivide) * 100).toInt() // this line is to test if it works
+        //val score = ((seconds / (input * 60)) * 100).toInt()
         if (score >= 100) {
             scorefinal = 100
         } else {
@@ -105,12 +106,10 @@ class ResultSleepTrackerFragment : Fragment() {
                     Log.d("Response", responseBody)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<Alarm>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -131,12 +130,10 @@ class ResultSleepTrackerFragment : Fragment() {
                     testing(authToken)
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<SleepScoreLogs>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get logs info", t)
-                Toast.makeText(requireContext(), "Failed to get logs info", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -183,19 +180,11 @@ class ResultSleepTrackerFragment : Fragment() {
                             } catch (e: Exception) {
                                 "Failed to get a valid response. Response code: ${response.code()}"
                             }
-                            Toast.makeText(
-                                requireContext(),
-                                errorMessage,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
                 })
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Error parsing JSON", Toast.LENGTH_SHORT)
-                .show()
             e.printStackTrace()
         }
     }

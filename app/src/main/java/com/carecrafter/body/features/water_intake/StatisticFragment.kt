@@ -120,7 +120,6 @@ class StatisticFragment : Fragment() {
                     }
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get weekly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -152,7 +151,6 @@ class StatisticFragment : Fragment() {
 
                     setData(entries, labels)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to get monthly water data", Toast.LENGTH_SHORT).show()
                 }
             }
 

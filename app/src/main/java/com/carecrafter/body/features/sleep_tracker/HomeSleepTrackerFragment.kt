@@ -67,12 +67,10 @@ class HomeSleepTrackerFragment : Fragment() {
 
                 } else {
                     // Handle unsuccessful response
-                    Toast.makeText(requireContext(), "Failed to get sleep info", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<SleepsApi>, t: Throwable) {
                 Log.e("SleepTracker", "Failed to get logs info", t)
-                Toast.makeText(requireContext(), "Failed to get logs info", Toast.LENGTH_SHORT).show()
             }
         })
     }
