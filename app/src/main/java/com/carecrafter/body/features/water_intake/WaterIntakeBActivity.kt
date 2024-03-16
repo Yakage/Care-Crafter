@@ -102,7 +102,7 @@ class WaterIntakeBActivity : AppCompatActivity() {
         middleDrinkButton.setOnClickListener {
             indicateDrink(authToken.toString())
             watergoal.visibility = View.GONE
-            handler.postDelayed({ sendNotification() }, 1*1000)
+            handler.postDelayed({ sendNotification() }, 30*60*1000)
         }
         backButton.setOnClickListener{
             val intent = Intent(this, BodyActivity::class.java)

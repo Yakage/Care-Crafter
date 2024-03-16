@@ -61,6 +61,7 @@ class SignUp : AppCompatActivity() {
         }
 
         binding.btSubmit.setOnClickListener {
+            binding.btSubmit.isClickable = false
             val selectedGender = genderSpinner.selectedItem.toString()
             val name = binding.FullNameET.text.toString().trim()
             val email = binding.EmailET.text.toString().trim()
@@ -80,42 +81,49 @@ class SignUp : AppCompatActivity() {
                 binding.FullNameET.error = "Full Name is required"
                 binding.FullNameET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (email.isEmpty()) {
                 binding.EmailET.error = "Email is required"
                 binding.EmailET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (birthday.isEmpty()) {
                 binding.BirthdayET.error = "Age is required"
                 binding.BirthdayET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (height.isEmpty()) {
                 binding.HeightET.error = "Height is required"
                 binding.HeightET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (weight.isEmpty()) {
                 binding.WeightET.error = "Weight is required"
                 binding.WeightET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (password.isEmpty()) {
                 binding.PasswordET.error = "Password is required"
                 binding.PasswordET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             if (confirmPassword.isEmpty()) {
                 binding.ConfirmPasswordET.error = "Confirm Password is required"
                 binding.ConfirmPasswordET.requestFocus()
                 return@setOnClickListener
+                binding.btSubmit.isClickable = true
             }
 
             // Make API call
@@ -135,12 +143,14 @@ class SignUp : AppCompatActivity() {
 
                 override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
                     if (response.isSuccessful && response.body() != null) {
+                        binding.btSubmit.isClickable = true
                         Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                         val intent = Intent(this@SignUp, SignIn::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
                     } else {
+                        binding.btSubmit.isClickable = true
                         var errorMessage = response.errorBody()?.string() ?: "Failed to get a valid response"
                         // Extract message part from the error JSON
                         val messageRegex = """"message":"([^"]+)""".toRegex()

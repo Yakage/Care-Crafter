@@ -62,17 +62,22 @@ class BmiCalcuHome : Fragment() {
             val bmiResult = String.format("%.2f", bmi)
 
             val bmiCategory = when {
-                bmi < 5 -> "Are you even a human my guy"
+                bmi < 5 -> "Invalid Input"
                 bmi < 18.5 -> "Under Weight"
                 bmi < 25 -> "Normal Weight"
                 bmi < 30 -> "Over Weight"
-                else -> "Obese"
+                bmi < 45 -> "Obese"
+                else -> "Invalid Input"
             }
-            binding.tvCalcuResult.text = "$bmiResult \n $bmiCategory"
-            createBMIData(authToken,bmiResult, bmiCategory)
-            findNavController().navigate(R.id.action_bmiCalcuHome_to_bmiResult3)
-        } else {
-            binding.tvCalcuResult.text = "Invalid Input"
+            if (bmi < 5) {
+                Toast.makeText(requireContext(), "Input Too Low", Toast.LENGTH_SHORT).show()
+            } else if (bmi > 45) {
+                Toast.makeText(requireContext(), "Input Too High", Toast.LENGTH_SHORT).show()
+            } else {
+                binding.tvCalcuResult.text = "$bmiResult \n $bmiCategory"
+                createBMIData(authToken,bmiResult, bmiCategory)
+                findNavController().navigate(R.id.action_bmiCalcuHome_to_bmiResult3)
+            }
         }
     }
 

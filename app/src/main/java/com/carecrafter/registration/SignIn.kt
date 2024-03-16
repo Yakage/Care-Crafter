@@ -29,6 +29,7 @@ class SignIn : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
         binding.btLogin.setOnClickListener {
+            binding.btLogin.isClickable = false
             val email = binding.EmailET.text.toString().trim()
             val password = binding.PasswordET.text.toString().trim()
 
@@ -63,6 +64,7 @@ class SignIn : AppCompatActivity() {
                             response: Response<DefaultResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
+                                binding.btLogin.isClickable = true
                                 val accessToken = response.body()?.access_token
                                 saveTokenToSharedPreferences(accessToken)
 
@@ -77,11 +79,13 @@ class SignIn : AppCompatActivity() {
                                 finish()
 
                             } else {
+                                binding.btLogin.isClickable = true
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()
                                         ?: "Failed to get a valid response. Response code: ${response.code()}"
                                 } catch (e: Exception) {
                                     "Failed to get a valid response. Response code: ${response.code()}"
+
                                 }
                                 Toast.makeText(applicationContext, "Invalid Credentials", Toast.LENGTH_LONG)
                                     .show()
@@ -91,6 +95,7 @@ class SignIn : AppCompatActivity() {
                     })
             } catch (e: Exception) {
                 Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
+                binding.btLogin.isClickable = true
                 e.printStackTrace()
             }
 

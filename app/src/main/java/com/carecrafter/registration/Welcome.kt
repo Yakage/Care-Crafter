@@ -20,12 +20,14 @@ class Welcome : AppCompatActivity() {
         welcomeSignup = findViewById(R.id.welcomeSignup)
 
         welcomeLogin.setOnClickListener {
+            welcomeLogin.isClickable = false
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
             finish()
         }
 
         welcomeSignup.setOnClickListener {
+            welcomeSignup.isClickable = false
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
             finish()
